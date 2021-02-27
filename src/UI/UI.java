@@ -37,7 +37,7 @@ public class UI {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the record ID: ");
         int recordId = input.nextInt(); input.nextLine();
-        System.out.print("Enter the record name: ");
+        System.out.print("Enter the album name: ");
         String name = input.nextLine();
         System.out.print("Enter the price: ");
         int price = input.nextInt(); input.nextLine();
@@ -119,7 +119,7 @@ public class UI {
                         listUsers();
                         break;
                     default:
-                        System.out.println("Enter an option between 1 and 2.");
+                        System.out.println("Enter an option between 1 and 5.");
                 }
             }catch(Exception ignore){}
         }

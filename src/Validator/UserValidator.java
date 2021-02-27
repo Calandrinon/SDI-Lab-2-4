@@ -3,10 +3,17 @@ package Validator;
 import Model.User;
 
 public class UserValidator implements Validator<User>{
-    /*
-    * first name : String, cannot be empty, shorter than 64 characters
-    * last name : String, cannot be empty, shorter than 64 characters
-    * */
+    /**
+     * validate the given user
+     *
+     * @param entity must be valid
+     *
+     * @throws Exception
+     *             if the user has an empty firstname
+     *             if the user has an empty lastname
+     *             if the user has a firstname that is longer than 64 characters
+     *             if the user has a lastname that is longer than 64 characters
+     */
 
     @Override
     public void validate(User entity) throws Exception {
