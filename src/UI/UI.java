@@ -1,6 +1,6 @@
 package UI;
 
-import Controller.IController;
+import Controller.Controller;
 
 import java.util.Scanner;
 import Model.Record;
@@ -10,10 +10,10 @@ import Model.User;
 import static Model.RecordType.*;
 
 public class UI {
-    private IController controller;
+    private Controller controller;
     private boolean running;
 
-    public UI(IController controller) {
+    public UI(Controller controller) {
         this.controller = controller;
         this.running = true;
     }
