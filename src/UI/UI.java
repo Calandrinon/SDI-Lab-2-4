@@ -32,11 +32,15 @@ public class UI {
 
     public void addRecord() throws Exception {
         Scanner input = new Scanner(System.in);
-        int recordId = input.nextInt();
+        System.out.print("Enter the record ID: ");
+        int recordId = input.nextInt(); input.nextLine();
+        System.out.print("Enter the record name: ");
         String name = input.nextLine();
-        int price = input.nextInt();
+        System.out.print("Enter the price: ");
+        int price = input.nextInt(); input.nextLine();
+        System.out.print("Enter the record type: ");
         String recordTypeAsString = input.nextLine().toLowerCase();
-        RecordType recordType;
+        RecordType recordType = CD;
 
         switch (recordTypeAsString) {
             case "cd":
@@ -48,16 +52,19 @@ public class UI {
             case "tape":
                 recordType = TAPE;
                 break;
-            default:
-                recordType = CD;
         }
+
+        System.out.println(recordType.toString());
         this.RecordController.add(recordId, price, name, 1, recordType);
     }
     public void addUser() throws Exception {
         Scanner input = new Scanner(System.in);
 
-        int userId = input.nextInt();
+        System.out.print("User ID: ");
+        int userId = input.nextInt(); input.nextLine();
+        System.out.print("First name: ");
         String firstName = input.nextLine();
+        System.out.print("Second name: ");
         String lastName = input.nextLine();
 
         this.UserController.add(userId, firstName, lastName, 0);
@@ -70,10 +77,13 @@ public class UI {
         while (this.running) {
             this.displayMenu();
             System.out.print("Enter an option: ");
-            input.nextInt();
+            option = input.nextInt();
 
             try {
                 switch (option) {
+                    case 0:
+                        this.running = false;
+                        break;
                     case 1:
                         addRecord();
                         break;
