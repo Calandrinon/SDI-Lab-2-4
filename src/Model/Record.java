@@ -1,16 +1,14 @@
 package Model;
 
-public class Record {
-    private final int RecordID;
+public class Record extends BaseEntity<Integer>{
     private final int Price;
-    private final String ALbumName;
+    private final String AlbumName;
     private final int InStock;
     private final RecordType TypeOfRecord;
 
-    public Record(int recordID, int price, String ALbumName, int inStock, RecordType typeOfRecord) {
-        RecordID = recordID;
+    public Record(int price, String AlbumName, int inStock, RecordType typeOfRecord) {
         Price = price;
-        this.ALbumName = ALbumName;
+        this.AlbumName = AlbumName;
         InStock = inStock;
         TypeOfRecord = typeOfRecord;
     }
@@ -18,16 +16,22 @@ public class Record {
     @Override
     public String toString() {
         return "Record{" +
-                "RecordID=" + RecordID +
+                "RecordID=" + getId() +
                 ", Price=" + Price +
-                ", ALbumName='" + ALbumName + '\'' +
+                ", ALbumName='" + AlbumName + '\'' +
                 ", InStock=" + InStock +
                 ", TypeOfRecord=" + TypeOfRecord +
                 '}';
     }
 
-    public int getRecordID() {
-        return RecordID;
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Record record = (Record) obj;
+
+        return getId() == record.getId();
     }
 
     public int getPrice() {
@@ -35,7 +39,7 @@ public class Record {
     }
 
     public String getALbumName() {
-        return ALbumName;
+        return AlbumName;
     }
 
     public int getInStock() {

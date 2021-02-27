@@ -1,36 +1,40 @@
 package Model;
 
-public class User {
-    private final int userID;
-    private final String firstName;
-    private final String lastName;
-    private final int numberOfTransactions;
+public class User extends BaseEntity<Integer>{
+    private final String FirstName;
+    private final String LastName;
+    private final int NumberOfTransactions;
 
-    public User(int userID, String firstName, String lastName, int numberOfTransactions) {
-        this.userID = userID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.numberOfTransactions = numberOfTransactions;
+    public User(String FirstName, String LastName, int NumberOfTransactions) {
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.NumberOfTransactions = NumberOfTransactions;
     }
 
     @Override
     public String toString() {
-        return "Client " + Integer.toString(userID) + ": " + firstName + " " + lastName + " No. of transactions: " + Integer.toString(numberOfTransactions);
+        return "Client " + Integer.toString(this.getId()) + ": " + FirstName + " " + LastName + " No. of transactions: " + Integer.toString(NumberOfTransactions);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        User user = (User) obj;
+
+        return getId().equals(user.getId());
     }
 
     public int getNumberOfTransactions() {
-        return numberOfTransactions;
+        return NumberOfTransactions;
     }
 
     public String getLastName() {
-        return lastName;
+        return LastName;
     }
 
     public String getFirstName() {
-        return firstName;
-    }
-
-    public int getUserID() {
-        return userID;
+        return FirstName;
     }
 }

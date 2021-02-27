@@ -78,7 +78,7 @@ Architecture and coding style (5.5p):
 
 - using custom generic classes
 
-- the application must be structured as in the example: src/main/java, src/test/java - mixing the tests with the actual code is forbidden
+- the application must be structured as in the example: src/main/java, src/Test/java - mixing the tests with the actual code is forbidden
 
 - using java doc comments for the important parts of the application; generate java doc (intellij idea: tools -> generate java doc).
 

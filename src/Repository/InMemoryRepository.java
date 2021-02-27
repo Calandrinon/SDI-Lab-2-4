@@ -1,7 +1,6 @@
 package Repository;
 
 import Model.BaseEntity;
-import Repository.Repository;
 import Validator.Validator;
 
 import java.util.HashMap;
