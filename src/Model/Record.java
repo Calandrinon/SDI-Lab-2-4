@@ -1,16 +1,16 @@
 package Model;
 
-public class Record {
+public class Record extends BaseEntity<Long>{
     private final int RecordID;
     private final int Price;
-    private final String ALbumName;
+    private final String AlbumName;
     private final int InStock;
     private final RecordType TypeOfRecord;
 
     public Record(int recordID, int price, String ALbumName, int inStock, RecordType typeOfRecord) {
         RecordID = recordID;
         Price = price;
-        this.ALbumName = ALbumName;
+        this.AlbumName = ALbumName;
         InStock = inStock;
         TypeOfRecord = typeOfRecord;
     }
@@ -20,10 +20,20 @@ public class Record {
         return "Record{" +
                 "RecordID=" + RecordID +
                 ", Price=" + Price +
-                ", ALbumName='" + ALbumName + '\'' +
+                ", ALbumName='" + AlbumName + '\'' +
                 ", InStock=" + InStock +
                 ", TypeOfRecord=" + TypeOfRecord +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+
+        Record record = (Record) obj;
+
+        return RecordID == record.getRecordID();
     }
 
     public int getRecordID() {
@@ -35,7 +45,7 @@ public class Record {
     }
 
     public String getALbumName() {
-        return ALbumName;
+        return AlbumName;
     }
 
     public int getInStock() {

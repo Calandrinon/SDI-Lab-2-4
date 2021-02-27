@@ -1,14 +1,14 @@
 package Model;
 
 public class BaseEntity<ID> {
-    private final ID id;
-
-    public BaseEntity(ID id) {
-        this.id = id;
-    }
+    private ID id;
 
     public ID getId() {
         return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
     }
 
     @Override
@@ -17,4 +17,6 @@ public class BaseEntity<ID> {
                 "id=" + id +
                 '}';
     }
+
+
 }
