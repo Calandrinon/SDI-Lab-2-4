@@ -1,5 +1,6 @@
 package UI;
 
+import java.util.List;
 import java.util.Scanner;
 
 import Controller.IController;
@@ -27,6 +28,8 @@ public class UI {
     public void displayMenu() {
         System.out.println("1. Add record");
         System.out.println("2. Add user");
+        System.out.println("3. List records");
+        System.out.println("4. List users");
         System.out.println("0. Exit");
     }
 
@@ -57,6 +60,18 @@ public class UI {
         System.out.println(recordType.toString());
         this.RecordController.add(recordId, price, name, 1, recordType);
     }
+
+
+    public void listRecords() {
+        List<String> recordsAsStrings = this.RecordController.getRepository();
+        System.out.println("Records:");
+
+        for (String record: recordsAsStrings) {
+            System.out.println(record);
+        }
+    }
+
+
     public void addUser() throws Exception {
         Scanner input = new Scanner(System.in);
 
@@ -69,6 +84,17 @@ public class UI {
 
         this.UserController.add(userId, firstName, lastName, 0);
     }
+
+
+    public void listUsers() {
+        List<String> usersAsStrings = this.UserController.getRepository();
+        System.out.println("Users:");
+
+        for (String user: usersAsStrings) {
+            System.out.println(user);
+        }
+    }
+
 
     public void run() {
         Scanner input = new Scanner(System.in);
@@ -89,6 +115,12 @@ public class UI {
                         break;
                     case 2:
                         addUser();
+                        break;
+                    case 3:
+                        listRecords();
+                        break;
+                    case 4:
+                        listUsers();
                         break;
                     default:
                         System.out.println("Enter an option between 1 and 2.");
