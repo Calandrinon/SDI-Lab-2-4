@@ -2,6 +2,8 @@ package Validator;
 
 import Model.Record;
 
+import java.util.regex.Matcher;
+
 public class RecordValidator implements Validator<Record> {
     /*
     * price: positive Integer

@@ -66,9 +66,7 @@ public class UI {
         List<String> recordsAsStrings = this.RecordController.getRepository();
         System.out.println("Records:");
 
-        for (String record: recordsAsStrings) {
-            System.out.println(record);
-        }
+        recordsAsStrings.forEach(System.out::println);
     }
 
 
@@ -90,9 +88,7 @@ public class UI {
         List<String> usersAsStrings = this.UserController.getRepository();
         System.out.println("Users:");
 
-        for (String user: usersAsStrings) {
-            System.out.println(user);
-        }
+        usersAsStrings.forEach(System.out::println);
     }
 
 
