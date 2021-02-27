@@ -1,13 +1,11 @@
 package Model;
 
-public class User extends BaseEntity<Long>{
-    private final int UserID;
+public class User extends BaseEntity<Integer>{
     private final String FirstName;
     private final String LastName;
     private final int NumberOfTransactions;
 
-    public User(int UserID, String FirstName, String LastName, int NumberOfTransactions) {
-        this.UserID = UserID;
+    public User(String FirstName, String LastName, int NumberOfTransactions) {
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.NumberOfTransactions = NumberOfTransactions;
@@ -15,7 +13,7 @@ public class User extends BaseEntity<Long>{
 
     @Override
     public String toString() {
-        return "Client " + Integer.toString(UserID) + ": " + FirstName + " " + LastName + " No. of transactions: " + Integer.toString(NumberOfTransactions);
+        return "Client " + Integer.toString(this.getId()) + ": " + FirstName + " " + LastName + " No. of transactions: " + Integer.toString(NumberOfTransactions);
     }
 
     @Override
@@ -25,7 +23,7 @@ public class User extends BaseEntity<Long>{
 
         User user = (User) obj;
 
-        return UserID == user.getUserID();
+        return getId().equals(user.getId());
     }
 
     public int getNumberOfTransactions() {
@@ -38,9 +36,5 @@ public class User extends BaseEntity<Long>{
 
     public String getFirstName() {
         return FirstName;
-    }
-
-    public int getUserID() {
-        return UserID;
     }
 }

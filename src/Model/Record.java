@@ -1,16 +1,14 @@
 package Model;
 
-public class Record extends BaseEntity<Long>{
-    private final int RecordID;
+public class Record extends BaseEntity<Integer>{
     private final int Price;
     private final String AlbumName;
     private final int InStock;
     private final RecordType TypeOfRecord;
 
-    public Record(int recordID, int price, String ALbumName, int inStock, RecordType typeOfRecord) {
-        RecordID = recordID;
+    public Record(int price, String AlbumName, int inStock, RecordType typeOfRecord) {
         Price = price;
-        this.AlbumName = ALbumName;
+        this.AlbumName = AlbumName;
         InStock = inStock;
         TypeOfRecord = typeOfRecord;
     }
@@ -18,7 +16,7 @@ public class Record extends BaseEntity<Long>{
     @Override
     public String toString() {
         return "Record{" +
-                "RecordID=" + RecordID +
+                "RecordID=" + getId() +
                 ", Price=" + Price +
                 ", ALbumName='" + AlbumName + '\'' +
                 ", InStock=" + InStock +
@@ -33,11 +31,7 @@ public class Record extends BaseEntity<Long>{
 
         Record record = (Record) obj;
 
-        return RecordID == record.getRecordID();
-    }
-
-    public int getRecordID() {
-        return RecordID;
+        return getId() == record.getId();
     }
 
     public int getPrice() {
