@@ -6,6 +6,12 @@ public class Record extends BaseEntity<Integer>{
     private final int InStock;
     private final RecordType TypeOfRecord;
 
+    /**
+     * @param price - integer
+     * @param AlbumName - string
+     * @param inStock - integer
+     * @param typeOfRecord - RecordType
+     */
     public Record(int price, String AlbumName, int inStock, RecordType typeOfRecord) {
         Price = price;
         this.AlbumName = AlbumName;
@@ -18,7 +24,7 @@ public class Record extends BaseEntity<Integer>{
         return "Record{" +
                 "RecordID=" + getId() +
                 ", Price=" + Price +
-                ", ALbumName='" + AlbumName + '\'' +
+                ", AlbumName='" + AlbumName + '\'' +
                 ", InStock=" + InStock +
                 ", TypeOfRecord=" + TypeOfRecord +
                 '}';
