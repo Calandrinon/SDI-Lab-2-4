@@ -2,6 +2,8 @@ package Validator;
 
 import Model.User;
 
+import Exceptions.ValidationException;
+
 public class UserValidator implements Validator<User>{
     /**
      * validate the given user
@@ -18,19 +20,19 @@ public class UserValidator implements Validator<User>{
     @Override
     public void validate(User entity) throws Exception {
         if(entity.getFirstName().isBlank()){
-            throw new Exception("the firstname cannot be blank");
+            throw new ValidationException("the firstname cannot be blank");
         }
 
         if(entity.getFirstName().length() > 64){
-            throw new Exception("the firstname should be shorter than 64 characters");
+            throw new ValidationException("the firstname should be shorter than 64 characters");
         }
 
         if(entity.getLastName().isBlank()){
-            throw new Exception("the lastname cannot be empty");
+            throw new ValidationException("the lastname cannot be empty");
         }
 
         if(entity.getFirstName().length() > 64){
-            throw new Exception("the lastname should be shorter than 64 characters");
+            throw new ValidationException("the lastname should be shorter than 64 characters");
         }
     }
 }

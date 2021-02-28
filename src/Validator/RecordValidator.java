@@ -2,7 +2,7 @@ package Validator;
 
 import Model.Record;
 
-import java.util.regex.Matcher;
+import Exceptions.ValidationException;
 
 public class RecordValidator implements Validator<Record> {
 
@@ -19,10 +19,10 @@ public class RecordValidator implements Validator<Record> {
     @Override
     public void validate(Record entity) throws Exception {
         if(entity.getPrice() < 0){
-            throw new Exception("the price is negative");
+            throw new ValidationException("the price is negative");
         }
         if(entity.getInStock() < 0){
-            throw new Exception("the number of records is negative");
+            throw new ValidationException("the number of records is negative");
         }
     }
 }
