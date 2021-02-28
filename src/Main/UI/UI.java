@@ -40,19 +40,12 @@ public class UI {
         int price = input.nextInt(); input.nextLine();
         System.out.print("Enter the record type: ");
         String recordTypeAsString = input.nextLine().toLowerCase();
-        RecordType recordType = CD;
-
-        switch (recordTypeAsString) {
-            case "cd":
-                recordType = CD;
-                break;
-            case "vinyl":
-                recordType = VINYL;
-                break;
-            case "tape":
-                recordType = TAPE;
-                break;
-        }
+        RecordType recordType = switch (recordTypeAsString) {
+            case "cd" -> CD;
+            case "vinyl" -> VINYL;
+            case "tape" -> TAPE;
+            default -> CD;
+        };
 
         this.RecordController.add(recordId, price, name, 1, recordType);
     }
@@ -87,19 +80,12 @@ public class UI {
         int newInStock = input.nextInt(); input.nextLine();
         System.out.print("Enter the new record type: ");
         String recordTypeAsString = input.nextLine().toLowerCase();
-        RecordType recordType = CD;
-
-        switch (recordTypeAsString) {
-            case "cd":
-                recordType = CD;
-                break;
-            case "vinyl":
-                recordType = VINYL;
-                break;
-            case "tape":
-                recordType = TAPE;
-                break;
-        }
+        RecordType recordType = switch (recordTypeAsString) {
+            case "cd" -> CD;
+            case "vinyl" -> VINYL;
+            case "tape" -> TAPE;
+            default -> CD;
+        };
 
         System.out.println(recordType.toString());
         this.RecordController.update(recordId, price, name, newInStock, recordType);
