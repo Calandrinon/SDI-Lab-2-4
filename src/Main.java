@@ -8,10 +8,6 @@ import Validator.RecordValidator;
 import Validator.UserValidator;
 
 public class Main {
-
-    /**
-     * @param args -
-     */
     public static void main(String[] args) {
 
         InMemoryRepository<Integer, Record> recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
