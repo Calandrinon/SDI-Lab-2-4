@@ -162,35 +162,16 @@ public class UI {
 
             try {
                 switch (option) {
-                    case 0:
-                        this.running = false;
-                        break;
-                    case 1:
-                        addRecord();
-                        break;
-                    case 2:
-                        addUser();
-                        break;
-                    case 3:
-                        listRecords();
-                        break;
-                    case 4:
-                        listUsers();
-                        break;
-                    case 5:
-                        removeRecord();
-                        break;
-                    case 6:
-                        removeUser();
-                        break;
-                    case 7:
-                        updateRecord();
-                        break;
-                    case 8:
-                        updateUser();
-                        break;
-                    default:
-                        System.out.println("Enter an option between 1 and 8.");
+                    case 0 -> this.running = false;
+                    case 1 -> addRecord();
+                    case 2 -> addUser();
+                    case 3 -> listRecords();
+                    case 4 -> listUsers();
+                    case 5 -> removeRecord();
+                    case 6 -> removeUser();
+                    case 7 -> updateRecord();
+                    case 8 -> updateUser();
+                    default -> System.out.println("Enter an option between 1 and 8.");
                 }
             }catch(Exception exception){
                 System.out.println(exception.getMessage());
