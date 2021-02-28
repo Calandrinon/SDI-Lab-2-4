@@ -1,5 +1,6 @@
 package Repository;
 
+import Exceptions.ValidationException;
 import Model.BaseEntity;
 
 import java.util.Optional;
@@ -30,10 +31,10 @@ public interface Repository<ID, T extends BaseEntity<ID>> {
      * @return an {@code Optional} - null if the entity was saved otherwise (e.g. id already exists) returns the entity.
      * @throws IllegalArgumentException
      *             if the given entity is null.
-     * @throws Exception
+     * @throws ValidationException
      *             if the entity is not valid.
      */
-    Optional<T> save(T entity) throws Exception;
+    Optional<T> save(T entity) throws ValidationException;
 
     /**
      * Removes the entity with the given id.
@@ -55,8 +56,8 @@ public interface Repository<ID, T extends BaseEntity<ID>> {
      *         entity.
      * @throws IllegalArgumentException
      *             if the given entity is null.
-     * @throws Exception
+     * @throws ValidationException
      *             if the entity is not valid.
      */
-    Optional<T> update(T entity) throws Exception;
+    Optional<T> update(T entity) throws ValidationException;
 }

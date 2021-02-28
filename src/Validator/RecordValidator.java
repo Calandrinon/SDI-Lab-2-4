@@ -11,13 +11,13 @@ public class RecordValidator implements Validator<Record> {
      *
      * @param entity must be valid
      *
-     * @throws Exception
+     * @throws ValidationException
      *             if the record has a negative price
      *             if the record has a negative number of records
      */
 
     @Override
-    public void validate(Record entity) throws Exception {
+    public void validate(Record entity) throws ValidationException {
         if(entity.getPrice() < 0){
             throw new ValidationException("the price is negative");
         }

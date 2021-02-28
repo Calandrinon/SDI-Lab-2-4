@@ -1,5 +1,6 @@
 package Repository;
 
+import Exceptions.ValidationException;
 import Model.BaseEntity;
 import Validator.Validator;
 
@@ -58,11 +59,11 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
      * @return an {@code Optional} - null if the entity was saved otherwise (e.g. id already exists) returns the entity.
      * @throws IllegalArgumentException
      *             if the given entity is null.
-     * @throws Exception
+     * @throws ValidationException
      *             if the entity is not valid.
      */
     @Override
-    public Optional<T> save(T entity) throws Exception {
+    public Optional<T> save(T entity) throws ValidationException {
         if (entity == null) {
             throw new IllegalArgumentException("id must not be null");
         }
@@ -96,11 +97,11 @@ public class InMemoryRepository<ID, T extends BaseEntity<ID>> implements Reposit
      *         entity.
      * @throws IllegalArgumentException
      *             if the given entity is null.
-     * @throws Exception
+     * @throws ValidationException
      *             if the entity is not valid.
      */
     @Override
-    public Optional<T> update(T entity) throws Exception {
+    public Optional<T> update(T entity) throws ValidationException {
         if (entity == null) {
             throw new IllegalArgumentException("entity must not be null");
         }

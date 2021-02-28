@@ -1,5 +1,7 @@
 package Validator;
 
+import Exceptions.ValidationException;
+
 public interface Validator<T> {
-    void validate(T entity) throws Exception;
+    void validate(T entity) throws ValidationException;
 }

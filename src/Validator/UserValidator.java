@@ -10,7 +10,7 @@ public class UserValidator implements Validator<User>{
      *
      * @param entity must be valid
      *
-     * @throws Exception
+     * @throws ValidationException
      *             if the user has an empty firstname
      *             if the user has an empty lastname
      *             if the user has a firstname that is longer than 64 characters
@@ -18,7 +18,7 @@ public class UserValidator implements Validator<User>{
      */
 
     @Override
-    public void validate(User entity) throws Exception {
+    public void validate(User entity) throws ValidationException {
         if(entity.getFirstName().isBlank()){
             throw new ValidationException("the firstname cannot be blank");
         }
