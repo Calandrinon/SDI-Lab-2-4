@@ -23,6 +23,10 @@ public class UI {
         System.out.println("2. Add user");
         System.out.println("3. List records");
         System.out.println("4. List users");
+        System.out.println("5. Remove record");
+        System.out.println("6. Remove user");
+        System.out.println("7. Update record");
+        System.out.println("8. Update user");
         System.out.println("0. Exit");
     }
 
@@ -50,7 +54,6 @@ public class UI {
                 break;
         }
 
-        System.out.println(recordType.toString());
         this.RecordController.add(recordId, price, name, 1, recordType);
     }
 
@@ -60,6 +63,46 @@ public class UI {
         System.out.println("Records:");
 
         recordsAsStrings.forEach(System.out::println);
+    }
+
+
+    public void removeRecord() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the record ID to delete: ");
+        int recordId = input.nextInt(); input.nextLine();
+
+        this.RecordController.remove(recordId);
+    }
+
+
+    public void updateRecord() throws Exception {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the record ID to update: ");
+        int recordId = input.nextInt(); input.nextLine();
+        System.out.print("Enter the new album name: ");
+        String name = input.nextLine();
+        System.out.print("Enter the new price: ");
+        int price = input.nextInt(); input.nextLine();
+        System.out.print("Enter the new number of copies in stock: ");
+        int newInStock = input.nextInt(); input.nextLine();
+        System.out.print("Enter the new record type: ");
+        String recordTypeAsString = input.nextLine().toLowerCase();
+        RecordType recordType = CD;
+
+        switch (recordTypeAsString) {
+            case "cd":
+                recordType = CD;
+                break;
+            case "vinyl":
+                recordType = VINYL;
+                break;
+            case "tape":
+                recordType = TAPE;
+                break;
+        }
+
+        System.out.println(recordType.toString());
+        this.RecordController.update(recordId, price, name, newInStock, recordType);
     }
 
 
@@ -82,6 +125,29 @@ public class UI {
         System.out.println("Users:");
 
         usersAsStrings.forEach(System.out::println);
+    }
+
+
+    public void removeUser() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the user ID to delete: ");
+        int userId = input.nextInt(); input.nextLine();
+
+        this.UserController.remove(userId);
+    }
+
+
+    public void updateUser() throws Exception {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("User ID to update: ");
+        int userId = input.nextInt(); input.nextLine();
+        System.out.print("New first name: ");
+        String firstName = input.nextLine();
+        System.out.print("New second name: ");
+        String lastName = input.nextLine();
+
+        this.UserController.update(userId, firstName, lastName, 0);
     }
 
 
@@ -111,8 +177,20 @@ public class UI {
                     case 4:
                         listUsers();
                         break;
+                    case 5:
+                        removeRecord();
+                        break;
+                    case 6:
+                        removeUser();
+                        break;
+                    case 7:
+                        updateRecord();
+                        break;
+                    case 8:
+                        updateUser();
+                        break;
                     default:
-                        System.out.println("Enter an option between 1 and 5.");
+                        System.out.println("Enter an option between 1 and 8.");
                 }
             }catch(Exception exception){
                 System.out.println(exception.getMessage());
