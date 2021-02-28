@@ -47,7 +47,7 @@ public class TestRecord {
 
     @Test
     public void testGetAlbumName() throws Exception{
-        assert(ALBUM_NAME.equals(record.getALbumName()));
+        assert(ALBUM_NAME.equals(record.getAlbumName()));
     }
 
     @Test

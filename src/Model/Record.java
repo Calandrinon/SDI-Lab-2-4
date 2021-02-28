@@ -19,6 +19,10 @@ public class Record extends BaseEntity<Integer>{
         TypeOfRecord = typeOfRecord;
     }
 
+    /**
+     *
+     * @return String of the Record object
+     */
     @Override
     public String toString() {
         return "Record{" +
@@ -30,6 +34,12 @@ public class Record extends BaseEntity<Integer>{
                 '}';
     }
 
+    /**
+     *
+     * @param obj - an object to be compared
+     * @return true - if the objects are the same or if their ids are the same
+     *         false - if the objects don't have the same class
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj)return true;
@@ -37,21 +47,37 @@ public class Record extends BaseEntity<Integer>{
 
         Record record = (Record) obj;
 
-        return getId() == record.getId();
+        return getId().equals(record.getId());
     }
 
+    /**
+     *
+     * @return the price of a Record
+     */
     public int getPrice() {
         return Price;
     }
 
-    public String getALbumName() {
+    /**
+     *
+     * @return the album name of a record
+     */
+    public String getAlbumName() {
         return AlbumName;
     }
 
+    /**
+     *
+     * @return the amount of stock for a Record
+     */
     public int getInStock() {
         return InStock;
     }
 
+    /**
+     *
+     * @return the record type of a record
+     */
     public RecordType getTypeOfRecord() {
         return TypeOfRecord;
     }
