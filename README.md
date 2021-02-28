@@ -12,7 +12,7 @@
 # Details:
 The first example for lab2-4 is: *catalog1_I1_inmemory_infile.zip*
 
-**You will have to use the Repository interface from the example (no changes allowed there).** Everything else is up to you (considering the _grading scheme_).
+**You will have to use the Main.Repository interface from the example (no changes allowed there).** Everything else is up to you (considering the _grading scheme_).
 
 The following  **iteration plan**  contains the  _minimal_  features such that the  _starting_  grade (points) for each iteration is 10:
 

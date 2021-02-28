@@ -6,7 +6,7 @@
 <title>RecordController</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-02-28">
-<meta name="description" content="declaration: package: Controller, class: RecordController">
+<meta name="description" content="declaration: package: Main.Controller, class: RecordController">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">Controller</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">Main.Controller</a></div>
 <h1 title="Class RecordController" class="title">Class RecordController</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">Controller.RecordController</div>
+<div class="inheritance">Main.Controller.RecordController</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="IController.html" title="interface in Controller">IController</a></code></dd>
+<dd><code><a href="IController.html" title="interface in Main.Controller">IController</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="type-name-label">RecordController</span>
 extends java.lang.Object
-implements <a href="IController.html" title="interface in Controller">IController</a></pre>
+implements <a href="IController.html" title="interface in Main.Controller">IController</a></pre>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,7 +106,7 @@ implements <a href="IController.html" title="interface in Controller">IControlle
 </thead>
 <tbody>
 <tr class="alt-color">
-<th class="col-constructor-name" scope="row"><code><span class="member-name-link"><a href="#%3Cinit%3E(Repository.InMemoryRepository)">RecordController</a></span>&#8203;(<a href="../Repository/InMemoryRepository.html" title="class in Repository">InMemoryRepository</a>&lt;java.lang.Integer,&#8203;<a href="../Model/Record.html" title="class in Model">Record</a>&gt;&nbsp;recordRepository)</code></th>
+<th class="col-constructor-name" scope="row"><code><span class="member-name-link"><a href="#%3Cinit%3E(Main.Repository.InMemoryRepository)">RecordController</a></span>&#8203;(<a href="../Main.Repository/InMemoryRepository.html" title="class in Main.Repository">InMemoryRepository</a>&lt;java.lang.Integer,&#8203;<a href="../Main.Model/Record.html" title="class in Main.Model">Record</a>&gt;&nbsp;recordRepository)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 </tbody>
@@ -132,11 +132,11 @@ implements <a href="IController.html" title="interface in Controller">IControlle
 <tbody>
 <tr class="alt-color" id="i0">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#add(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Model.RecordType)">add</a></span>&#8203;(java.lang.Integer&nbsp;id,
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#add(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Main.Model.RecordType)">add</a></span>&#8203;(java.lang.Integer&nbsp;id,
 java.lang.Integer&nbsp;price,
 java.lang.String&nbsp;AlbumName,
 java.lang.Integer&nbsp;InStock,
-<a href="../Model/RecordType.html" title="enum in Model">RecordType</a>&nbsp;RecordType)</code></th>
+<a href="../Main.Model/RecordType.html" title="enum in Main.Model">RecordType</a>&nbsp;RecordType)</code></th>
 <td class="col-last">
 <div class="block">creates and adds to the repository a record</div>
 </td>
@@ -155,11 +155,11 @@ java.lang.Integer&nbsp;InStock,
 </tr>
 <tr class="row-color" id="i3">
 <td class="col-first"><code>void</code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#update(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Model.RecordType)">update</a></span>&#8203;(java.lang.Integer&nbsp;id,
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#update(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Main.Model.RecordType)">update</a></span>&#8203;(java.lang.Integer&nbsp;id,
 java.lang.Integer&nbsp;price,
 java.lang.String&nbsp;AlbumName,
 java.lang.Integer&nbsp;InStock,
-<a href="../Model/RecordType.html" title="enum in Model">RecordType</a>&nbsp;RecordType)</code></th>
+<a href="../Main.Model/RecordType.html" title="enum in Main.Model">RecordType</a>&nbsp;RecordType)</code></th>
 <td class="col-last">
 <div class="block">creates and updates to the repository the record with another one having the same id</div>
 </td>
@@ -183,9 +183,9 @@ java.lang.Integer&nbsp;InStock,
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(Repository.InMemoryRepository)">
+<section class="detail" id="&lt;init&gt;(Main.Repository.InMemoryRepository)">
 <h3>RecordController</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="member-name">RecordController</span>&#8203;(<span class="parameters"><a href="../Repository/InMemoryRepository.html" title="class in Repository">InMemoryRepository</a>&lt;java.lang.Integer,&#8203;<a href="../Model/Record.html" title="class in Model">Record</a>&gt;&nbsp;recordRepository)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="member-name">RecordController</span>&#8203;(<span class="parameters"><a href="../Main.Repository/InMemoryRepository.html" title="class in Main.Repository">InMemoryRepository</a>&lt;java.lang.Integer,&#8203;<a href="../Main.Model/Record.html" title="class in Main.Model">Record</a>&gt;&nbsp;recordRepository)</span></div>
 </section>
 </li>
 </ul>
@@ -197,13 +197,13 @@ java.lang.Integer&nbsp;InStock,
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="add(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Model.RecordType)">
+<section class="detail" id="add(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Main.Model.RecordType)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">add</span>&#8203;(<span class="parameters">java.lang.Integer&nbsp;id,
 java.lang.Integer&nbsp;price,
 java.lang.String&nbsp;AlbumName,
 java.lang.Integer&nbsp;InStock,
-<a href="../Model/RecordType.html" title="enum in Model">RecordType</a>&nbsp;RecordType)</span>
+<a href="../Main.Model/RecordType.html" title="enum in Main.Model">RecordType</a>&nbsp;RecordType)</span>
          throws <span class="exceptions">java.lang.Exception</span></div>
 <div class="block">creates and adds to the repository a record</div>
 <dl class="notes">
@@ -219,13 +219,13 @@ java.lang.Integer&nbsp;InStock,
 </section>
 </li>
 <li>
-<section class="detail" id="update(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Model.RecordType)">
+<section class="detail" id="update(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Integer,Main.Model.RecordType)">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">update</span>&#8203;(<span class="parameters">java.lang.Integer&nbsp;id,
 java.lang.Integer&nbsp;price,
 java.lang.String&nbsp;AlbumName,
 java.lang.Integer&nbsp;InStock,
-<a href="../Model/RecordType.html" title="enum in Model">RecordType</a>&nbsp;RecordType)</span>
+<a href="../Main.Model/RecordType.html" title="enum in Main.Model">RecordType</a>&nbsp;RecordType)</span>
             throws <span class="exceptions">java.lang.Exception</span></div>
 <div class="block">creates and updates to the repository the record with another one having the same id</div>
 <dl class="notes">

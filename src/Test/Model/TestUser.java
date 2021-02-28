@@ -2,7 +2,7 @@ package Test.Model;
 
 import org.junit.After;
 import org.junit.Before;
-import Model.User;
+import Main.Model.User;
 import org.junit.Test;
 
 public class TestUser {

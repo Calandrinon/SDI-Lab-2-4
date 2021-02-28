@@ -6,7 +6,7 @@
 <title>InMemoryRepository</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-02-28">
-<meta name="description" content="declaration: package: Repository, class: InMemoryRepository">
+<meta name="description" content="declaration: package: Main.Repository, class: InMemoryRepository">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
@@ -73,21 +73,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">Repository</a></div>
-<h1 title="Class InMemoryRepository" class="title">Class InMemoryRepository&lt;ID,&#8203;T extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;ID&gt;&gt;</h1>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">Main.Repository</a></div>
+<h1 title="Class InMemoryRepository" class="title">Class InMemoryRepository&lt;ID,&#8203;T extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;ID&gt;&gt;</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance">Repository.InMemoryRepository&lt;ID,&#8203;T&gt;</div>
+<div class="inheritance">Main.Repository.InMemoryRepository&lt;ID,&#8203;T&gt;</div>
 </div>
 <section class="description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;ID,&#8203;T&gt;</code></dd>
+<dd><code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;ID,&#8203;T&gt;</code></dd>
 </dl>
 <hr>
-<pre>public class <span class="type-name-label">InMemoryRepository&lt;ID,&#8203;T extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;ID&gt;&gt;</span>
+<pre>public class <span class="type-name-label">InMemoryRepository&lt;ID,&#8203;T extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;ID&gt;&gt;</span>
 extends java.lang.Object
-implements <a href="Repository.html" title="interface in Repository">Repository</a>&lt;ID,&#8203;T&gt;</pre>
+implements <a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;ID,&#8203;T&gt;</pre>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,7 +106,7 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 </thead>
 <tbody>
 <tr class="alt-color">
-<th class="col-constructor-name" scope="row"><code><span class="member-name-link"><a href="#%3Cinit%3E(Validator.Validator)">InMemoryRepository</a></span>&#8203;(<a href="../Validator/Validator.html" title="interface in Validator">Validator</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;&nbsp;validator)</code></th>
+<th class="col-constructor-name" scope="row"><code><span class="member-name-link"><a href="#%3Cinit%3E(Main.Validator.Validator)">InMemoryRepository</a></span>&#8203;(<a href="../Main.Validator/Main.Validator.html" title="interface in Main.Validator">Main.Validator</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;&nbsp;validator)</code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
 </tbody>
@@ -182,9 +182,9 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(Validator.Validator)">
+<section class="detail" id="&lt;init&gt;(Main.Validator.Validator)">
 <h3>InMemoryRepository</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="member-name">InMemoryRepository</span>&#8203;(<span class="parameters"><a href="../Validator/Validator.html" title="interface in Validator">Validator</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;&nbsp;validator)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="member-name">InMemoryRepository</span>&#8203;(<span class="parameters"><a href="../Main.Validator/Main.Validator.html" title="interface in Main.Validator">Main.Validator</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;&nbsp;validator)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>validator</code> - - validator for the entities</dd>
@@ -206,7 +206,7 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 <div class="block">Find the entity with the given <code>id</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Repository.html#findOne(ID)">findOne</a></code>&nbsp;in interface&nbsp;<code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
+<dd><code><a href="Main.Repository.html#findOne(ID)">findOne</a></code>&nbsp;in interface&nbsp;<code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>id</code> - must be not null.</dd>
 <dt>Returns:</dt>
@@ -222,7 +222,7 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.lang.Iterable&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;</span>&nbsp;<span class="member-name">findAll</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Repository.html#findAll()">findAll</a></code>&nbsp;in interface&nbsp;<code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
+<dd><code><a href="Main.Repository.html#findAll()">findAll</a></code>&nbsp;in interface&nbsp;<code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>all entities.</dd>
 </dl>
@@ -230,13 +230,13 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 </li>
 <li>
 <section class="detail" id="save(T)">
-<h3 id="save(Model.BaseEntity)">save</h3>
+<h3 id="save(Main.Model.BaseEntity)">save</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.Optional&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;</span>&nbsp;<span class="member-name">save</span>&#8203;(<span class="parameters"><a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&nbsp;entity)</span>
                            throws <span class="exceptions">java.lang.Exception</span></div>
 <div class="block">Saves the given entity.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Repository.html#save(T)">save</a></code>&nbsp;in interface&nbsp;<code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
+<dd><code><a href="Main.Repository.html#save(T)">save</a></code>&nbsp;in interface&nbsp;<code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>entity</code> - must not be null.</dd>
 <dt>Returns:</dt>
@@ -254,7 +254,7 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 <div class="block">Removes the entity with the given id.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Repository.html#delete(ID)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
+<dd><code><a href="Main.Repository.html#delete(ID)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>id</code> - must not be null.</dd>
 <dt>Returns:</dt>
@@ -266,13 +266,13 @@ implements <a href="Repository.html" title="interface in Repository">Repository<
 </li>
 <li>
 <section class="detail" id="update(T)">
-<h3 id="update(Model.BaseEntity)">update</h3>
+<h3 id="update(Main.Model.BaseEntity)">update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">java.util.Optional&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&gt;</span>&nbsp;<span class="member-name">update</span>&#8203;(<span class="parameters"><a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a>&nbsp;entity)</span>
                              throws <span class="exceptions">java.lang.Exception</span></div>
 <div class="block">Updates the given entity.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Repository.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="Repository.html" title="interface in Repository">Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Model/BaseEntity.html" title="class in Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
+<dd><code><a href="Main.Repository.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="Main.Repository.html" title="interface in Main.Repository">Main.Repository</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>,&#8203;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">T</a> extends <a href="../Main.Model/BaseEntity.html" title="class in Main.Model">BaseEntity</a>&lt;<a href="InMemoryRepository.html" title="type parameter in InMemoryRepository">ID</a>&gt;&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>entity</code> - must not be null.</dd>
 <dt>Returns:</dt>

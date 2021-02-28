@@ -1,8 +1,8 @@
 unnamed package
-Controller
-Model
-Repository
-Test.Model
-Test.Repository
-UI
-Validator
+Main.Controller
+Main.Model
+Main.Repository
+Test.Main.Model
+Test.Main.Repository
+Main.UI
+Main.Validator

@@ -1,8 +1,7 @@
 package Test.Model;
 
-import Model.Record;
-import Model.RecordType;
-import Model.User;
+import Main.Model.Record;
+import Main.Model.RecordType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
