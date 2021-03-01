@@ -41,7 +41,6 @@ public class UI {
         System.out.print("Enter the record type: ");
         String recordTypeAsString = input.nextLine().toLowerCase();
         RecordType recordType = switch (recordTypeAsString) {
-            case "cd" -> CD;
             case "vinyl" -> VINYL;
             case "tape" -> TAPE;
             default -> CD;
@@ -81,7 +80,6 @@ public class UI {
         System.out.print("Enter the new record type: ");
         String recordTypeAsString = input.nextLine().toLowerCase();
         RecordType recordType = switch (recordTypeAsString) {
-            case "cd" -> CD;
             case "vinyl" -> VINYL;
             case "tape" -> TAPE;
             default -> CD;

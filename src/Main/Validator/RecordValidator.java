@@ -18,11 +18,16 @@ public class RecordValidator implements Validator<Record> {
 
     @Override
     public void validate(Record entity) throws ValidationException {
-        if(entity.getPrice() < 0){
-            throw new ValidationException("the price is negative");
+        if (entity.getPrice() < 0){
+            throw new ValidationException("The price cannot be negative.");
         }
-        if(entity.getInStock() < 0){
-            throw new ValidationException("the number of records is negative");
+
+        if (entity.getInStock() < 0){
+            throw new ValidationException("The number of records cannot be negative.");
+        }
+
+        if (entity.getAlbumName().equals("")) {
+            throw new ValidationException("The album name cannot be an empty string.");
         }
     }
 }
