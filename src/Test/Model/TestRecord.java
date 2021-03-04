@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestRecord {
-    private static final int USER_ID = 1;
-    private static final int NEW_USER_ID = 2;
+    private static final int RECORD_ID = 1;
+    private static final int NEW_RECORD_ID = 2;
     private static final int PRICE = 1;
     private static final String ALBUM_NAME = "A";
     private static final int IN_STOCK = 1;
@@ -20,7 +20,7 @@ public class TestRecord {
     public void setUp() throws Exception
     {
         record = new Record(PRICE, ALBUM_NAME, IN_STOCK, TYPE_OF_RECORD);
-        record.setId(USER_ID);
+        record.setId(RECORD_ID);
     }
 
     @After
@@ -30,13 +30,13 @@ public class TestRecord {
 
     @Test
     public void testGetId() throws Exception{
-        assert(USER_ID == record.getId());
+        assert(RECORD_ID == record.getId());
     }
 
     @Test
     public void testSetId() throws Exception{
-        record.setId(NEW_USER_ID);
-        assert(NEW_USER_ID == record.getId());
+        record.setId(NEW_RECORD_ID);
+        assert(NEW_RECORD_ID == record.getId());
     }
 
     @Test
