@@ -10,15 +10,17 @@ import static Main.Model.RecordType.*;
 public class UI {
     private final Main.Controller.UserController UserController;
     private final Main.Controller.RecordController RecordController;
+    private final ClientUI clientUI;
     private boolean running;
 
-    public UI(Main.Controller.UserController UserController, Main.Controller.RecordController RecordController) {
+    public UI(Main.Controller.UserController UserController, Main.Controller.RecordController RecordController, ClientUI clientUI) {
         this.UserController = UserController;
         this.RecordController = RecordController;
+        this.clientUI = clientUI;
         this.running = true;
     }
 
-    public void displayMenu() {
+    public void displayMenuOldVersion() {
         System.out.println("1. Add record");
         System.out.println("2. Add user");
         System.out.println("3. List records");
@@ -29,6 +31,14 @@ public class UI {
         System.out.println("8. Update user");
         System.out.println("0. Exit");
     }
+
+
+    public void displayMenu() {
+        System.out.println("1. Client role");
+        System.out.println("2. Admin role");
+        System.out.println("0. Exit");
+    }
+
 
     public void addRecord() throws Exception {
         Scanner input = new Scanner(System.in);
@@ -147,15 +157,9 @@ public class UI {
             try {
                 switch (option) {
                     case 0 -> this.running = false;
-                    case 1 -> addRecord();
-                    case 2 -> addUser();
-                    case 3 -> listRecords();
-                    case 4 -> listUsers();
-                    case 5 -> removeRecord();
-                    case 6 -> removeUser();
-                    case 7 -> updateRecord();
-                    case 8 -> updateUser();
-                    default -> System.out.println("Enter an option between 1 and 8.");
+                    case 1 -> this.clientUI.run();
+                    case 2 -> this.clientUI.run(); // it should be "this.adminUI.run()", but that will be fixed later
+                    default -> System.out.println("Enter an option between 0 and 2.");
                 }
             }catch(Exception exception){
                 System.out.println(exception.getMessage());

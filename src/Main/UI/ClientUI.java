@@ -50,6 +50,7 @@ public class ClientUI {
 
 
     public void run() {
+        this.running = true;
         Scanner input = new Scanner(System.in);
         int option = 0;
 

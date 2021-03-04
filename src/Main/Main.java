@@ -25,7 +25,7 @@ public class Main {
         UserController userController = new UserController(userRepository);
         RecordController recordController = new RecordController(recordRepository);
         ClientUI clientUserInterface = new ClientUI(clientController, recordController, transactionController, 1);
-        UI userInterface = new UI(userController, recordController);
+        UI userInterface = new UI(userController, recordController, clientUserInterface);
         userInterface.run();
     }
 }

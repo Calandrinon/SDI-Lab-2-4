@@ -23,7 +23,6 @@ public class ClientController {
         for (Record record: availableRecords) {
             if (record.getId().equals(id) && record.getTypeOfRecord() == RecordType) {
                 clientRecordRepository.save(record);
-                // The transaction should be handled here as well (by using a reference to the TransactionController)
                 break;
             }
         }
