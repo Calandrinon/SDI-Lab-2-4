@@ -5,6 +5,9 @@ import Main.Repository.InMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class UserController implements IController{
     private final InMemoryRepository<Integer, User> UserRepository;
@@ -64,9 +67,18 @@ public class UserController implements IController{
      *
      */
 
+    private List<String> filter(Predicate<User> pred){
+        return StreamSupport.stream(this.UserRepository.findAll().spliterator(), false)
+                .filter(pred)
+                .map(User::toString)
+                .collect(Collectors.toList());
+    }
+
     public List<String> getRepository() {
-        List<String> list = new ArrayList<>();
-        this.UserRepository.findAll().forEach(e -> list.add(e.toString()));
-        return list;
+        return filter(p -> true);
+    }
+
+    public List<String> filterByNumberOfTransactions(Integer minimumNumberOfTransactions) {
+        return filter(p -> p.getNumberOfTransactions() > minimumNumberOfTransactions);
     }
 }
