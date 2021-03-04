@@ -22,7 +22,9 @@ public class User extends BaseEntity<Integer>{
      */
     @Override
     public String toString() {
-        return "Client " + Integer.toString(this.getId()) + ": " + FirstName + " " + LastName + " No. of transactions: " + Integer.toString(NumberOfTransactions);
+        return "User " + Integer.toString(this.getId()) + ": " +
+                FirstName + " " + LastName +
+                " No. of transactions: " + Integer.toString(NumberOfTransactions);
     }
 
     /**
