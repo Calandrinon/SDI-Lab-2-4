@@ -3,20 +3,20 @@ package Main.Model;
 import java.util.Date;
 
 public class Transaction extends BaseEntity<Integer>{
-    private final User user;
-    private final Record record;
+    private final int userID;
+    private final int recordID;
     private final Date date;
     private final int quantity;
 
     /**
-     * @param user - User class
-     * @param record - Record class
+     * @param userID - Integer
+     * @param recordID - Integer
      * @param date - Date
      * @param quantity - Integer
      */
-    public Transaction(User user, Record record, Date date, int quantity) {
-        this.user = user;
-        this.record = record;
+    public Transaction(int userID, int recordID, Date date, int quantity) {
+        this.userID = userID;
+        this.recordID = recordID;
         this.date = date;
         this.quantity = quantity;
     }
@@ -27,8 +27,8 @@ public class Transaction extends BaseEntity<Integer>{
     @Override
     public String toString() {
         return "Transaction " + getId() + ": " +
-                "User " + user.getId() +
-                "Record " + record.getId() +
+                "User " + userID +
+                "Record " + recordID +
                 "Date " + date.toString() +
                 "Quantity " + quantity;
     }
@@ -49,20 +49,6 @@ public class Transaction extends BaseEntity<Integer>{
     }
 
     /**
-     * @return the User from a Transaction
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @return the Record from a Transaction
-     */
-    public Record getRecord() {
-        return record;
-    }
-
-    /**
      * @return the Date for a Transaction
      */
     public Date getDate() {
@@ -74,5 +60,19 @@ public class Transaction extends BaseEntity<Integer>{
      */
     public int getQuantity() {
         return quantity;
+    }
+
+    /**
+     * @return the ID of the User that did the Transaction
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * @return the ID of the Record that was bought in the Transaction
+     */
+    public int getRecordID() {
+        return recordID;
     }
 }
