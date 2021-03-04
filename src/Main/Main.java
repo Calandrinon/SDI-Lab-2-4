@@ -8,6 +8,7 @@ import Main.Model.Record;
 import Main.Model.Transaction;
 import Main.Model.User;
 import Main.Repository.InMemoryRepository;
+import Main.UI.AdminUI;
 import Main.UI.ClientUI;
 import Main.UI.UI;
 import Main.Validator.RecordValidator;
@@ -25,7 +26,8 @@ public class Main {
         UserController userController = new UserController(userRepository);
         RecordController recordController = new RecordController(recordRepository);
         ClientUI clientUserInterface = new ClientUI(clientController, recordController, transactionController, 1);
-        UI userInterface = new UI(userController, recordController, clientUserInterface);
+        AdminUI adminUserInterface = new AdminUI(userController, recordController);
+        UI userInterface = new UI(userController, recordController, clientUserInterface, adminUserInterface);
         userInterface.run();
     }
 }
