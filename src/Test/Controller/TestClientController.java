@@ -44,7 +44,7 @@ public class TestClientController {
     }
 
     @Test
-    public void testAcquireRecordAddition() throws Exception {
+    public void testAcquireRecord() throws Exception {
         this.clientController.acquireRecord(this.id, this.type);
         long numberOfElementsInClientRepository = StreamSupport.stream(this.clientRecordRepository.findAll().spliterator(), false).count();
         assert(numberOfElementsInClientRepository == 1);
