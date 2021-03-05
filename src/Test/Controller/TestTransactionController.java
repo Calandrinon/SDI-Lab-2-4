@@ -28,6 +28,7 @@ public class TestTransactionController {
     private final static int TRANSACTION_ID = 1;
     private final static int NEW_TRANSACTION_ID = 2;
     private final static int USER_ID = 1;
+    private final static int USER_ID_2 = 2;
     private final static String USER_FIRSTNAME = "abc";
     private final static String USER_LASTNAME = "def";
     private final static int RECORD_ID = 1;
@@ -56,6 +57,7 @@ public class TestTransactionController {
         this.userController = new UserController((InMemoryRepository<Integer, User>) this.userRepository);
         this.recordController = new RecordController((InMemoryRepository<Integer, Record>) recordRepository);
         this.userController.add(USER_ID, USER_FIRSTNAME, USER_LASTNAME, 0);
+        this.userController.add(USER_ID_2, USER_FIRSTNAME, USER_LASTNAME, 0);
         this.recordController.add(RECORD_ID, 59, RECORD_NAME, RECORDS_IN_STOCK, RecordType.VINYL);
         this.recordController.add(RECORD_ID_2, 99, RECORD_NAME_2, RECORDS_IN_STOCK_2, RecordType.VINYL);
     }
@@ -111,5 +113,23 @@ public class TestTransactionController {
         Date date = new Date();
         List<String> list = this.transactionController.filterByDate(date);
         assert(list.size() == 1);
+    }
+
+
+    @Test
+    public void testGetQuantityPurchasedByRecordID() throws Exception {
+        this.transactionController.makeTransaction(USER_ID, RECORD_ID, 50);
+        this.transactionController.makeTransaction(USER_ID, RECORD_ID, 25);
+        this.transactionController.makeTransaction(USER_ID_2, RECORD_ID, 25);
+        assert(this.transactionController.getTotalQuantityPurchasedByRecordID(RECORD_ID) == 100);
+    }
+
+
+    @Test
+    public void testGetMostPurchasedRecords() throws Exception {
+        this.transactionController.makeTransaction(USER_ID, RECORD_ID, 3);
+        this.transactionController.makeTransaction(USER_ID_2, RECORD_ID_2, 1);
+        this.transactionController.makeTransaction(USER_ID_2, RECORD_ID_2, 1);
+        assert(this.transactionController.getMostPurchasedRecords().getId() == RECORD_ID);
     }
 }
