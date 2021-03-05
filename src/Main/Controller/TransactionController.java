@@ -49,8 +49,12 @@ public class TransactionController {
         User user = UserRepository.findOne(userID).orElseThrow(() -> new TransactionException("no such user"));
         Record record = RecordRepository.findOne(recordID).orElseThrow(() -> new TransactionException("no such record"));
 
-        this.UserRepository.update(new User(user.getFirstName(), user.getLastName(), user.getNumberOfTransactions() + 1));
-        this.RecordRepository.update(new Record(record.getPrice(), record.getAlbumName(), record.getInStock() - quantity, record.getTypeOfRecord()));
+        User updatedUser = new User(user.getFirstName(), user.getLastName(), user.getNumberOfTransactions() + 1);
+        updatedUser.setId(user.getId());
+        this.UserRepository.update(updatedUser);
+        Record updatedRecord = new Record(record.getPrice(), record.getAlbumName(), record.getInStock() - quantity, record.getTypeOfRecord());
+        updatedRecord.setId(record.getId());
+        this.RecordRepository.update(updatedRecord);
         this.TransactionRepository.save(new Transaction(userID, recordID, new Date(), quantity));
     }
 
