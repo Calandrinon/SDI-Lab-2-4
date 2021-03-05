@@ -2,16 +2,18 @@ package Main.Controller;
 
 import Main.Model.RecordType;
 import Main.Model.Record;
-import Main.Repository.FileRepository;
 import Main.Repository.InMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class RecordController implements IController {
-    private final FileRepository<Integer, Record> RecordRepository;
+    private final InMemoryRepository<Integer, Record> RecordRepository;
 
-    public RecordController(FileRepository<Integer, Record> recordRepository) {
+    public RecordController(InMemoryRepository<Integer, Record> recordRepository) {
         RecordRepository = recordRepository;
     }
 
@@ -68,9 +70,18 @@ public class RecordController implements IController {
      *
      */
 
+    private List<String> filter(Predicate<Record> pred){
+        return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)
+                .filter(pred)
+                .map(Record::toString)
+                .collect(Collectors.toList());
+    }
+
     public List<String> getRepository() {
-        List<String> list = new ArrayList<>();
-        this.RecordRepository.findAll().forEach(e -> list.add(e.toString()));
-        return list;
+        return filter(e -> true);
+    }
+
+    public List<String> filterByPrice(Integer maximumPrice) {
+        return filter(e -> e.getPrice() < maximumPrice);
     }
 }

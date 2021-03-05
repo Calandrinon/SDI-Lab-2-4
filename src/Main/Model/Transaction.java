@@ -7,6 +7,7 @@ public class Transaction extends BaseEntity<Integer>{
     private final int recordID;
     private final Date date;
     private final int quantity;
+    private static int transactionNumber = 0;
 
     /**
      * @param userID - Integer
@@ -19,6 +20,8 @@ public class Transaction extends BaseEntity<Integer>{
         this.recordID = recordID;
         this.date = date;
         this.quantity = quantity;
+        transactionNumber++;
+        this.setId(transactionNumber);
     }
 
     /**

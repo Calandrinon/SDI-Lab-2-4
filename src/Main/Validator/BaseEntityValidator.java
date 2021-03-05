@@ -3,6 +3,8 @@ package Main.Validator;
 import Main.Exceptions.ValidationException;
 import Main.Model.BaseEntity;
 
+import java.util.Optional;
+
 public class BaseEntityValidator implements Validator<BaseEntity<Integer>> {
     @Override
     public void validate(BaseEntity<Integer> entity) throws ValidationException {
