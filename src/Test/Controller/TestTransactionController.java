@@ -16,6 +16,8 @@ import Main.Validator.UserValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,5 +100,16 @@ public class TestTransactionController {
         Stream<User> streamOfUsers = StreamSupport.stream(this.userRepository.findAll().spliterator(), false);
         List<User> users = streamOfUsers.filter(user -> user.getId() == USER_ID).collect(Collectors.toList());
         assert(users.get(0).getNumberOfTransactions() == 1);
+    }
+
+
+    @Test
+    public void testFilterByDate() throws Exception {
+        this.transactionRepository.save(new Transaction(USER_ID, RECORD_ID, new Date(2012, Calendar.FEBRUARY, 1), 1));
+        this.transactionController.makeTransaction(USER_ID, RECORD_ID, 50);
+
+        Date date = new Date();
+        List<String> list = this.transactionController.filterByDate(date);
+        assert(list.size() == 1);
     }
 }
