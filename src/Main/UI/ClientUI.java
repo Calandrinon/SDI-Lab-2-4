@@ -2,19 +2,21 @@ package Main.UI;
 
 import Main.Controller.ClientController;
 import Main.Controller.TransactionController;
+import Main.Controller.UserController;
 import Main.Model.RecordType;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class ClientUI {
     private final Main.Controller.RecordController recordController;
     private final TransactionController transactionController;
-    private final ClientController clientController;
+    private final UserController userController;
     private boolean running;
     private int userId;
 
-    public ClientUI(ClientController clientController, Main.Controller.RecordController recordController, TransactionController transactionController, int userId) {
-        this.clientController = clientController;
+    public ClientUI(UserController userController, Main.Controller.RecordController recordController, TransactionController transactionController, int userId) {
+        this.userController = userController;
         this.recordController = recordController;
         this.transactionController = transactionController;
         this.userId = userId;
@@ -39,17 +41,19 @@ public class ClientUI {
         int quantity = input.nextInt(); input.nextLine();
 
         transactionController.makeTransaction(userId, recordId, quantity);
-        clientController.acquireRecord(recordId, RecordType.VINYL);
     }
 
+    private void prettyPrintMapEntry(Map.Entry<Integer, Integer> entry){
+        System.out.println("you own " + entry.getValue() + " instances of this record: " + this.recordController.getRecordByID(entry.getKey()));
+    }
 
     public void listOwnedRecords() {
         System.out.println("Your records:");
-        clientController.getOwnedRecords().forEach(record -> System.out.println(record.toString()));
+        this.transactionController.getRecordsByUser(this.userId).entrySet().forEach(this::prettyPrintMapEntry);
     }
 
 
-    public void run() {
+    public void run(Integer userId) {
         this.running = true;
         Scanner input = new Scanner(System.in);
         int option = 0;
@@ -59,17 +63,26 @@ public class ClientUI {
             System.out.print("Enter an option: ");
             option = input.nextInt();
 
+            this.userId = userId;
+
             try {
                 switch (option) {
                     case 0 -> this.running = false;
                     case 1 -> this.buyRecord();
                     case 2 -> this.listOwnedRecords();
-                    default -> System.out.println("Enter an option between 0 and 2.");
+                    case 3 -> this.filterRecordsByPrice();
+                    default -> System.out.println("Enter an option between 0 and 3.");
                 }
             } catch(Exception exception){
                 System.out.println(exception.getMessage());
             }
         }
+    }
+
+    private void filterRecordsByPrice() {
+        System.out.println("please enter the upper limit for the price");
+        Scanner input = new Scanner(System.in);
+        this.recordController.filterByPrice(input.nextInt()).forEach(System.out::println);
     }
 
 }

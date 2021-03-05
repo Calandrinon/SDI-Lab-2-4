@@ -6,6 +6,7 @@ import Main.Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -92,6 +93,11 @@ public class UserController implements IController{
      */
 
     public List<String> filterByNumberOfTransactions(Integer minimumNumberOfTransactions) {
-        return filter(p -> p.getNumberOfTransactions() > minimumNumberOfTransactions);
+        return filter(p -> p.getNumberOfTransactions() >= minimumNumberOfTransactions);
     }
+
+
+     public Optional<User> exists(Integer userID) {
+        return this.UserRepository.findOne(userID);
+     }
 }

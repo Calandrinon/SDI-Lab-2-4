@@ -9,6 +9,7 @@ import Main.Repository.Repository;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ public class TransactionController {
     private final Repository<Integer, Record> RecordRepository;
     private final Repository<Integer, User> UserRepository;
     private final Repository<Integer, Transaction> TransactionRepository;
+    private AtomicInteger counter = new AtomicInteger(0);
 
     /**
      *
@@ -55,7 +57,10 @@ public class TransactionController {
         Record updatedRecord = new Record(record.getPrice(), record.getAlbumName(), record.getInStock() - quantity, record.getTypeOfRecord());
         updatedRecord.setId(record.getId());
         this.RecordRepository.update(updatedRecord);
-        this.TransactionRepository.save(new Transaction(userID, recordID, new Date(), quantity));
+
+        Transaction newTransaction = new Transaction(userID, recordID, new Date(), quantity);
+        newTransaction.setId(this.counter.incrementAndGet());
+        this.TransactionRepository.save(newTransaction);
     }
 
     /**
@@ -69,6 +74,19 @@ public class TransactionController {
                 .filter(pred)
                 .map(Transaction::toString)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param userID the id of the user
+     * @return a map containing the record id as key and the the quantity as value,
+     * if we encounter a duplicate key then the we execute integer sum on the two values under the same key
+     */
+
+    public Map<Integer, Integer> getRecordsByUser(Integer userID) {
+        return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)
+                .filter(t -> t.getUserID() == userID)
+                .collect(Collectors.toMap(Transaction::getRecordID, Transaction::getQuantity, Integer::sum));
     }
 
     /**
@@ -87,6 +105,7 @@ public class TransactionController {
      */
 
     public List<String> filterByDate(Date date) {
+        System.out.println(date.toString());
         return filter(e -> abs(TimeUnit.DAYS.convert(e.getDate().getTime() - date.getTime(), TimeUnit.MILLISECONDS)) <= 1);
     }
 
@@ -108,8 +127,8 @@ public class TransactionController {
      * @return the record having the maximum amount of purchases
      */
 
-    public Record getMostPurchasedRecords(){
+    public List<Record> getMostPurchasedRecords(){
         return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)
-                .max((r1, r2) -> getTotalQuantityPurchasedByRecordID(r1.getId()) - getTotalQuantityPurchasedByRecordID(r2.getId())).get();
+                .max((r1, r2) -> getTotalQuantityPurchasedByRecordID(r1.getId()) - getTotalQuantityPurchasedByRecordID(r2.getId())).stream().collect(Collectors.toList());
     }
 }

@@ -24,11 +24,11 @@ public class Main {
         Repository<Integer, Record> recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
         Repository<Integer, User> userRepository = new InMemoryRepository<Integer, User>(new UserValidator());
         TransactionController transactionController = new TransactionController(recordRepository, userRepository, transactionRepository);
-        ClientController clientController = new ClientController(clientRecordRepository, recordRepository);
+        // ClientController clientController = new ClientController(clientRecordRepository, recordRepository);
         UserController userController = new UserController(userRepository);
         RecordController recordController = new RecordController(recordRepository);
-        ClientUI clientUserInterface = new ClientUI(clientController, recordController, transactionController, 1);
-        AdminUI adminUserInterface = new AdminUI(userController, recordController);
+        ClientUI clientUserInterface = new ClientUI(userController, recordController, transactionController, 1);
+        AdminUI adminUserInterface = new AdminUI(userController, recordController, transactionController);
         UI userInterface = new UI(userController, recordController, clientUserInterface, adminUserInterface);
         userInterface.run();
     }
