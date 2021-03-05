@@ -63,8 +63,9 @@ public class UserController implements IController{
     }
 
     /**
-     * @return the a list of String values corresponding to the user objects
      *
+     * @param pred a given Predicate object
+     * @return the list of string transactions matching the given predicate return true when applied
      */
 
     private List<String> filter(Predicate<User> pred){
@@ -74,9 +75,20 @@ public class UserController implements IController{
                 .collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @return the a list of String values corresponding to the user objects
+     */
+
     public List<String> getRepository() {
         return filter(p -> true);
     }
+
+    /**
+     *
+     * @param minimumNumberOfTransactions the lower bound for the Users' number of transactions
+     * @return all of the users having more transactions than the given minimum amount
+     */
 
     public List<String> filterByNumberOfTransactions(Integer minimumNumberOfTransactions) {
         return filter(p -> p.getNumberOfTransactions() > minimumNumberOfTransactions);

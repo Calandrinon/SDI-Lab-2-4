@@ -4,6 +4,10 @@ import Main.Model.User;
 
 import Main.Exceptions.ValidationException;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.function.Predicate;
+
 public class UserValidator implements Validator<User>{
     /**
      * validate the given user
@@ -19,20 +23,15 @@ public class UserValidator implements Validator<User>{
 
     @Override
     public void validate(User entity) throws ValidationException {
-        if(entity.getFirstName().isBlank()){
-            throw new ValidationException("the firstname cannot be blank");
-        }
+        Predicate<User> checkFirstName = e ->
+                !e.getFirstName().isBlank()
+                && e.getFirstName().length() <= 64;
 
-        if(entity.getFirstName().length() > 64){
-            throw new ValidationException("the firstname should be shorter than 64 characters");
-        }
+        Predicate<User> checkLastName = e ->
+                        !e.getLastName().isBlank()
+                        && e.getLastName().length() <= 64;
 
-        if(entity.getLastName().isBlank()){
-            throw new ValidationException("the lastname cannot be empty");
-        }
-
-        if(entity.getFirstName().length() > 64){
-            throw new ValidationException("the lastname should be shorter than 64 characters");
-        }
+        Optional.ofNullable(entity).filter(checkFirstName).orElseThrow(() -> new ValidationException("firstname is invalid"));
+        Optional.of(entity).filter(checkLastName).orElseThrow(() -> new ValidationException("lastname is invalid"));
     }
 }

@@ -55,7 +55,7 @@ public class RecordController implements IController {
     }
 
     /**
-     * removes from the repository the record having the
+     * removes from the repository the record having the given id
      *
      * @param id must be already found in the repository
      *
@@ -67,8 +67,9 @@ public class RecordController implements IController {
     }
 
     /**
-     * @return the a list of String values corresponding to the record objects
      *
+     * @param pred a given Predicate object
+     * @return the list of string transactions matching the given predicate return true when applied
      */
 
     private List<String> filter(Predicate<Record> pred){
@@ -78,9 +79,20 @@ public class RecordController implements IController {
                 .collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @return the the a list of String values corresponding to the record objects
+     */
+
     public List<String> getRepository() {
         return filter(e -> true);
     }
+
+    /**
+     *
+     * @param maximumPrice the maximum price of the
+     * @return a list of all records having the value of the price attribute smaller than the given @maximumPrice
+     */
 
     public List<String> filterByPrice(Integer maximumPrice) {
         return filter(e -> e.getPrice() < maximumPrice);

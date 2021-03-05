@@ -4,6 +4,9 @@ import Main.Model.Record;
 
 import Main.Exceptions.ValidationException;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 public class RecordValidator implements Validator<Record> {
 
     /**
@@ -18,16 +21,8 @@ public class RecordValidator implements Validator<Record> {
 
     @Override
     public void validate(Record entity) throws ValidationException {
-        if (entity.getPrice() < 0){
-            throw new ValidationException("The price cannot be negative.");
-        }
-
-        if (entity.getInStock() < 0){
-            throw new ValidationException("The number of records cannot be negative.");
-        }
-
-        if (entity.getAlbumName().equals("")) {
-            throw new ValidationException("The album name cannot be an empty string.");
-        }
+        Optional.ofNullable(entity).filter(e -> e.getPrice() > 0).orElseThrow(() -> new ValidationException("the price cannot be negative"));
+        Optional.of(entity).filter(e -> e.getInStock() > 0).orElseThrow(() -> new ValidationException("there are no more records in stock"));
+        Optional.of(entity).filter(e -> !e.getAlbumName().isBlank()).orElseThrow(() -> new ValidationException("the album name cannot be empty"));
     }
 }

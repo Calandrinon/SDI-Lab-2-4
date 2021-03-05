@@ -57,7 +57,7 @@ public class TransactionController {
     /**
      *
      * @param pred Predicate type object
-     * @return the list of string transactions having the given predicate return true when applied
+     * @return the list of string transactions matching the given predicate return true when applied
      */
 
     private List<String> filter(Predicate<Transaction> pred){
@@ -69,7 +69,7 @@ public class TransactionController {
 
     /**
      *
-     * @return returns a list of all transactions as Strings
+     * @return the a list of String values corresponding to the transaction objects
      */
 
     public List<String> getRepository() {
