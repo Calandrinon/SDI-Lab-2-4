@@ -4,14 +4,15 @@ import Main.Model.Record;
 import Main.Model.RecordType;
 import Main.Model.Transaction;
 import Main.Repository.InMemoryRepository;
+import Main.Repository.Repository;
 
 import java.util.Set;
 
 public class ClientController {
-    private final InMemoryRepository<Integer, Record> clientRecordRepository;
-    private final InMemoryRepository<Integer, Record> recordRepository;
+    private final Repository<Integer, Record> clientRecordRepository;
+    private final Repository<Integer, Record> recordRepository;
 
-    public ClientController(InMemoryRepository<Integer, Record> clientRecordRepository, InMemoryRepository<Integer, Record> recordRepository) {
+    public ClientController(Repository<Integer, Record> clientRecordRepository, Repository<Integer, Record> recordRepository) {
         this.clientRecordRepository = clientRecordRepository;
         this.recordRepository = recordRepository;
     }

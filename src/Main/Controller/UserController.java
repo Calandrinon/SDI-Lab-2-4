@@ -2,6 +2,7 @@ package Main.Controller;
 
 import Main.Model.User;
 import Main.Repository.InMemoryRepository;
+import Main.Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class UserController implements IController{
-    private final InMemoryRepository<Integer, User> UserRepository;
+    private final Repository<Integer, User> UserRepository;
 
-    public UserController(InMemoryRepository<Integer, User> UserRepository) {
+    public UserController(Repository<Integer, User> UserRepository) {
         this.UserRepository = UserRepository;
     }
 

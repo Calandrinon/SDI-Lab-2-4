@@ -9,6 +9,7 @@ import Main.Model.Transaction;
 import Main.Model.User;
 import Main.Repository.FileRepository;
 import Main.Repository.InMemoryRepository;
+import Main.Repository.Repository;
 import Main.UI.AdminUI;
 import Main.UI.ClientUI;
 import Main.UI.UI;
@@ -18,10 +19,10 @@ import Main.Validator.UserValidator;
 
 public class Main {
     public static void main(String[] args) {
-        InMemoryRepository<Integer, Transaction> transactionRepository = new InMemoryRepository<Integer, Transaction>(new TransactionValidator());
-        InMemoryRepository<Integer, Record> clientRecordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
-        InMemoryRepository<Integer, Record> recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
-        InMemoryRepository<Integer, User> userRepository = new InMemoryRepository<Integer, User>(new UserValidator());
+        Repository<Integer, Transaction> transactionRepository = new InMemoryRepository<Integer, Transaction>(new TransactionValidator());
+        Repository<Integer, Record> clientRecordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
+        Repository<Integer, Record> recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
+        Repository<Integer, User> userRepository = new InMemoryRepository<Integer, User>(new UserValidator());
         TransactionController transactionController = new TransactionController(recordRepository, userRepository, transactionRepository);
         ClientController clientController = new ClientController(clientRecordRepository, recordRepository);
         UserController userController = new UserController(userRepository);
