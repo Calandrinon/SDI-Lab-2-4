@@ -3,6 +3,9 @@ package Main.UI;
 import Main.Controller.UserController;
 import Main.Model.RecordType;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,11 +15,13 @@ import static Main.Model.RecordType.CD;
 public class AdminUI {
     private final Main.Controller.UserController userController;
     private final Main.Controller.RecordController recordController;
+    private final Main.Controller.TransactionController transactionController;
     private boolean running;
 
-    public AdminUI(Main.Controller.UserController userController, Main.Controller.RecordController recordController) {
+    public AdminUI(Main.Controller.UserController userController, Main.Controller.RecordController recordController, Main.Controller.TransactionController transactionController) {
         this.userController = userController;
         this.recordController = recordController;
+        this.transactionController = transactionController;
         this.running = true;
     }
 
@@ -29,6 +34,10 @@ public class AdminUI {
         System.out.println("6. Remove user");
         System.out.println("7. Update record");
         System.out.println("8. Update user");
+        System.out.println("9. Get most purchased records");
+        System.out.println("10. Filter transactions by date");
+        System.out.println("11. Filter users by the minimum amount of transactions");
+        System.out.println("12. ");
         System.out.println("0. Exit");
     }
 
@@ -159,12 +168,37 @@ public class AdminUI {
                     case 6 -> removeUser();
                     case 7 -> updateRecord();
                     case 8 -> updateUser();
-                    default -> System.out.println("Enter an option between 1 and 8.");
+                    case 9 -> mostPurchasedRecords();
+                    case 10 -> filterTransactionsByDate();
+                    case 11 -> filterUsersByMinimumTransactions();
+                    default -> System.out.println("Enter an option between 1 and 11.");
                 }
             }catch(Exception exception){
                 System.out.println(exception.getMessage());
             }
         }
+    }
+
+    private void filterUsersByMinimumTransactions() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("please enter the minimum amount of transactions: ");
+        this.userController.filterByNumberOfTransactions(input.nextInt()).forEach(System.out::println);
+    }
+
+    private void filterTransactionsByDate() {
+        System.out.println("enter the day you want the transactions from (dd/MM/yyyy): ");
+        Scanner input = new Scanner(System.in);
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(input.nextLine());
+            this.transactionController.filterByDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostPurchasedRecords() {
+        System.out.println(this.transactionController.getMostPurchasedRecords());
     }
 }
 

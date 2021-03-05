@@ -1,6 +1,7 @@
 package Main.UI;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import Main.Model.RecordType;
@@ -42,7 +43,12 @@ public class UI {
             try {
                 switch (option) {
                     case 0 -> this.running = false;
-                    case 1 -> this.clientUI.run();
+                    case 1 -> {
+                        System.out.println("login with your id: ");
+                        Integer givenID = input.nextInt();
+                        this.UserController.exists(givenID).orElseThrow(() -> new Exception("no user has this id"));
+                        this.clientUI.run(givenID);
+                    }
                     case 2 -> this.adminUI.run();
                     default -> System.out.println("Enter an option between 0 and 2.");
                 }

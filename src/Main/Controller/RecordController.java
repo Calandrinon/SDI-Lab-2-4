@@ -7,6 +7,7 @@ import Main.Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -72,11 +73,21 @@ public class RecordController implements IController {
      * @return the list of string transactions matching the given predicate return true when applied
      */
 
-    private List<String> filter(Predicate<Record> pred){
+    public List<String> filter(Predicate<Record> pred){
         return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)
                 .filter(pred)
                 .map(Record::toString)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param recordID the id of the element we are looking for
+     * @return the String equivalent of the record
+     */
+
+    public String getRecordByID(Integer recordID) {
+        return this.RecordRepository.findOne(recordID).get().toString();
     }
 
     /**
