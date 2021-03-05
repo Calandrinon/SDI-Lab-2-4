@@ -19,8 +19,7 @@ public class TestTransaction {
     private Transaction transaction;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() {
         transaction = new Transaction(USER_ID, RECORD_ID, DATE, QUANTITY);
         transaction.setId(TRANSACTION_ID);
     }

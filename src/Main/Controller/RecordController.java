@@ -2,15 +2,16 @@ package Main.Controller;
 
 import Main.Model.RecordType;
 import Main.Model.Record;
+import Main.Repository.FileRepository;
 import Main.Repository.InMemoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecordController implements IController {
-    private final InMemoryRepository<Integer, Record> RecordRepository;
+    private final FileRepository<Integer, Record> RecordRepository;
 
-    public RecordController(InMemoryRepository<Integer, Record> recordRepository) {
+    public RecordController(FileRepository<Integer, Record> recordRepository) {
         RecordRepository = recordRepository;
     }
 

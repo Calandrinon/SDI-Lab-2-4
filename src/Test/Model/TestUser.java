@@ -15,40 +15,39 @@ public class TestUser {
     private User user;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() {
         user = new User(FIRST_NAME, LAST_NAME, NUMBER_OF_TRANSACTIONS);
         user.setId(USER_ID);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         user = null;
     }
 
     @Test
-    public void testGetId() throws Exception{
+    public void testGetId() {
         assert(USER_ID == user.getId());
     }
 
     @Test
-    public void testSetId() throws Exception{
+    public void testSetId() {
         user.setId(NEW_USER_ID);
         assert(NEW_USER_ID == user.getId());
     }
 
     @Test
-    public void testGetFirstName() throws Exception{
+    public void testGetFirstName() {
         assert(FIRST_NAME.equals(user.getFirstName()));
     }
 
     @Test
-    public void testGetLastName() throws Exception{
+    public void testGetLastName() {
         assert(LAST_NAME.equals(user.getLastName()));
     }
 
     @Test
-    public void testGetNumberOfTransactions() throws Exception{
+    public void testGetNumberOfTransactions() {
         assert(NUMBER_OF_TRANSACTIONS == user.getNumberOfTransactions());
     }
 

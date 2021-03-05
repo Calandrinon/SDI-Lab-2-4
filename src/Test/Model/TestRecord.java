@@ -17,45 +17,44 @@ public class TestRecord {
     private Record record;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() {
         record = new Record(PRICE, ALBUM_NAME, IN_STOCK, TYPE_OF_RECORD);
         record.setId(RECORD_ID);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         record = null;
     }
 
     @Test
-    public void testGetId() throws Exception{
+    public void testGetId() {
         assert(RECORD_ID == record.getId());
     }
 
     @Test
-    public void testSetId() throws Exception{
+    public void testSetId() {
         record.setId(NEW_RECORD_ID);
         assert(NEW_RECORD_ID == record.getId());
     }
 
     @Test
-    public void testGetPrice() throws Exception{
+    public void testGetPrice() {
         assert(PRICE == record.getPrice());
     }
 
     @Test
-    public void testGetAlbumName() throws Exception{
+    public void testGetAlbumName() {
         assert(ALBUM_NAME.equals(record.getAlbumName()));
     }
 
     @Test
-    public void testGetInStock() throws Exception{
+    public void testGetInStock() {
         assert(IN_STOCK == record.getInStock());
     }
 
     @Test
-    public void testGetTypeOfRecord() throws Exception{
+    public void testGetTypeOfRecord() {
         assert(TYPE_OF_RECORD == record.getTypeOfRecord());
     }
 
