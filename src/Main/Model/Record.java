@@ -81,4 +81,12 @@ public class Record extends BaseEntity<Integer>{
     public RecordType getTypeOfRecord() {
         return TypeOfRecord;
     }
+
+    public static String fileWriter(Record record){
+        return record.getId() + " | " + record.Price + " | " + record.AlbumName + " | " + record.InStock + " | " + record.TypeOfRecord;
+    }
+
+    public static Record fileReader(String line){
+        return new Record(1, "a", 1, RecordType.CD);
+    }
 }

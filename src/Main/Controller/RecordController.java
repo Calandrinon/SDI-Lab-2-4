@@ -2,8 +2,8 @@ package Main.Controller;
 
 import Main.Model.RecordType;
 import Main.Model.Record;
-import Main.Model.User;
 import Main.Repository.InMemoryRepository;
+import Main.Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class RecordController implements IController {
-    private final InMemoryRepository<Integer, Record> RecordRepository;
+    private final Repository<Integer, Record> RecordRepository;
 
-    public RecordController(InMemoryRepository<Integer, Record> recordRepository) {
+    public RecordController(Repository<Integer, Record> recordRepository) {
         RecordRepository = recordRepository;
     }
 
