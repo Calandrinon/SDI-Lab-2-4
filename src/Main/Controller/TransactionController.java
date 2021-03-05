@@ -96,7 +96,7 @@ public class TransactionController {
      * @return the total sum of the record having the id = @id found in the transaction repository
      */
 
-    public Integer getTotalQuantityPurchasedByRecordID(Integer id){
+    public Integer getTotalQuantityPurchasedByRecordID(Integer id) {
         return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)
                 .filter(t -> t.getRecordID() == id)
                 .map(Transaction::getQuantity)
