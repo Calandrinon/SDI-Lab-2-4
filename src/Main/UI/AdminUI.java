@@ -191,7 +191,7 @@ public class AdminUI {
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(input.nextLine());
-            this.transactionController.filterByDate(date);
+            System.out.println(this.transactionController.filterByDate(date));
         } catch (ParseException e) {
             e.printStackTrace();
         }
