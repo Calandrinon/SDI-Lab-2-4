@@ -7,6 +7,7 @@ import Main.Model.Transaction;
 import Main.Model.User;
 import Main.Repository.Repository;
 
+import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -105,7 +106,6 @@ public class TransactionController {
      */
 
     public List<String> filterByDate(Date date) {
-        System.out.println(date.toString());
         return filter(e -> abs(TimeUnit.DAYS.convert(e.getDate().getTime() - date.getTime(), TimeUnit.MILLISECONDS)) <= 1);
     }
 
