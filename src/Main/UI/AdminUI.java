@@ -70,7 +70,7 @@ public class AdminUI {
     }
 
 
-    public void removeRecord() {
+    public void removeRecord() throws Exception {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the record ID to delete: ");
         int recordId = input.nextInt(); input.nextLine();
@@ -124,7 +124,7 @@ public class AdminUI {
     }
 
 
-    public void removeUser() {
+    public void removeUser() throws Exception {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the user ID to delete: ");
         int userId = input.nextInt(); input.nextLine();
