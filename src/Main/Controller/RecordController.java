@@ -55,16 +55,16 @@ public class RecordController implements IController {
         this.RecordRepository.update(record);
     }
 
+
     /**
-     * removes from the repository the record having the given id
      *
      * @param id must be already found in the repository
-     *
-     *
+     * @throws Exception
+     *              if the element is not found inside the repository
      */
 
-    public void remove(Integer id) {
-        this.RecordRepository.delete(id);
+    public void remove(Integer id) throws Exception {
+        this.RecordRepository.delete(id).orElseThrow(() -> new Exception("the element does not exist"));
     }
 
     /**

@@ -53,15 +53,14 @@ public class UserController implements IController{
     }
 
     /**
-     * removes from the repository the user having the
      *
-     * @param id must be already found in the repository
-     *
-     *
+     * @param id removes from the repository the user having this id
+     * @throws Exception
+     *              if the element is not found inside the repository
      */
 
-    public void remove(Integer id) {
-        this.UserRepository.delete(id);
+    public void remove(Integer id) throws Exception {
+        this.UserRepository.delete(id).orElseThrow(() -> new Exception("no such user"));
     }
 
     /**
