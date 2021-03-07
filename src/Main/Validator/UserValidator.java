@@ -33,5 +33,6 @@ public class UserValidator implements Validator<User>{
 
         Optional.ofNullable(entity).filter(checkFirstName).orElseThrow(() -> new ValidationException("firstname is invalid"));
         Optional.of(entity).filter(checkLastName).orElseThrow(() -> new ValidationException("lastname is invalid"));
+        Optional.ofNullable(entity).filter(e -> e.getId() > 0).orElseThrow(() -> new ValidationException("The id cannot be negative."));
     }
 }
