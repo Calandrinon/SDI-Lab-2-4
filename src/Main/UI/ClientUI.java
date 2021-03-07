@@ -1,9 +1,7 @@
 package Main.UI;
 
-import Main.Controller.ClientController;
 import Main.Controller.TransactionController;
 import Main.Controller.UserController;
-import Main.Model.RecordType;
 
 import java.util.Map;
 import java.util.Scanner;
