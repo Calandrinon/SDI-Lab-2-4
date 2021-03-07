@@ -14,6 +14,6 @@ public class BaseEntityValidator implements Validator<BaseEntity<Integer>> {
      */
     @Override
     public void validate(BaseEntity<Integer> entity) throws ValidationException {
-        Optional.ofNullable(entity).filter(e -> e.getId() < 0).orElseThrow(() -> new ValidationException("id of entity must be positive"));
+        Optional.ofNullable(entity).filter(e -> e.getId() > 0).orElseThrow(() -> new ValidationException("id of entity must be positive"));
     }
 }
