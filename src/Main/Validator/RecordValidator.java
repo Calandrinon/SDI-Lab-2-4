@@ -24,5 +24,6 @@ public class RecordValidator implements Validator<Record> {
         Optional.ofNullable(entity).filter(e -> e.getPrice() > 0).orElseThrow(() -> new ValidationException("the price cannot be negative"));
         Optional.of(entity).filter(e -> e.getInStock() >= 0).orElseThrow(() -> new ValidationException("there are no more records in stock"));
         Optional.of(entity).filter(e -> !e.getAlbumName().isBlank()).orElseThrow(() -> new ValidationException("the album name cannot be empty"));
+        Optional.ofNullable(entity).filter(e -> e.getId() > 0).orElseThrow(() -> new ValidationException("The id cannot be negative."));
     }
 }
