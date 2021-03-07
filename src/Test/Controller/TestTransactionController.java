@@ -130,6 +130,6 @@ public class TestTransactionController {
         this.transactionController.makeTransaction(USER_ID, RECORD_ID, 3);
         this.transactionController.makeTransaction(USER_ID_2, RECORD_ID_2, 1);
         this.transactionController.makeTransaction(USER_ID_2, RECORD_ID_2, 1);
-        assert(this.transactionController.getMostPurchasedRecords().getId() == RECORD_ID);
+        assert(this.transactionController.getMostPurchasedRecords().get(0).getId() == RECORD_ID);
     }
 }
