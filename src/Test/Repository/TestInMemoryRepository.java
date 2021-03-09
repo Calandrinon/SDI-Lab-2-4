@@ -1,9 +1,9 @@
-package Test.Repository;
+package Repository;
 
-import Main.Exceptions.ValidationException;
-import Main.Model.BaseEntity;
-import Main.Repository.InMemoryRepository;
-import Main.Validator.BaseEntityValidator;
+import Exceptions.ValidationException;
+import Model.BaseEntity;
+import Repository.InMemoryRepository;
+import Validator.BaseEntityValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class TestInMemoryRepository {
         BASE_ENTITY_1.setId(1);
         BASE_ENTITY_2.setId(1);
         BASE_ENTITY_3.setId(-1);
-        repository = new InMemoryRepository<>(BASE_ENTITY_VALIDATOR);
+        repository = new InMemoryRepository<Integer, BaseEntity<Integer>>(BASE_ENTITY_VALIDATOR);
     }
 
     @After

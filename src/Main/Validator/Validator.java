@@ -1,6 +1,6 @@
-package Main.Validator;
+package Validator;
 
-import Main.Exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 public interface Validator<T> {
     void validate(T entity) throws ValidationException;

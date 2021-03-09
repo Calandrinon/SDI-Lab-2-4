@@ -1,4 +1,4 @@
-package Main.Model;
+package Model;
 
 import java.util.function.Function;
 

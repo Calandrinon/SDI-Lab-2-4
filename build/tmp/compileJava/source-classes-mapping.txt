@@ -1,46 +1,46 @@
 Exceptions/ValidationException.java
- Main.Exceptions.ValidationException
+ Exceptions.ValidationException
 Model/User.java
- Main.Model.User
+ Model.User
 Validator/RecordValidator.java
- Main.Validator.RecordValidator
+ Validator.RecordValidator
 Model/Transaction.java
- Main.Model.Transaction
+ Model.Transaction
 Repository/Repository.java
- Main.Repository.Repository
+ Repository.Repository
 UI/AdminUI.java
- Main.UI.AdminUI
+ UI.AdminUI
 Repository/FileRepository.java
- Main.Repository.FileRepository
+ Repository.FileRepository
 Controller/TransactionController.java
- Main.Controller.TransactionController
+ Controller.TransactionController
 Validator/BaseEntityValidator.java
- Main.Validator.BaseEntityValidator
+ Validator.BaseEntityValidator
 Model/RecordType.java
- Main.Model.RecordType
+ Model.RecordType
 Model/Record.java
- Main.Model.Record
+ Model.Record
 Main.java
  Main.Main
 Exceptions/TransactionException.java
- Main.Exceptions.TransactionException
+ Exceptions.TransactionException
 Controller/RecordController.java
- Main.Controller.RecordController
+ Controller.RecordController
 Model/BaseEntity.java
- Main.Model.BaseEntity
+ Model.BaseEntity
 Controller/UserController.java
- Main.Controller.UserController
+ Controller.UserController
 Repository/InMemoryRepository.java
- Main.Repository.InMemoryRepository
+ Repository.InMemoryRepository
 Controller/IController.java
- Main.Controller.IController
+ Controller.IController
 Validator/Validator.java
- Main.Validator.Validator
+ Validator.Validator
 UI/UI.java
- Main.UI.UI
+ UI.UI
 Validator/UserValidator.java
- Main.Validator.UserValidator
+ Validator.UserValidator
 UI/ClientUI.java
- Main.UI.ClientUI
+ UI.ClientUI
 Validator/TransactionValidator.java
- Main.Validator.TransactionValidator
+ Validator.TransactionValidator

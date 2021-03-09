@@ -21,13 +21,21 @@ application {
 
 sourceSets {
     test {
-        java.srcDirs = ['src/test/']
+        java.srcDirs = ['src/Test']
     }
 
     main {
-        java.srcDirs = ['src/main']
+        java.srcDirs = ['src/Main']
     }
 
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'src/Main/Main.java'
+        )
+    }
 }
 
 test {

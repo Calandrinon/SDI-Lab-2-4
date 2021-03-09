@@ -1,4 +1,4 @@
-package Main.Controller;
+package Controller;
 
 public interface IController {
 

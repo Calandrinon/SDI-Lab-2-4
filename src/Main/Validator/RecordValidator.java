@@ -1,8 +1,8 @@
-package Main.Validator;
+package Validator;
 
-import Main.Model.Record;
+import Model.Record;
 
-import Main.Exceptions.ValidationException;
+import Exceptions.ValidationException;
 
 import javax.swing.text.html.Option;
 import java.util.Optional;

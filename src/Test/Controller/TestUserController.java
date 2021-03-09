@@ -1,13 +1,13 @@
-package Test.Controller;
+package Controller;
 
-import Main.Controller.UserController;
-import Main.Model.Record;
-import Main.Model.RecordType;
-import Main.Model.User;
-import Main.Repository.InMemoryRepository;
-import Main.Repository.Repository;
-import Main.Validator.RecordValidator;
-import Main.Validator.UserValidator;
+import Controller.UserController;
+import Model.Record;
+import Model.RecordType;
+import Model.User;
+import Repository.InMemoryRepository;
+import Repository.Repository;
+import Validator.RecordValidator;
+import Validator.UserValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class TestUserController {
 
     @Before
     public void setUp() {
-        this.userRepository = new InMemoryRepository<>(new UserValidator());
+        this.userRepository = new InMemoryRepository<Integer, User>(new UserValidator());
         this.userController = new UserController(userRepository);
     }
 

@@ -1,7 +1,7 @@
-package Main.UI;
+package UI;
 
-import Main.Controller.UserController;
-import Main.Model.RecordType;
+import Controller.UserController;
+import Model.RecordType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,16 +9,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import static Main.Model.RecordType.*;
-import static Main.Model.RecordType.CD;
+import static Model.RecordType.*;
+import static Model.RecordType.CD;
 
 public class AdminUI {
-    private final Main.Controller.UserController userController;
-    private final Main.Controller.RecordController recordController;
-    private final Main.Controller.TransactionController transactionController;
+    private final Controller.UserController userController;
+    private final Controller.RecordController recordController;
+    private final Controller.TransactionController transactionController;
     private boolean running;
 
-    public AdminUI(Main.Controller.UserController userController, Main.Controller.RecordController recordController, Main.Controller.TransactionController transactionController) {
+    public AdminUI(Controller.UserController userController, Controller.RecordController recordController, Controller.TransactionController transactionController) {
         this.userController = userController;
         this.recordController = recordController;
         this.transactionController = transactionController;

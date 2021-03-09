@@ -1,7 +1,7 @@
-package Main.Validator;
+package Validator;
 
-import Main.Exceptions.ValidationException;
-import Main.Model.BaseEntity;
+import Exceptions.ValidationException;
+import Model.BaseEntity;
 
 import java.util.Optional;
 

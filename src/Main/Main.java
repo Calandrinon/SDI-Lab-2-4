@@ -1,19 +1,19 @@
 package Main;
 
-import Main.Controller.RecordController;
-import Main.Controller.TransactionController;
-import Main.Controller.UserController;
-import Main.Model.Record;
-import Main.Model.Transaction;
-import Main.Model.User;
-import Main.Repository.InMemoryRepository;
-import Main.Repository.Repository;
-import Main.UI.AdminUI;
-import Main.UI.ClientUI;
-import Main.UI.UI;
-import Main.Validator.RecordValidator;
-import Main.Validator.TransactionValidator;
-import Main.Validator.UserValidator;
+import Controller.RecordController;
+import Controller.TransactionController;
+import Controller.UserController;
+import Model.Record;
+import Model.Transaction;
+import Model.User;
+import Repository.InMemoryRepository;
+import Repository.Repository;
+import UI.AdminUI;
+import UI.ClientUI;
+import UI.UI;
+import Validator.RecordValidator;
+import Validator.TransactionValidator;
+import Validator.UserValidator;
 
 public class Main {
     public static void main(String[] args) {

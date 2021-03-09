@@ -1,4 +1,4 @@
-package Main.Model;
+package Model;
 
 public enum RecordType {
     CD

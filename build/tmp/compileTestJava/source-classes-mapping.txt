@@ -1,14 +1,14 @@
 Model/TestTransaction.java
- Test.Model.TestTransaction
-Repository/TestInMemoryRepository.java
- Test.Repository.TestInMemoryRepository
-Controller/TestTransactionController.java
- Test.Controller.TestTransactionController
+ Model.TestTransaction
 Model/TestUser.java
- Test.Model.TestUser
+ Model.TestUser
 Model/TestRecord.java
- Test.Model.TestRecord
+ Model.TestRecord
 Controller/TestUserController.java
- Test.Controller.TestUserController
+ Controller.TestUserController
+Repository/TestInMemoryRepository.java
+ Repository.TestInMemoryRepository
+Controller/TestTransactionController.java
+ Controller.TestTransactionController
 Controller/TestRecordController.java
- Test.Controller.TestRecordController
+ Controller.TestRecordController

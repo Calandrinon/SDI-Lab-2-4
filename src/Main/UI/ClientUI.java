@@ -1,19 +1,19 @@
-package Main.UI;
+package UI;
 
-import Main.Controller.TransactionController;
-import Main.Controller.UserController;
+import Controller.TransactionController;
+import Controller.UserController;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class ClientUI {
-    private final Main.Controller.RecordController recordController;
+    private final Controller.RecordController recordController;
     private final TransactionController transactionController;
     private final UserController userController;
     private boolean running;
     private int userId;
 
-    public ClientUI(UserController userController, Main.Controller.RecordController recordController, TransactionController transactionController, int userId) {
+    public ClientUI(UserController userController, Controller.RecordController recordController, TransactionController transactionController, int userId) {
         this.userController = userController;
         this.recordController = recordController;
         this.transactionController = transactionController;

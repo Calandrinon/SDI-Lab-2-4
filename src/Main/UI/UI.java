@@ -1,21 +1,22 @@
-package Main.UI;
+package UI;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import Main.Model.RecordType;
+import Controller.UserController;
+import Model.RecordType;
 
-import static Main.Model.RecordType.*;
+import static Model.RecordType.*;
 
 public class UI {
-    private final Main.Controller.UserController UserController;
-    private final Main.Controller.RecordController RecordController;
+    private final Controller.UserController UserController;
+    private final Controller.RecordController RecordController;
     private final ClientUI clientUI;
     private final AdminUI adminUI;
     private boolean running;
 
-    public UI(Main.Controller.UserController UserController, Main.Controller.RecordController RecordController, ClientUI clientUI, AdminUI adminUI) {
+    public UI(UserController UserController, Controller.RecordController RecordController, ClientUI clientUI, AdminUI adminUI) {
         this.UserController = UserController;
         this.RecordController = RecordController;
         this.clientUI = clientUI;
