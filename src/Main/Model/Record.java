@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.function.Function;
+
 public class Record extends BaseEntity<Integer>{
     private final int Price;
     private final String AlbumName;
@@ -82,11 +84,26 @@ public class Record extends BaseEntity<Integer>{
         return TypeOfRecord;
     }
 
-    public static String fileWriter(Record record){
-        return record.getId() + " | " + record.Price + " | " + record.AlbumName + " | " + record.InStock + " | " + record.TypeOfRecord;
+    public static Function reader(Function<String, Record> function){
+        return function;
+    }
+
+    public static Function writer(Function<Record, String> function){
+        return function;
+    }
+
+    public static String fileWriter(BaseEntity<Integer> baseEntity){
+        if (baseEntity.getClass() == Record.class) {
+            Record record = (Record) baseEntity;
+            return record.getId() + " | " + record.Price + " | " + record.AlbumName + " | " + record.InStock + " | " + record.TypeOfRecord;
+        }
+        return "";
     }
 
     public static Record fileReader(String line){
-        return new Record(1, "a", 1, RecordType.CD);
+        String[] parts = line.split(" \\| ");
+        Record record = new Record(Integer.parseInt(parts[1]), parts[2], Integer.parseInt(parts[3]), RecordType.valueOf(parts[4]));
+        record.setId(Integer.parseInt(parts[0]));
+        return record;
     }
 }
