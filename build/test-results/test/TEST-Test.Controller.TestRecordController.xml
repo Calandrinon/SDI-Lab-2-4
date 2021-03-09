@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test.Controller.TestRecordController" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-03-09T00:18:47" hostname="DESKTOP-F1BJT3D" time="0.117">
+  <properties/>
+  <testcase name="testInStockAfterUpdate" classname="Test.Controller.TestRecordController" time="0.049"/>
+  <testcase name="testAddDuplicateID" classname="Test.Controller.TestRecordController" time="0.051"/>
+  <testcase name="testPriceAfterUpdate" classname="Test.Controller.TestRecordController" time="0.002"/>
+  <testcase name="testRecordTypeAfterUpdate" classname="Test.Controller.TestRecordController" time="0.003"/>
+  <testcase name="testRemoveNonexistentItem" classname="Test.Controller.TestRecordController" time="0.003"/>
+  <testcase name="testAlbumNameAfterUpdate" classname="Test.Controller.TestRecordController" time="0.002"/>
+  <testcase name="testFilterByPrice" classname="Test.Controller.TestRecordController" time="0.003"/>
+  <testcase name="testAddAverageCase" classname="Test.Controller.TestRecordController" time="0.001"/>
+  <testcase name="testRemove" classname="Test.Controller.TestRecordController" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

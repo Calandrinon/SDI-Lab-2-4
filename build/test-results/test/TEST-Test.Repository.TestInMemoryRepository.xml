@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test.Repository.TestInMemoryRepository" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-03-09T00:18:47" hostname="DESKTOP-F1BJT3D" time="0.01">
+  <properties/>
+  <testcase name="testUpdateException" classname="Test.Repository.TestInMemoryRepository" time="0.004"/>
+  <testcase name="testFindAll" classname="Test.Repository.TestInMemoryRepository" time="0.001"/>
+  <testcase name="testFindOne" classname="Test.Repository.TestInMemoryRepository" time="0.001"/>
+  <testcase name="testSave" classname="Test.Repository.TestInMemoryRepository" time="0.0"/>
+  <testcase name="testDelete" classname="Test.Repository.TestInMemoryRepository" time="0.0"/>
+  <testcase name="testSaveException" classname="Test.Repository.TestInMemoryRepository" time="0.001"/>
+  <testcase name="testUpdate" classname="Test.Repository.TestInMemoryRepository" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
