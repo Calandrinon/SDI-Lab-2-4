@@ -1,5 +1,6 @@
 package Main.Controller;
 
+import Main.Exceptions.ValidationException;
 import Main.Model.RecordType;
 import Main.Model.Record;
 import Main.Repository.InMemoryRepository;
@@ -28,13 +29,14 @@ public class RecordController implements IController {
      * @param InStock -
      * @param RecordType -
      *
-     *
+     * @throws RuntimeException
+     *               if the element has already been added to the list
      */
 
     public void add(Integer id, Integer price, String AlbumName, Integer InStock, RecordType RecordType) throws Exception {
         Record record = new Record(price, AlbumName, InStock,RecordType);
         record.setId(id);
-        this.RecordRepository.save(record);
+        this.RecordRepository.save(record).ifPresent(e -> {throw new RuntimeException("element already in the list");});
     }
 
     /**

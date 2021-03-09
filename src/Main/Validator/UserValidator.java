@@ -23,16 +23,27 @@ public class UserValidator implements Validator<User>{
 
     @Override
     public void validate(User entity) throws ValidationException {
+        Optional.ofNullable(entity)
+                .orElseThrow(() -> new ValidationException("entity is null"));
+
+        Optional.of(entity)
+                .filter(e -> e.getId() > 0)
+                .orElseThrow(() -> new ValidationException("id of entity must be positive"));
+
         Predicate<User> checkFirstName = e ->
                 !e.getFirstName().isBlank()
-                && e.getFirstName().length() <= 64;
+                        && e.getFirstName().length() <= 64;
 
         Predicate<User> checkLastName = e ->
-                        !e.getLastName().isBlank()
+                !e.getLastName().isBlank()
                         && e.getLastName().length() <= 64;
 
-        Optional.ofNullable(entity).filter(checkFirstName).orElseThrow(() -> new ValidationException("firstname is invalid"));
-        Optional.of(entity).filter(checkLastName).orElseThrow(() -> new ValidationException("lastname is invalid"));
-        Optional.ofNullable(entity).filter(e -> e.getId() > 0).orElseThrow(() -> new ValidationException("The id cannot be negative."));
+        Optional.of(entity)
+                .filter(checkFirstName)
+                .orElseThrow(() -> new ValidationException("firstname is invalid"));
+
+        Optional.of(entity)
+                .filter(checkLastName)
+                .orElseThrow(() -> new ValidationException("lastname is invalid"));
     }
 }

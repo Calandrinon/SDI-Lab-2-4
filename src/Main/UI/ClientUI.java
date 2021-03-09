@@ -23,10 +23,12 @@ public class ClientUI {
 
 
     public void displayMenu() {
+        System.out.println(" ------------------------------------- ");
         System.out.println("1. Buy record");
         System.out.println("2. List all records");
         System.out.println("3. Filter by price");
         System.out.println("0. Exit");
+        System.out.println(" ------------------------------------- ");
     }
 
 

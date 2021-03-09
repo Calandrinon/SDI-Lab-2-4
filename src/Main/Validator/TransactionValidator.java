@@ -16,6 +16,13 @@ public class TransactionValidator implements Validator<Transaction> {
     @Override
     public void validate(Transaction entity) throws ValidationException {
         Optional.ofNullable(entity)
+                .orElseThrow(() -> new ValidationException("entity is null"));
+
+        Optional.of(entity)
+                .filter(e -> e.getId() > 0)
+                .orElseThrow(() -> new ValidationException("id of entity must be positive"));
+
+        Optional.of(entity)
                 .filter(e -> e.getQuantity() > 0)
                 .orElseThrow(() -> new ValidationException("the quantity cannot be negative"));
     }
