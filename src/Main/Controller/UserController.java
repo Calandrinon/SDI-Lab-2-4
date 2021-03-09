@@ -1,5 +1,6 @@
 package Main.Controller;
 
+import Main.Exceptions.ValidationException;
 import Main.Model.User;
 import Main.Repository.InMemoryRepository;
 import Main.Repository.Repository;
@@ -26,13 +27,16 @@ public class UserController implements IController{
      * @param LastName must be at least one and at most 64 characters long
      * @param NumberOfTransactions will default to 0
      *
+     * @throws RuntimeException
+     *              if the element has already been added to the list
      *
      */
 
-    public void add(Integer id, String FirstName, String LastName, Integer NumberOfTransactions) throws Exception {
+
+    public void add(Integer id, String FirstName, String LastName, Integer NumberOfTransactions) throws ValidationException {
         User user = new User(FirstName, LastName, NumberOfTransactions);
         user.setId(id);
-        this.UserRepository.save(user);
+        this.UserRepository.save(user).ifPresent(e -> {throw new RuntimeException("element already in the list");});
     }
 
     /**
@@ -95,6 +99,11 @@ public class UserController implements IController{
         return filter(p -> p.getNumberOfTransactions() >= minimumNumberOfTransactions);
     }
 
+    /**
+     *
+     * @param userID the id of the user you want to obtain
+     * @return a User wrapped inside an Optional or an empty Ooptional
+     */
 
      public Optional<User> exists(Integer userID) {
         return this.UserRepository.findOne(userID);

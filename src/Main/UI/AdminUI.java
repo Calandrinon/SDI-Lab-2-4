@@ -26,6 +26,7 @@ public class AdminUI {
     }
 
     public void displayMenu() {
+        System.out.println(" ------------------------------------- ");
         System.out.println("1. Add record");
         System.out.println("2. Add user");
         System.out.println("3. List records");
@@ -37,8 +38,8 @@ public class AdminUI {
         System.out.println("9. Get most purchased records");
         System.out.println("10. Filter transactions by date");
         System.out.println("11. Filter users by the minimum amount of transactions");
-        System.out.println("12. ");
         System.out.println("0. Exit");
+        System.out.println(" ------------------------------------- ");
     }
 
 

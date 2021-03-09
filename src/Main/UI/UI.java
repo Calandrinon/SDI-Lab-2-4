@@ -53,7 +53,7 @@ public class UI {
                     default -> System.out.println("Enter an option between 0 and 2.");
                 }
             }catch(Exception exception){
-                System.out.println(exception.getMessage());
+                exception.printStackTrace();
             }
         }
     }
