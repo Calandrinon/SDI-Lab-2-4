@@ -45,8 +45,12 @@ public class TestRecordController {
     @Test
     public void testAddDuplicateID() throws Exception {
         this.recordController.add(1, 5, "aaa", 25, RecordType.CD);
-        this.recordController.add(1, 12, "bbb", 500, RecordType.TAPE);
-        assert(this.recordController.getRepository().size() == 1);
+        try {
+            this.recordController.add(1, 12, "bbb", 500, RecordType.TAPE);
+            assert(false);
+        }catch (Exception ignore){
+            assert(this.recordController.getRepository().size() == 1);
+        }
     }
 
 

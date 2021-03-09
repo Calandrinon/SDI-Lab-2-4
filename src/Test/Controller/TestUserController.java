@@ -46,8 +46,12 @@ public class TestUserController {
     @Test
     public void testAddDuplicateID() throws Exception {
         this.userController.add(1, "abc", "def", 0);
-        this.userController.add(1, "aaa", "bbb", 0);
-        assert(this.userController.getRepository().size() == 1);
+        try {
+            this.userController.add(1, "aaa", "bbb", 0);
+            assert(false);
+        }catch (Exception ignore){
+            assert(this.userController.getRepository().size() == 1);
+        }
     }
 
 

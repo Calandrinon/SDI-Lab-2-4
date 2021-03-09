@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test.Controller.TestUserController" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-03-09T00:18:47" hostname="DESKTOP-F1BJT3D" time="0.073">
+  <properties/>
+  <testcase name="testFilterByNumberOfTransactions_numberOfUsersReturned" classname="Test.Controller.TestUserController" time="0.037"/>
+  <testcase name="testAddDuplicateID" classname="Test.Controller.TestUserController" time="0.003"/>
+  <testcase name="testFilterByNumberOfTransactions_userReturned" classname="Test.Controller.TestUserController" time="0.018"/>
+  <testcase name="testNumberOfTransactionsAfterUpdate" classname="Test.Controller.TestUserController" time="0.003"/>
+  <testcase name="testRemoveNonexistentUser" classname="Test.Controller.TestUserController" time="0.002"/>
+  <testcase name="testFirstNameAfterUpdate" classname="Test.Controller.TestUserController" time="0.002"/>
+  <testcase name="testLastNameAfterUpdate" classname="Test.Controller.TestUserController" time="0.004"/>
+  <testcase name="testAddAverageCase" classname="Test.Controller.TestUserController" time="0.001"/>
+  <testcase name="testRemove" classname="Test.Controller.TestUserController" time="0.0"/>
+  <system-out><![CDATA[User 1: bbb aaa No. of transactions: 100
+User 1: bbb aaa No. of transactions: 100
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

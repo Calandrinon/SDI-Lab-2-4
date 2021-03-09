@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test.Controller.TestTransactionController" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-03-09T00:18:47" hostname="DESKTOP-F1BJT3D" time="0.091">
+  <properties/>
+  <testcase name="testGetQuantityPurchasedByRecordID" classname="Test.Controller.TestTransactionController" time="0.023"/>
+  <testcase name="testMakeTransaction_quantityUpdate" classname="Test.Controller.TestTransactionController" time="0.004"/>
+  <testcase name="testFilterByDate" classname="Test.Controller.TestTransactionController" time="0.055"/>
+  <testcase name="testGetMostPurchasedRecords" classname="Test.Controller.TestTransactionController" time="0.004"/>
+  <testcase name="testMakeTransaction_updatedNumberOfTransactionsForUser" classname="Test.Controller.TestTransactionController" time="0.002"/>
+  <testcase name="testMakeTransaction_multipleTransactions" classname="Test.Controller.TestTransactionController" time="0.002"/>
+  <testcase name="testMakeTransaction_oneTransaction" classname="Test.Controller.TestTransactionController" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
