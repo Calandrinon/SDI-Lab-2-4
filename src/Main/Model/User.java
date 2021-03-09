@@ -1,4 +1,4 @@
-package Main.Model;
+package Model;
 
 public class User extends BaseEntity<Integer>{
     private final String FirstName;

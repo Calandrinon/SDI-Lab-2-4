@@ -1,4 +1,4 @@
-package Main.Exceptions;
+package Exceptions;
 
 public class TransactionException extends Exception{
     public TransactionException(String message) {

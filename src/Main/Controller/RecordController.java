@@ -1,10 +1,10 @@
-package Main.Controller;
+package Controller;
 
-import Main.Exceptions.ValidationException;
-import Main.Model.RecordType;
-import Main.Model.Record;
-import Main.Repository.InMemoryRepository;
-import Main.Repository.Repository;
+import Exceptions.ValidationException;
+import Model.RecordType;
+import Model.Record;
+import Repository.InMemoryRepository;
+import Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;

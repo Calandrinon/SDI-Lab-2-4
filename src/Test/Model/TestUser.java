@@ -1,8 +1,8 @@
-package Test.Model;
+package Model;
 
 import org.junit.After;
 import org.junit.Before;
-import Main.Model.User;
+import Model.User;
 import org.junit.Test;
 
 public class TestUser {

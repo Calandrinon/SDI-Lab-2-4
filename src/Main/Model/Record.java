@@ -1,4 +1,4 @@
-package Main.Model;
+package Model;
 
 public class Record extends BaseEntity<Integer>{
     private final int Price;

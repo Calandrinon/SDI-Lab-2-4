@@ -1,11 +1,11 @@
-package Test.Controller;
+package Controller;
 
-import Main.Controller.RecordController;
-import Main.Model.RecordType;
-import Main.Repository.InMemoryRepository;
-import Main.Repository.Repository;
-import Main.Validator.RecordValidator;
-import Main.Model.Record;
+import Controller.RecordController;
+import Model.RecordType;
+import Repository.InMemoryRepository;
+import Repository.Repository;
+import Validator.RecordValidator;
+import Model.Record;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class TestRecordController {
 
     @Before
     public void setUp() {
-        this.recordRepository = new InMemoryRepository<>(new RecordValidator());
+        this.recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
         this.recordController = new RecordController(recordRepository);
     }
 

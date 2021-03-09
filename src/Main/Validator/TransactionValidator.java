@@ -1,7 +1,7 @@
-package Main.Validator;
+package Validator;
 
-import Main.Exceptions.ValidationException;
-import Main.Model.Transaction;
+import Exceptions.ValidationException;
+import Model.Transaction;
 
 import java.util.Optional;
 

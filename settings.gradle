@@ -1,2 +1,2 @@
-rootProject.name = "src"
+rootProject.name = "distributableApplication"
 include("lab2x-d-g-i")
