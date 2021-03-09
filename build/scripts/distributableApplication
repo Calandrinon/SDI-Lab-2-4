@@ -18,7 +18,7 @@
 
 ##############################################################################
 ##
-##  lab2x-d-g-i start up script for UN*X
+##  distributableApplication start up script for UN*X
 ##
 ##############################################################################
 
@@ -40,10 +40,10 @@ cd "`dirname \"$PRG\"`/.." >/dev/null
 APP_HOME="`pwd -P`"
 cd "$SAVED" >/dev/null
 
-APP_NAME="lab2x-d-g-i"
+APP_NAME="distributableApplication"
 APP_BASE_NAME=`basename "$0"`
 
-# Add default JVM options here. You can also use JAVA_OPTS and LAB2X_D_G_I_OPTS to pass JVM options to this script.
+# Add default JVM options here. You can also use JAVA_OPTS and DISTRIBUTABLE_APPLICATION_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
@@ -80,7 +80,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/lab2x-d-g-i.jar
+CLASSPATH=$APP_HOME/lib/distributableApplication.jar
 
 
 # Determine the Java command to use to start the JVM.
@@ -180,6 +180,6 @@ save () {
 APP_ARGS=`save "$@"`
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $LAB2X_D_G_I_OPTS -classpath "\"$CLASSPATH\"" Main.Main "$APP_ARGS"
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $DISTRIBUTABLE_APPLICATION_OPTS -classpath "\"$CLASSPATH\"" Main.Main "$APP_ARGS"
 
 exec "$JAVACMD" "$@"

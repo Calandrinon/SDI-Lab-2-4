@@ -1,7 +1,5 @@
 package Model;
 
-import java.util.function.Function;
-
 public class BaseEntity<ID> {
     private ID id;
 
@@ -30,15 +28,5 @@ public class BaseEntity<ID> {
         return "BaseEntity{" +
                 "id=" + id +
                 '}';
-    }
-
-    public static <ID> String fileWriter(BaseEntity<ID> baseEntity)
-    {
-        return String.valueOf(baseEntity.getId());
-    }
-
-    public static <ID> BaseEntity<ID> fileReader(String line)
-    {
-        return new BaseEntity<>();
     }
 }

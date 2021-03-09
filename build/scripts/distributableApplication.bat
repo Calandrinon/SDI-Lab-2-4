@@ -17,7 +17,7 @@
 @if "%DEBUG%" == "" @echo off
 @rem ##########################################################################
 @rem
-@rem  lab2x-d-g-i startup script for Windows
+@rem  distributableApplication startup script for Windows
 @rem
 @rem ##########################################################################
 
@@ -32,7 +32,7 @@ set APP_HOME=%DIRNAME%..
 @rem Resolve any "." and ".." in APP_HOME to make it shorter.
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 
-@rem Add default JVM options here. You can also use JAVA_OPTS and LAB2X_D_G_I_OPTS to pass JVM options to this script.
+@rem Add default JVM options here. You can also use JAVA_OPTS and DISTRIBUTABLE_APPLICATION_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS=
 
 @rem Find java.exe
@@ -67,20 +67,20 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\lab2x-d-g-i.jar
+set CLASSPATH=%APP_HOME%\lib\distributableApplication.jar
 
 
-@rem Execute lab2x-d-g-i
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %LAB2X_D_G_I_OPTS%  -classpath "%CLASSPATH%" Main.Main %*
+@rem Execute distributableApplication
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %DISTRIBUTABLE_APPLICATION_OPTS%  -classpath "%CLASSPATH%" Main.Main %*
 
 :end
 @rem End local scope for the variables with windows NT shell
 if "%ERRORLEVEL%"=="0" goto mainEnd
 
 :fail
-rem Set variable LAB2X_D_G_I_EXIT_CONSOLE if you need the _script_ return code instead of
+rem Set variable DISTRIBUTABLE_APPLICATION_EXIT_CONSOLE if you need the _script_ return code instead of
 rem the _cmd.exe /c_ return code!
-if  not "" == "%LAB2X_D_G_I_EXIT_CONSOLE%" exit 1
+if  not "" == "%DISTRIBUTABLE_APPLICATION_EXIT_CONSOLE%" exit 1
 exit /b 1
 
 :mainEnd

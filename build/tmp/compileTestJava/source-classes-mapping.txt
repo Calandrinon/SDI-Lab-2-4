@@ -1,9 +1,3 @@
-Model/TestTransaction.java
- Model.TestTransaction
-Model/TestUser.java
- Model.TestUser
-Model/TestRecord.java
- Model.TestRecord
 Controller/TestUserController.java
  Controller.TestUserController
 Repository/TestInMemoryRepository.java
@@ -12,3 +6,9 @@ Controller/TestTransactionController.java
  Controller.TestTransactionController
 Controller/TestRecordController.java
  Controller.TestRecordController
+Model/TestRecord.java
+ Model.TestRecord
+Model/TestUser.java
+ Model.TestUser
+Model/TestTransaction.java
+ Model.TestTransaction

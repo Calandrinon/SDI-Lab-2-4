@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.function.Function;
+
 public class User extends BaseEntity<Integer>{
     private final String FirstName;
     private final String LastName;
@@ -64,5 +66,28 @@ public class User extends BaseEntity<Integer>{
      */
     public String getFirstName() {
         return FirstName;
+    }
+
+    public static Function reader(Function<String, User> function){
+        return function;
+    }
+
+    public static Function writer(Function<User, String> function){
+        return function;
+    }
+
+    public static String fileWriter(BaseEntity<Integer> baseEntity){
+        if (baseEntity.getClass() == User.class) {
+            User user = (User) baseEntity;
+            return user.getId() + " | " + user.FirstName + " | " + user.LastName + " | " + user.NumberOfTransactions;
+        }
+        return "";
+    }
+
+    public static User fileReader(String line){
+        String[] parts = line.split(" \\| ");
+        User user = new User(parts[1], parts[2], Integer.parseInt(parts[3]));
+        user.setId(Integer.parseInt(parts[0]));
+        return user;
     }
 }
