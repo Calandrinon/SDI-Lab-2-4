@@ -24,11 +24,16 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="a93126b0-3f01-4c61-8195-ad3068305209">
+        <schema name="pg_catalog" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, function" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a93126b0-3f01-4c61-8195-ad3068305209">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT * FROM ClientUser;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -79,7 +84,7 @@
           <database value="onlinemusicstore" />
           <type value="USER_PASSWORD" />
           <user value="calandrinon" />
-          <deprecated-pwd value="bWloYWl0YTMwLg==" />
+          <deprecated-pwd value="" />
         </database>
         <properties>
           <auto-commit value="false" />
