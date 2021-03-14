@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +59,20 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     private String getTypesOfTheTableFromTheDatabase(Connection connection) throws SQLException {
         var columnDataTypesQuery = connection.prepareStatement("SELECT data_type FROM information_schema.columns WHERE table_name=?");
+        columnDataTypesQuery.setString(1, this.tableName.toLowerCase());
+        var columnDataTypes = columnDataTypesQuery.executeQuery();
+        String types = "";
+        while (columnDataTypes.next()) {
+            types = types.concat(columnDataTypes.getString(1)).concat(",");
+        }
+
+        types = types.substring(0, types.length() - 1);
+        return types;
+    }
+
+
+    public String getColumnsOfTheTableFromTheDatabase(Connection connection) throws SQLException {
+        var columnDataTypesQuery = connection.prepareStatement("SELECT column_name FROM information_schema.columns WHERE table_name=?");
         columnDataTypesQuery.setString(1, this.tableName.toLowerCase());
         var columnDataTypes = columnDataTypesQuery.executeQuery();
         String types = "";
@@ -156,7 +172,62 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> save(T entity) throws ValidationException {
-        return Optional.empty();
+        String columnNames = "";
+        try (var connection = DriverManager.getConnection(url, username, password)) {
+            columnNames = this.getColumnsOfTheTableFromTheDatabase(DriverManager.getConnection(url, username, password));
+
+            var queryNumberOfColumns = connection.prepareStatement("select count(*) from information_schema.columns where table_name=?");
+            queryNumberOfColumns.setString(1, this.tableName.toLowerCase());
+            var numberOfColumnsResult = queryNumberOfColumns.executeQuery();
+            int numberOfColumns = 0;
+
+            if (numberOfColumnsResult.next()) {
+                numberOfColumns = numberOfColumnsResult.getInt(1);
+            }
+
+            String stringWithParameters = "";
+            for (int i = 1; i <= numberOfColumns; i++) {
+                if (i > 1)
+                    stringWithParameters = stringWithParameters.concat(",");
+                stringWithParameters = stringWithParameters.concat("?");
+            }
+
+            System.out.println("Parameters: " + stringWithParameters);
+            System.out.println("Columns: " + columnNames);
+            String insertStatement = "insert into " + this.tableName + " (" + columnNames + ") values (" + stringWithParameters + ")";
+
+            try (var preparedStatement = connection.prepareStatement(insertStatement)) {
+                if (entity instanceof User) {
+                    preparedStatement.setInt(1, ((User)entity).getId());
+                    preparedStatement.setString(2, ((User)entity).getFirstName());
+                    preparedStatement.setString(3, ((User)entity).getLastName());
+                    preparedStatement.setInt(4, ((User)entity).getNumberOfTransactions());
+                } else if (entity instanceof Record) {
+                    preparedStatement.setInt(1, ((Record)entity).getId());
+                    preparedStatement.setString(2, ((Record)entity).getAlbumName());
+                    preparedStatement.setInt(3, ((Record)entity).getPrice());
+                    preparedStatement.setInt(4, ((Record)entity).getInStock());
+                    preparedStatement.setString(5, ((Record)entity).getTypeOfRecord().toString());
+                } else if (entity instanceof Transaction) {
+                    preparedStatement.setInt(1, ((Transaction)entity).getId());
+                    preparedStatement.setInt(2, ((Transaction)entity).getUserID());
+                    preparedStatement.setInt(3, ((Transaction)entity).getRecordID());
+                    Date date = ((Transaction)entity).getDate();
+                    LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+                    preparedStatement.setDate(4, sqlDate);
+                    preparedStatement.setInt(5, ((Transaction)entity).getQuantity());
+                }
+
+                preparedStatement.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return Optional.ofNullable(entity);
     }
 
     @Override
@@ -169,15 +240,7 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
         return Optional.empty();
     }
 
-    public Optional<String> save(String entity) throws ValidationException {
-        return Optional.empty();
-    }
-
-    public Optional<String> delete(Integer id) {
-        return Optional.empty();
-    }
-
-    public Optional<String> update(String entity) throws ValidationException {
-        return Optional.empty();
+    public int getNumberOfEntities() {
+        return (int)this.findAll().spliterator().getExactSizeIfKnown();
     }
 }
