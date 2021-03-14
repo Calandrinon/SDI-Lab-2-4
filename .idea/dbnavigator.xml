@@ -25,28 +25,76 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="a93126b0-3f01-4c61-8195-ad3068305209">
-        <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, function" />
+      <connection connection-id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3">
+        <schema name="information_schema" object-types="view, table, column, function" />
+        <schema name="pg_catalog" object-types="view, table, constraint, column, function" />
+        <schema name="public" object-types="view, table, constraint, column, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="a93126b0-3f01-4c61-8195-ad3068305209">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT * FROM ClientUser;]]></console>
+    <connection id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3">
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT * FROM Record;
+SELECT * FROM ClientUser;
+
+select count(*) from information_schema.columns where table_name='clientuser';
+SELECT * FROM TestTable;
+
+SELECT 
+   data_type 
+FROM 
+   information_schema.columns
+WHERE 
+   table_name = 'usertransactiontesttable';
+
+CREATE TABLE IF NOT EXISTS ClientUserTestTable
+    (UserId INT PRIMARY KEY,
+	 FirstName VARCHAR (64) NOT NULL,
+	 LastName VARCHAR (64) NOT NULL,
+     NumberOfTransactions INT NOT NULL CHECK (NumberOfTransactions >= 0));
+     
+     
+CREATE TABLE IF NOT EXISTS RecordTestTable
+    (RecordId INT PRIMARY KEY,
+	 AlbumName VARCHAR(64) NOT NULL,
+     Price REAL NOT NULL,
+     InStock INT NOT NULL,
+     RecordType VARCHAR(10) NOT NULL);
+     
+          
+CREATE TABLE IF NOT EXISTS UserTransactionTestTable
+    (TransactionId INT PRIMARY KEY,
+     UserId INT REFERENCES ClientUserTestTable(UserId) ON DELETE CASCADE,
+     RecordId INT REFERENCES RecordTestTable(RecordId) ON DELETE CASCADE,
+     TransactionDateTime TIMESTAMP NOT NULL,
+	 Quantity INT NOT NULL CHECK (Quantity > 0));     
+	 
+DELETE FROM usertransactiontesttable;
+SELECT * FROM usertransactiontesttable; 
+	 
+INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (15, 'userfirstname', 'userlastname', 22);
+INSERT INTO RecordTestTable (RecordId, AlbumName, Price, InStock, RecordType) VALUES (14, 'abc', 99, 200, 'VINYL');
+INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, TransactionDateTime, Quantity) VALUES (1, 15, 14, '2021-02-25', 2);
+
+SELECT * FROM ClientUserTestTable;
+SELECT * FROM RecordTestTable;
+SELECT * FROM UserTransactionTestTable;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="a93126b0-3f01-4c61-8195-ad3068305209" />
+    <connection id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/src/Main/Repository/tables.sql" connection-id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3" session-id="MAIN" current-schema="public" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
@@ -68,7 +116,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="a93126b0-3f01-4c61-8195-ad3068305209" active="true">
+      <connection id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -84,7 +132,7 @@
           <database value="onlinemusicstore" />
           <type value="USER_PASSWORD" />
           <user value="calandrinon" />
-          <deprecated-pwd value="" />
+          <deprecated-pwd value="MTIzNDU=" />
         </database>
         <properties>
           <auto-commit value="false" />

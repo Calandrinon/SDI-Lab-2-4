@@ -1,16 +1,21 @@
 package Repository;
 
 import Exceptions.ValidationException;
-import Model.BaseEntity;
-import Validator.Validator;
+import Model.*;
+import Model.Record;
 
+import java.sql.ClientInfoStatus;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public class PostgresRepository {
+public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Repository<ID, T> {
     //private Validator<T> validator;
     private String tableName, url, username, password;
 
@@ -21,6 +26,12 @@ public class PostgresRepository {
         this.username = "calandrinon";
         this.password = "12345";
     }
+
+    @Override
+    public Optional<T> findOne(ID id) {
+        return Optional.empty();
+    }
+
     /**
 
     @Override
@@ -42,46 +53,120 @@ public class PostgresRepository {
 
         return Optional.empty();
     }
-    **/
+     **/
 
-    public List<String> findAll() {
+    private String getTypesOfTheTableFromTheDatabase(Connection connection) throws SQLException {
+        var columnDataTypesQuery = connection.prepareStatement("SELECT data_type FROM information_schema.columns WHERE table_name=?");
+        columnDataTypesQuery.setString(1, this.tableName.toLowerCase());
+        var columnDataTypes = columnDataTypesQuery.executeQuery();
+        String types = "";
+        while (columnDataTypes.next()) {
+            types = types.concat(columnDataTypes.getString(1)).concat(",");
+        }
+
+        types = types.substring(0, types.length() - 1);
+        return types;
+    }
+
+
+    private T getEntityFromDatabase(Connection connection, String attributes) throws SQLException, ParseException {
+        String types = this.getTypesOfTheTableFromTheDatabase(connection);
+        String[] listOfAttributes = attributes.split(",");
+        if (types.equals("integer,character varying,real,integer,character varying")) {
+            int id = Integer.parseInt(listOfAttributes[0]);
+            String albumName = listOfAttributes[1];
+            int price = Integer.parseInt(listOfAttributes[2]);
+            int inStock = Integer.parseInt(listOfAttributes[3]);
+            RecordType typeOfRecord = null;
+            switch (listOfAttributes[4]) {
+                case "CD" -> typeOfRecord = RecordType.CD;
+                case "VINYL" -> typeOfRecord = RecordType.VINYL;
+                case "TAPE" -> typeOfRecord = RecordType.TAPE;
+            }
+
+            Record record = new Record(price, albumName, inStock, typeOfRecord);
+            record.setId(id);
+            return (T) record;
+        } else if (types.equals("integer,character varying,character varying,integer")) {
+            int id = Integer.parseInt(listOfAttributes[0]);
+            String firstName = listOfAttributes[1];
+            String lastName = listOfAttributes[2];
+            int numberOfTransactions = Integer.parseInt(listOfAttributes[3]);
+
+            User user = new User(firstName, lastName, numberOfTransactions);
+            user.setId(id);
+
+            return (T) user;
+        } else if (types.equals("integer,integer,integer,date,integer")) {
+            int transactionId = Integer.parseInt(listOfAttributes[0]);
+            int userId = Integer.parseInt(listOfAttributes[1]);
+            int recordId = Integer.parseInt(listOfAttributes[2]);
+
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(listOfAttributes[3]);
+            int quantity = Integer.parseInt(listOfAttributes[4]);
+
+            Transaction transaction = new Transaction(userId, recordId, date, quantity);
+            transaction.setId(transactionId);
+
+            return (T) transaction;
+        }
+
+        return null;
+    }
+
+
+    @Override
+    public Iterable<T> findAll() {
         String query = "SELECT * FROM " + this.tableName;
-
-        List<String> entitiesAsStrings = new ArrayList<>();
+        List<T> entities = new ArrayList<>();
 
         try (var connection = DriverManager.getConnection(url, username, password);
              var preparedStatement = connection.prepareStatement(query);
              var resultSet = preparedStatement.executeQuery()) {
 
-            var queryNumberOfColumns = connection.prepareStatement("select count(*) from information_schema.columns where table_name='clientuser';");
+            var queryNumberOfColumns = connection.prepareStatement("select count(*) from information_schema.columns where table_name=?");
+            queryNumberOfColumns.setString(1, this.tableName.toLowerCase());
 
             var numberOfColumnsResult = queryNumberOfColumns.executeQuery();
             int numberOfColumns = 0;
+
             if (numberOfColumnsResult.next()) {
                 numberOfColumns = numberOfColumnsResult.getInt(1);
-                System.out.println("The number of columns has been properly returned!");
-            } else {
-                System.out.println("The number of columns hasn't been returned.");
             }
 
             while (resultSet.next()) {
-                String value = "";
+                String attributes = "";
+
                 for (int i = 1; i <= numberOfColumns; i++) {
-                    value = value.concat(resultSet.getString(i));
+                    attributes = attributes.concat(resultSet.getString(i));
                     if (i != numberOfColumns) {
-                        value = value.concat(",");
+                        attributes = attributes.concat(",");
                     }
                 }
 
-                entitiesAsStrings.add(value);
+                entities.add(this.getEntityFromDatabase(connection, attributes));
             }
 
-        } catch (SQLException throwables) {
-            System.out.println("FINDALL EXCEPTION MESSAGE: ");
+        } catch (SQLException | ParseException throwables) {
             throwables.printStackTrace();
         }
 
-        return entitiesAsStrings;
+        return entities;
+    }
+
+    @Override
+    public Optional<T> save(T entity) throws ValidationException {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<T> delete(ID id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<T> update(T entity) throws ValidationException {
+        return Optional.empty();
     }
 
     public Optional<String> save(String entity) throws ValidationException {
