@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import Model.Record;
 
+import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class TestPostgresRepository {
     private PostgresRepository<Integer, User> userRepository;
     private PostgresRepository<Integer, Record> recordRepository;
     private PostgresRepository<Integer, Transaction> transactionRepository;
-    private String url, username, password, tableName;
+    private String url, username, password;
 
     @Before
     public void setUp() {
@@ -187,5 +188,55 @@ public class TestPostgresRepository {
         int newNumberOfEntities = this.transactionRepository.getNumberOfEntities();
 
         assert(oldNumberOfEntities == 0 && newNumberOfEntities == 1);
+    }
+
+
+    @Test
+    public void testDeleteForUsers() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+
+        this.userRepository.save(user);
+        int oldNumberOfEntities = this.userRepository.getNumberOfEntities();
+        Optional<User> optionalUser = this.userRepository.delete(1);
+        int newNumberOfEntities = this.userRepository.getNumberOfEntities();
+
+        assert(oldNumberOfEntities == 1 && newNumberOfEntities == 0);
+    }
+
+
+    @Test
+    public void testDeleteForRecords() throws ValidationException {
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+
+        this.recordRepository.save(record);
+        int oldNumberOfEntities = this.recordRepository.getNumberOfEntities();
+        Optional<Record> optionalRecord = this.recordRepository.delete(1);
+        int newNumberOfEntities = this.recordRepository.getNumberOfEntities();
+
+        assert(oldNumberOfEntities == 1 && newNumberOfEntities == 0);
+    }
+
+
+    @Test
+    public void testDeleteForTransactions() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+
+        Transaction transaction = new Transaction(1, 1, new Date(), 2);
+        transaction.setId(1);
+        this.transactionRepository.save(transaction);
+
+        int oldNumberOfEntities = this.transactionRepository.getNumberOfEntities();
+        Optional<Transaction> optionalTransaction = this.transactionRepository.delete(1);
+        int newNumberOfEntities = this.transactionRepository.getNumberOfEntities();
+
+        assert(oldNumberOfEntities == 1 && newNumberOfEntities == 0);
     }
 }

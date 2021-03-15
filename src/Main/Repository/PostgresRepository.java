@@ -228,10 +228,25 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
         return Optional.ofNullable(entity);
     }
 
+
     @Override
     public Optional<T> delete(ID id) {
+        try (var connection = DriverManager.getConnection(url, username, password)) {
+            String columnNames = this.getColumnsOfTheTableFromTheDatabase(connection);
+            String[] listOfTheColumnNames = columnNames.split(",");
+            String deleteStatementString = "DELETE FROM " + this.tableName.toLowerCase() + " WHERE " + listOfTheColumnNames[0] + "=?";
+
+            var preparedStatement = connection.prepareStatement(deleteStatementString);
+            preparedStatement.setInt(1, (Integer) id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return Optional.empty();
     }
+
 
     @Override
     public Optional<T> update(T entity) throws ValidationException {
