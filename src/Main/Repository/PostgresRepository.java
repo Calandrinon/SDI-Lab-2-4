@@ -31,6 +31,8 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> findOne(ID id) {
+        Optional.ofNullable(id).orElseThrow(() -> new IllegalArgumentException("id must not be null"));
+
         try (var connection = DriverManager.getConnection(url, username, password)) {
             String columnNamesAsString = this.getColumnsOfTheTableFromTheDatabase(connection);
             String[] columnNames = columnNamesAsString.split(",");
@@ -250,15 +252,19 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> delete(ID id) {
+        Optional.ofNullable(id).orElseThrow(() -> new IllegalArgumentException("id must not be null"));
+
         try (var connection = DriverManager.getConnection(url, username, password)) {
             String columnNames = this.getColumnsOfTheTableFromTheDatabase(connection);
             String[] listOfTheColumnNames = columnNames.split(",");
             String deleteStatementString = "DELETE FROM " + this.tableName.toLowerCase() + " WHERE " + listOfTheColumnNames[0] + "=?";
+            Optional<T> optional = this.findOne(id);
 
             var preparedStatement = connection.prepareStatement(deleteStatementString);
             preparedStatement.setInt(1, (Integer) id);
 
             preparedStatement.executeUpdate();
+            return optional;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -314,6 +320,7 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
             }
 
             preparedStatement.executeUpdate();
+            return this.findOne(entity.getId());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -330,7 +337,6 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return -2;
         }
 
         return -1;

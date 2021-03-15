@@ -475,4 +475,10 @@ public class TestPostgresRepository {
 
         this.transactionRepository.save(transaction);
     }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindOne_nullIdCase() {
+        this.userRepository.findOne(null);
+    }
 }
