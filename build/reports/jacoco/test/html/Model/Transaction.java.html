@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Transaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">distributableApplication</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">Transaction.java</span></div><h1>Transaction.java</h1><pre class="source lang-java linenums">package Model;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Transaction extends BaseEntity&lt;Integer&gt;{
     private final int userID;
     private final int recordID;
     private final Date date;
     private final int quantity;
-<span class="fc" id="L10">    private static int transactionNumber = 0;</span>
 
     /**
      * @param userID - Integer
@@ -15,24 +23,22 @@ public class Transaction extends BaseEntity&lt;Integer&gt;{
      * @param date - Date
      * @param quantity - Integer
      */
-<span class="fc" id="L18">    public Transaction(int userID, int recordID, Date date, int quantity) {</span>
-<span class="fc" id="L19">        this.userID = userID;</span>
-<span class="fc" id="L20">        this.recordID = recordID;</span>
-<span class="fc" id="L21">        this.date = date;</span>
-<span class="fc" id="L22">        this.quantity = quantity;</span>
-<span class="fc" id="L23">        transactionNumber++;</span>
-<span class="fc" id="L24">        this.setId(transactionNumber);</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L26">    public Transaction(int userID, int recordID, Date date, int quantity) {</span>
+<span class="fc" id="L27">        this.userID = userID;</span>
+<span class="fc" id="L28">        this.recordID = recordID;</span>
+<span class="fc" id="L29">        this.date = date;</span>
+<span class="fc" id="L30">        this.quantity = quantity;</span>
+<span class="fc" id="L31">    }</span>
 
     /**
      * @return the string for a Transaction
      */
     @Override
     public String toString() {
-<span class="fc" id="L32">        return &quot;Transaction &quot; + getId() + &quot;: &quot; +</span>
+<span class="nc" id="L38">        return &quot;Transaction &quot; + getId() + &quot;: &quot; +</span>
                 &quot;User &quot; + userID +
                 &quot;Record &quot; + recordID +
-<span class="fc" id="L35">                &quot;Date &quot; + date.toString() +</span>
+<span class="nc" id="L41">                &quot;Date &quot; + date.toString() +</span>
                 &quot;Quantity &quot; + quantity;
     }
 
@@ -43,40 +49,104 @@ public class Transaction extends BaseEntity&lt;Integer&gt;{
      */
     @Override
     public boolean equals(Object obj) {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if(this == obj)return true;</span>
-<span class="nc bnc" id="L47" title="All 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if(this == obj)return true;</span>
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
 
-<span class="nc" id="L49">        Transaction transaction = (Transaction) obj;</span>
+<span class="fc" id="L55">        Transaction transaction = (Transaction) obj;</span>
 
-<span class="nc" id="L51">        return getId().equals(transaction.getId());</span>
+<span class="fc" id="L57">        return getId().equals(transaction.getId());</span>
     }
 
     /**
      * @return the Date for a Transaction
      */
     public Date getDate() {
-<span class="fc" id="L58">        return date;</span>
+<span class="nc" id="L64">        return date;</span>
     }
 
     /**
      * @return the quantity for a Transaction
      */
     public int getQuantity() {
-<span class="fc" id="L65">        return quantity;</span>
+<span class="fc" id="L71">        return quantity;</span>
     }
 
     /**
      * @return the ID of the User that did the Transaction
      */
     public int getUserID() {
-<span class="fc" id="L72">        return userID;</span>
+<span class="nc" id="L78">        return userID;</span>
     }
 
     /**
      * @return the ID of the Record that was bought in the Transaction
      */
     public int getRecordID() {
-<span class="fc" id="L79">        return recordID;</span>
+<span class="nc" id="L85">        return recordID;</span>
     }
+
+    public static Function reader(Function&lt;String, Transaction&gt; function){
+<span class="nc" id="L89">        return function;</span>
+    }
+
+    public static Function writer(Function&lt;Transaction, String&gt; function){
+<span class="nc" id="L93">        return function;</span>
+    }
+
+    public static String fileWriter(BaseEntity&lt;Integer&gt; baseEntity){
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (baseEntity.getClass() == Transaction.class) {</span>
+<span class="nc" id="L98">            Transaction transaction = (Transaction) baseEntity;</span>
+<span class="nc" id="L99">            DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy hh:mm:ss&quot;);</span>
+<span class="nc" id="L100">            return transaction.getId() + &quot; | &quot; + transaction.userID + &quot; | &quot; + transaction.recordID + &quot; | &quot; + dateFormat.format(transaction.date) + &quot; | &quot; + transaction.quantity;</span>
+        }
+<span class="nc" id="L102">        return &quot;&quot;;</span>
+    }
+
+    public static Transaction fileReader(String line){
+<span class="nc" id="L106">        String[] parts = line.split(&quot; \\| &quot;);</span>
+        try {
+<span class="nc" id="L108">            Date date = new SimpleDateFormat(&quot;dd/MM/yyyy hh:mm:ss&quot;).parse(parts[3]);</span>
+<span class="nc" id="L109">            Transaction transaction = new Transaction(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), date, Integer.parseInt(parts[4]));</span>
+<span class="nc" id="L110">            transaction.setId(Integer.parseInt(parts[0]));</span>
+<span class="nc" id="L111">            return transaction;</span>
+<span class="nc" id="L112">        } catch (ParseException e) {</span>
+<span class="nc" id="L113">            e.printStackTrace();</span>
+        }
+<span class="nc" id="L115">        return null;</span>
+    }
+
+
+<span class="fc" id="L119">    public static BiFunction&lt;Transaction, Document, Node&gt; transactionEncoder = (t, d) -&gt; {</span>
+<span class="fc" id="L120">        DateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy hh:mm:ss&quot;);</span>
+<span class="fc" id="L121">        Element transactionElement = d.createElement(&quot;transaction&quot;);</span>
+<span class="fc" id="L122">        transactionElement.setAttribute(&quot;id&quot;, Integer.toString(t.getId()));</span>
+<span class="fc" id="L123">        addChildWithTextContent(d, transactionElement, &quot;userID&quot;, Integer.toString(t.userID));</span>
+<span class="fc" id="L124">        addChildWithTextContent(d, transactionElement, &quot;recordID&quot;, Integer.toString(t.recordID));</span>
+<span class="fc" id="L125">        addChildWithTextContent(d, transactionElement, &quot;date&quot;, dateFormat.format(t.date));</span>
+<span class="fc" id="L126">        addChildWithTextContent(d, transactionElement, &quot;quantity&quot;, Integer.toString(t.quantity));</span>
+<span class="fc" id="L127">        return transactionElement;</span>
+    };
+
+    private static void addChildWithTextContent(Document document, Element parent, String tagName, String textContent){
+<span class="fc" id="L131">        Element childElement = document.createElement(tagName);</span>
+<span class="fc" id="L132">        childElement.setTextContent(textContent);</span>
+<span class="fc" id="L133">        parent.appendChild(childElement);</span>
+<span class="fc" id="L134">    }</span>
+
+<span class="fc" id="L136">    public static Function&lt;Element, Transaction&gt; transactionDecoder = e -&gt;{</span>
+<span class="fc" id="L137">        Transaction transaction = null;</span>
+        try {
+<span class="fc" id="L139">            transaction = new Transaction(</span>
+<span class="fc" id="L140">                    Integer.parseInt(e.getElementsByTagName(&quot;userID&quot;).item(0).getTextContent()),</span>
+<span class="fc" id="L141">                    Integer.parseInt(e.getElementsByTagName(&quot;recordID&quot;).item(0).getTextContent()),</span>
+<span class="fc" id="L142">                    new SimpleDateFormat(&quot;dd/MM/yyyy hh:mm:ss&quot;).parse(e.getElementsByTagName(&quot;date&quot;).item(0).getTextContent()),</span>
+<span class="fc" id="L143">                    Integer.parseInt(e.getElementsByTagName(&quot;quantity&quot;).item(0).getTextContent())</span>
+            );
+<span class="fc" id="L145">            transaction.setId(Integer.parseInt(e.getAttribute(&quot;id&quot;)));</span>
+<span class="nc" id="L146">        } catch (ParseException parseException) {</span>
+<span class="nc" id="L147">            parseException.printStackTrace();</span>
+<span class="fc" id="L148">        }</span>
+<span class="fc" id="L149">        return transaction;</span>
+    };
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

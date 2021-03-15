@@ -15,9 +15,9 @@ import java.util.stream.StreamSupport;
 public class UserController implements IController{
     private final Repository&lt;Integer, User&gt; UserRepository;
 
-<span class="fc" id="L18">    public UserController(Repository&lt;Integer, User&gt; UserRepository) {</span>
-<span class="fc" id="L19">        this.UserRepository = UserRepository;</span>
-<span class="fc" id="L20">    }</span>
+<span class="nc" id="L18">    public UserController(Repository&lt;Integer, User&gt; UserRepository) {</span>
+<span class="nc" id="L19">        this.UserRepository = UserRepository;</span>
+<span class="nc" id="L20">    }</span>
 
     /**
      * creates and adds to the repository a user
@@ -34,10 +34,10 @@ public class UserController implements IController{
 
 
     public void add(Integer id, String FirstName, String LastName, Integer NumberOfTransactions) throws ValidationException {
-<span class="fc" id="L37">        User user = new User(FirstName, LastName, NumberOfTransactions);</span>
-<span class="fc" id="L38">        user.setId(id);</span>
-<span class="fc" id="L39">        this.UserRepository.save(user).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
-<span class="fc" id="L40">    }</span>
+<span class="nc" id="L37">        User user = new User(FirstName, LastName, NumberOfTransactions);</span>
+<span class="nc" id="L38">        user.setId(id);</span>
+<span class="nc" id="L39">        this.UserRepository.save(user).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
+<span class="nc" id="L40">    }</span>
 
     /**
      * creates and updates to the repository the user with another one having the same id
@@ -51,10 +51,10 @@ public class UserController implements IController{
      */
 
     public void update(Integer id, String FirstName, String LastName, Integer NumberOfTransactions) throws Exception {
-<span class="fc" id="L54">        User user = new User(FirstName, LastName, NumberOfTransactions);</span>
-<span class="fc" id="L55">        user.setId(id);</span>
-<span class="fc" id="L56">        this.UserRepository.update(user);</span>
-<span class="fc" id="L57">    }</span>
+<span class="nc" id="L54">        User user = new User(FirstName, LastName, NumberOfTransactions);</span>
+<span class="nc" id="L55">        user.setId(id);</span>
+<span class="nc" id="L56">        this.UserRepository.update(user);</span>
+<span class="nc" id="L57">    }</span>
 
     /**
      *
@@ -64,8 +64,8 @@ public class UserController implements IController{
      */
 
     public void remove(Integer id) throws Exception {
-<span class="fc" id="L67">        this.UserRepository.delete(id).orElseThrow(() -&gt; new Exception(&quot;no such user&quot;));</span>
-<span class="fc" id="L68">    }</span>
+<span class="nc" id="L67">        this.UserRepository.delete(id).orElseThrow(() -&gt; new Exception(&quot;no such user&quot;));</span>
+<span class="nc" id="L68">    }</span>
 
     /**
      *
@@ -74,10 +74,10 @@ public class UserController implements IController{
      */
 
     private List&lt;String&gt; filter(Predicate&lt;User&gt; pred){
-<span class="fc" id="L77">        return StreamSupport.stream(this.UserRepository.findAll().spliterator(), false)</span>
-<span class="fc" id="L78">                .filter(pred)</span>
-<span class="fc" id="L79">                .map(User::toString)</span>
-<span class="fc" id="L80">                .collect(Collectors.toList());</span>
+<span class="nc" id="L77">        return StreamSupport.stream(this.UserRepository.findAll().spliterator(), false)</span>
+<span class="nc" id="L78">                .filter(pred)</span>
+<span class="nc" id="L79">                .map(User::toString)</span>
+<span class="nc" id="L80">                .collect(Collectors.toList());</span>
     }
 
     /**
@@ -86,7 +86,7 @@ public class UserController implements IController{
      */
 
     public List&lt;String&gt; getRepository() {
-<span class="fc" id="L89">        return filter(p -&gt; true);</span>
+<span class="nc" id="L89">        return filter(p -&gt; true);</span>
     }
 
     /**
@@ -96,7 +96,7 @@ public class UserController implements IController{
      */
 
     public List&lt;String&gt; filterByNumberOfTransactions(Integer minimumNumberOfTransactions) {
-<span class="fc bfc" id="L99" title="All 2 branches covered.">        return filter(p -&gt; p.getNumberOfTransactions() &gt;= minimumNumberOfTransactions);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        return filter(p -&gt; p.getNumberOfTransactions() &gt;= minimumNumberOfTransactions);</span>
     }
 
     /**

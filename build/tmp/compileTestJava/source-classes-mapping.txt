@@ -12,3 +12,5 @@ Model/TestUser.java
  Model.TestUser
 Model/TestTransaction.java
  Model.TestTransaction
+Repository/TestXmlFileRepository.java
+ Repository.TestXmlFileRepository

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Repository.TestXmlFileRepository" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-03-15T15:26:32" hostname="DESKTOP-F1BJT3D" time="0.472">
+  <properties/>
+  <testcase name="testFindAll" classname="Repository.TestXmlFileRepository" time="0.108"/>
+  <testcase name="testFindOne" classname="Repository.TestXmlFileRepository" time="0.013"/>
+  <testcase name="testSaveAndDelete" classname="Repository.TestXmlFileRepository" time="0.297"/>
+  <testcase name="testUpdate" classname="Repository.TestXmlFileRepository" time="0.053"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,5 +1,12 @@
 package Model;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class User extends BaseEntity<Integer>{
@@ -90,4 +97,34 @@ public class User extends BaseEntity<Integer>{
         user.setId(Integer.parseInt(parts[0]));
         return user;
     }
+
+
+
+
+
+    public static BiFunction<User, Document, Node> userEncoder = (u, d) -> {
+        Element userElement = d.createElement("user");
+        userElement.setAttribute("id", Integer.toString(u.getId()));
+        addChildWithTextContent(d, userElement, "firstName", u.getFirstName());
+        addChildWithTextContent(d, userElement, "lastName", u.getLastName());
+        addChildWithTextContent(d, userElement, "numberOfTransactions", Integer.toString(u.getNumberOfTransactions()));
+        return userElement;
+    };
+
+    private static void addChildWithTextContent(Document document, Element parent, String tagName, String textContent){
+        Element childElement = document.createElement(tagName);
+        childElement.setTextContent(textContent);
+        parent.appendChild(childElement);
+    }
+
+    public static Function<Element, User> userDecoder = e ->{
+        User user = null;
+        user = new User(
+                e.getElementsByTagName("firstName").item(0).getTextContent(),
+                e.getElementsByTagName("lastName").item(0).getTextContent(),
+                Integer.parseInt(e.getElementsByTagName("numberOfTransactions").item(0).getTextContent())
+        );
+        user.setId(Integer.parseInt(e.getAttribute("id")));
+        return user;
+    };
 }
