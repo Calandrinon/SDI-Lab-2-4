@@ -31,31 +31,47 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> findOne(ID id) {
-        return Optional.empty();
-    }
+        try (var connection = DriverManager.getConnection(url, username, password)) {
+            String columnNamesAsString = this.getColumnsOfTheTableFromTheDatabase(connection);
+            String[] columnNames = columnNamesAsString.split(",");
+            String query = "SELECT * FROM " + this.tableName.toLowerCase() + " WHERE " + columnNames[0] + "=?";
 
-    /**
+            var queryNumberOfColumns = connection.prepareStatement("select count(*) from information_schema.columns where table_name=?");
+            queryNumberOfColumns.setString(1, this.tableName.toLowerCase());
 
-    @Override
-    public Optional<T> findOne(ID id) {
-        String query = "SELECT * FROM " + this.tableName + " AS " + this.tableName + "(IdColumn) WHERE IdColumn = ?";
+            var numberOfColumnsResult = queryNumberOfColumns.executeQuery();
+            int numberOfColumns = 0;
 
-        try (var connection = DriverManager.getConnection(url, username, password);
-             var parameterSetter = connection.prepareStatement(query)) {
-            parameterSetter.setInt(1, (Integer) id);
-
-            var queryExecutor = parameterSetter.executeQuery();
-            if (queryExecutor.next()) {
-                int actualId = queryExecutor.getInt(1);
-                String firstName = queryExecutor.getString(2);
+            if (numberOfColumnsResult.next()) {
+                numberOfColumns = numberOfColumnsResult.getInt(1);
             }
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
+
+
+            var preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, (Integer) id);
+            var result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                String attributes = "";
+
+                for (int i = 1; i <= numberOfColumns; i++) {
+                    attributes = attributes.concat(result.getString(i));
+                    if (i != numberOfColumns) {
+                        attributes = attributes.concat(",");
+                    }
+                }
+
+                return Optional.ofNullable(this.getEntityFromDatabase(connection, attributes));
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException | ParseException exception) {
+            exception.printStackTrace();
         }
 
         return Optional.empty();
     }
-     **/
+
 
     private String getTypesOfTheTableFromTheDatabase(Connection connection) throws SQLException {
         var columnDataTypesQuery = connection.prepareStatement("SELECT data_type FROM information_schema.columns WHERE table_name=?");
@@ -274,7 +290,6 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
                 preparedStatement.setInt(4, ((User)entity).getId());
             } else if (entity instanceof Record) {
                 double price = ((Record)entity).getPrice();
-                System.out.println("IN UPDATE: RECORD PRICE IS " + price);
 
                 preparedStatement.setString(1, ((Record)entity).getAlbumName());
                 preparedStatement.setDouble(2, price);

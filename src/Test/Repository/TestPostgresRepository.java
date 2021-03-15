@@ -89,7 +89,6 @@ public class TestPostgresRepository {
             users.add(userIterator.next());
         }
 
-        System.out.println(users);
         assert(users.size() == 2);
     }
 
@@ -139,7 +138,6 @@ public class TestPostgresRepository {
             transactions.add(transactionIterator.next());
         }
 
-        System.out.println(transactions);
         assert(transactions.size() == 1 && transactions.get(0).getUserID() == 2 && transactions.get(0).getRecordID() == 3);
     }
 
@@ -259,7 +257,6 @@ public class TestPostgresRepository {
             users.add(userIterator.next());
         }
 
-        System.out.println(users);
         String firstName = users.get(0).getFirstName();
         String lastName = users.get(0).getLastName();
         int numberOfTransactions = users.get(0).getNumberOfTransactions();
@@ -287,7 +284,6 @@ public class TestPostgresRepository {
             records.add(recordIterator.next());
         }
 
-        System.out.println(records);
         int price = records.get(0).getPrice();
         String albumName = records.get(0).getAlbumName();
         int inStock = records.get(0).getInStock();
@@ -322,11 +318,54 @@ public class TestPostgresRepository {
             transactions.add(transactionIterator.next());
         }
 
-        System.out.println(transactions);
         int userId = transactions.get(0).getUserID();
         int recordId = transactions.get(0).getRecordID();
         int quantity = transactions.get(0).getQuantity();
 
         assert (transactions.size() == 1 && userId == 1 && recordId == 1 && quantity == 50);
+    }
+
+
+    @Test
+    public void testFindOneForUsers() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+
+        assert(this.userRepository.findOne(1).isPresent());
+        User databaseUser = this.userRepository.findOne(1).get();
+        assert(databaseUser.getId() == 1 && databaseUser.getFirstName().equals("abc") && databaseUser.getNumberOfTransactions() == 2);
+    }
+
+
+    @Test
+    public void testFindOneForRecords() throws ValidationException {
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+
+        assert(this.recordRepository.findOne(1).isPresent());
+        Record databaseRecord = this.recordRepository.findOne(1).get();
+        assert(databaseRecord.getId() == 1 && databaseRecord.getPrice() == 99 && databaseRecord.getAlbumName().equals("Dark Side Of The Moon"));
+    }
+
+
+    @Test
+    public void testFindOneForTransactions() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+
+        Transaction transaction = new Transaction(1, 1, new Date(), 50);
+        transaction.setId(1);
+        this.transactionRepository.save(transaction);
+
+        assert(this.transactionRepository.findOne(1).isPresent());
+        Transaction databaseTransaction = this.transactionRepository.findOne(1).get();
+        assert(databaseTransaction.getId() == 1 && databaseTransaction.getUserID() == 1 && databaseTransaction.getRecordID() == 1);
     }
 }

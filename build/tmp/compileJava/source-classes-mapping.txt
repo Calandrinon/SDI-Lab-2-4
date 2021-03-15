@@ -24,8 +24,8 @@ Validator/RecordValidator.java
  Validator.RecordValidator
 UI/AdminUI.java
  UI.AdminUI
-Validator/TransactionValidator.java
- Validator.TransactionValidator
+Repository/PostgresRepository.java
+ Repository.PostgresRepository
 Controller/TransactionController.java
  Controller.TransactionController
 Validator/BaseEntityValidator.java
@@ -46,5 +46,5 @@ UI/UI.java
  UI.UI
 Validator/UserValidator.java
  Validator.UserValidator
-Repository/PostgresRepository.java
- Repository.PostgresRepository
+Validator/TransactionValidator.java
+ Validator.TransactionValidator
