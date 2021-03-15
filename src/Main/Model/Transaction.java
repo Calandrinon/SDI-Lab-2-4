@@ -1,9 +1,14 @@
 package Model;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class Transaction extends BaseEntity<Integer>{
@@ -109,4 +114,38 @@ public class Transaction extends BaseEntity<Integer>{
         }
         return null;
     }
+
+
+    public static BiFunction<Transaction, Document, Node> transactionEncoder = (t, d) -> {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        Element transactionElement = d.createElement("transaction");
+        transactionElement.setAttribute("id", Integer.toString(t.getId()));
+        addChildWithTextContent(d, transactionElement, "userID", Integer.toString(t.userID));
+        addChildWithTextContent(d, transactionElement, "recordID", Integer.toString(t.recordID));
+        addChildWithTextContent(d, transactionElement, "date", dateFormat.format(t.date));
+        addChildWithTextContent(d, transactionElement, "quantity", Integer.toString(t.quantity));
+        return transactionElement;
+    };
+
+    private static void addChildWithTextContent(Document document, Element parent, String tagName, String textContent){
+        Element childElement = document.createElement(tagName);
+        childElement.setTextContent(textContent);
+        parent.appendChild(childElement);
+    }
+
+    public static Function<Element, Transaction> transactionDecoder = e ->{
+        Transaction transaction = null;
+        try {
+            transaction = new Transaction(
+                    Integer.parseInt(e.getElementsByTagName("userID").item(0).getTextContent()),
+                    Integer.parseInt(e.getElementsByTagName("recordID").item(0).getTextContent()),
+                    new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(e.getElementsByTagName("date").item(0).getTextContent()),
+                    Integer.parseInt(e.getElementsByTagName("quantity").item(0).getTextContent())
+            );
+            transaction.setId(Integer.parseInt(e.getAttribute("id")));
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+        return transaction;
+    };
 }

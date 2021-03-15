@@ -1,9 +1,31 @@
+deleteLater.java
+ deleteLater
+Repository/Repository.java
+ Repository.Repository
+Repository/FileRepository.java
+ Repository.FileRepository
+Validator/Validator.java
+ Validator.Validator
+Model/Record.java
+ Model.Record
+ Model.Record$1
+Main.java
+ Main.Main
+Controller/RecordController.java
+ Controller.RecordController
+Controller/UserController.java
+ Controller.UserController
+Controller/IController.java
+ Controller.IController
+UI/ClientUI.java
+ UI.ClientUI
 Exceptions/ValidationException.java
  Exceptions.ValidationException
 Model/User.java
  Model.User
 Validator/RecordValidator.java
  Validator.RecordValidator
+<<<<<<< HEAD
 Model/Transaction.java
  Model.Transaction
 Repository/Repository.java
@@ -14,20 +36,23 @@ Repository/FileRepository.java
  Repository.FileRepository
 Controller/TransactionController.java
  Controller.TransactionController
+=======
+UI/AdminUI.java
+ UI.AdminUI
+UI/UI.java
+ UI.UI
+>>>>>>> 3894a95864a7a867354efaf05c213f1850c50d6f
 Validator/BaseEntityValidator.java
  Validator.BaseEntityValidator
+Validator/UserValidator.java
+ Validator.UserValidator
 Model/RecordType.java
  Model.RecordType
-Model/Record.java
- Model.Record
-Main.java
- Main.Main
 Exceptions/TransactionException.java
  Exceptions.TransactionException
-Controller/RecordController.java
- Controller.RecordController
 Model/BaseEntity.java
  Model.BaseEntity
+<<<<<<< HEAD
 Controller/UserController.java
  Controller.UserController
 FileRepoMain.java
@@ -44,5 +69,17 @@ Validator/UserValidator.java
  Validator.UserValidator
 UI/ClientUI.java
  UI.ClientUI
+=======
+Repository/XmlFileRepository.java
+ Repository.XmlFileRepository
+Repository/InMemoryRepository.java
+ Repository.InMemoryRepository
+Model/Transaction.java
+ Model.Transaction
+FileRepoMain.java
+ Main.FileRepoMain
+Controller/TransactionController.java
+ Controller.TransactionController
+>>>>>>> 3894a95864a7a867354efaf05c213f1850c50d6f
 Validator/TransactionValidator.java
  Validator.TransactionValidator
