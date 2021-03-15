@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS ClientUser
 
 CREATE TABLE IF NOT EXISTS UserTransaction
     (TransactionId INT PRIMARY KEY,
-     UserId INT REFERENCES ClientUser(UserId) ON DELETE CASCADE,
-     RecordId INT REFERENCES Record(RecordId) ON DELETE CASCADE,
+     UserId INT REFERENCES ClientUser(UserId),
+     RecordId INT REFERENCES Record(RecordId),
      TransactionDateTime DATE NOT NULL,
 	 Quantity INT NOT NULL CHECK (Quantity > 0));
 
@@ -40,12 +40,38 @@ CREATE TABLE IF NOT EXISTS RecordTestTable
 
 CREATE TABLE IF NOT EXISTS UserTransactionTestTable
     (TransactionId INT PRIMARY KEY,
-     UserId INT REFERENCES ClientUserTestTable(UserId) ON DELETE CASCADE,
-     RecordId INT REFERENCES RecordTestTable(RecordId) ON DELETE CASCADE,
+     UserId INT REFERENCES ClientUserTestTable(UserId),
+     RecordId INT REFERENCES RecordTestTable(RecordId),
      TransactionDateTime DATE NOT NULL,
 	 Quantity INT NOT NULL CHECK (Quantity > 0));
 
 
+DROP TABLE ClientUser;
+DROP TABLE Record;
+DROP TABLE UserTransaction;
+DROP TABLE ClientUserTestTable;
+DROP TABLE RecordTestTable;
+DROP TABLE UserTransactionTestTable;
+
+SELECT * FROM ClientUser;
+SELECT * FROM Record;
+SELECT * FROM UserTransaction;
+SELECT * FROM ClientUserTestTable;
+SELECT * FROM RecordTestTable;
+SELECT * FROM UserTransactionTestTable;
+
+select count(*) from information_schema.columns where table_name='clientuser';
+SELECT column_name FROM information_schema.columns WHERE table_name='clientuser';
+
+SELECT
+   data_type
+FROM
+   information_schema.columns
+WHERE
+   table_name = 'usertransactiontesttable';
+
+/**
 INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (15, 'userfirstname', 'userlastname', 22);
 INSERT INTO RecordTestTable (RecordId, AlbumName, Price, InStock, RecordType) VALUES (14, 'abc', 99, 200, 'VINYL');
-INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, TransactionDateTime, Quantity) VALUES (1, 15, 14, '2021-2-25', 2);
+INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, TransactionDateTime, Quantity) VALUES (1, 15, 14, '2021-02-25', 2);
+**/

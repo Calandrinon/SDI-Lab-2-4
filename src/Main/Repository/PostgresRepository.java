@@ -192,8 +192,6 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
                 stringWithParameters = stringWithParameters.concat("?");
             }
 
-            System.out.println("Parameters: " + stringWithParameters);
-            System.out.println("Columns: " + columnNames);
             String insertStatement = "insert into " + this.tableName + " (" + columnNames + ") values (" + stringWithParameters + ")";
 
             try (var preparedStatement = connection.prepareStatement(insertStatement)) {
@@ -241,6 +239,17 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
     }
 
     public int getNumberOfEntities() {
-        return (int)this.findAll().spliterator().getExactSizeIfKnown();
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM " + this.tableName);
+             var resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return -2;
+        }
+
+        return -1;
     }
 }

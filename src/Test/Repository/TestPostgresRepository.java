@@ -6,7 +6,7 @@ import Model.Transaction;
 import Model.User;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import Model.Record;
 
@@ -20,31 +20,66 @@ public class TestPostgresRepository {
     private PostgresRepository<Integer, Record> recordRepository;
     private PostgresRepository<Integer, Transaction> transactionRepository;
     private String url, username, password, tableName;
-    private Connection connection;
 
     @Before
-    public void setUp() throws SQLException {
-        this.userRepository = new PostgresRepository<Integer, User>("User", this.url);
-        this.recordRepository = new PostgresRepository<Integer, Record>("Record", this.url);
-        this.transactionRepository = new PostgresRepository<Integer, Transaction>("Transaction", this.url);
+    public void setUp() {
+        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
         this.username = "calandrinon";
         this.password = "12345";
+        this.userRepository = new PostgresRepository<Integer, User>("ClientUserTestTable", this.url);
+        this.recordRepository = new PostgresRepository<Integer, Record>("RecordTestTable", this.url);
+        this.transactionRepository = new PostgresRepository<Integer, Transaction>("UserTransactionTestTable", this.url);
+
+        String deleteStatement = "DELETE FROM UserTransactionTestTable; DELETE FROM ClientUserTestTable; DELETE FROM RecordTestTable;";
+        try (var connection = DriverManager.getConnection(this.url, this.username, this.password);
+             var firstPreparedStatement = connection.prepareStatement(deleteStatement)) {
+            firstPreparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        System.out.println("SETUP METHOD CALLED");
     }
 
 
     @After
     public void tearDown() {
+        this.url = null;
+        this.username = null;
+        this.password = null;
         this.userRepository = null;
         this.recordRepository = null;
         this.transactionRepository = null;
+        System.out.println("TEARDOWN METHOD CALLED");
+    }
+
+
+    @Test
+    public void someTest() {
+        assert(this.url != null);
+        assert(this.username != null);
+        assert(this.password != null);
+        assert(this.userRepository!= null);
+        assert(this.recordRepository!= null);
+        assert(this.transactionRepository!= null);
+        System.out.println("> setUp and tearDown run properly.");
     }
 
 
     @Test
     public void testFindAllForUsers() {
-        this.tableName = "ClientUserTestTable";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.userRepository = new PostgresRepository<Integer, User>(this.tableName, this.url);
+        String firstInsertStatement = "INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (15, 'userfirstname', 'userlastname', 22)";
+        String secondInsertStatement = "INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (72, 'somename', 'somename', 52)";
+
+        try (var connection = DriverManager.getConnection(this.url, this.username, this.password);
+             var firstPreparedStatement = connection.prepareStatement(firstInsertStatement);
+             var secondPreparedStatement = connection.prepareStatement(secondInsertStatement)) {
+            firstPreparedStatement.executeUpdate();
+            secondPreparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
         Iterable<User> list = this.userRepository.findAll();
         Iterator<User> userIterator = list.iterator();
         List<User> users = new ArrayList<>();
@@ -54,15 +89,21 @@ public class TestPostgresRepository {
         }
 
         System.out.println(users);
-        assert(users.size() == 1 && users.get(0).getId() == 15);
+        assert(users.size() == 2);
     }
 
 
     @Test
     public void testFindAllForRecords() {
-        this.tableName = "RecordTestTable";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.recordRepository = new PostgresRepository<Integer, Record>(this.tableName, this.url);
+        String insertStatement = "INSERT INTO RecordTestTable (RecordId, AlbumName, Price, InStock, RecordType) VALUES (14, 'abc', 99, 200, 'VINYL');";
+
+        try (var connection = DriverManager.getConnection(this.url, this.username, this.password);
+             var preparedStatement = connection.prepareStatement(insertStatement)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
         Iterable<Record> list = this.recordRepository.findAll();
         Iterator<Record> recordIterator = list.iterator();
         List<Record> records = new ArrayList<>();
@@ -71,92 +112,80 @@ public class TestPostgresRepository {
             records.add(recordIterator.next());
         }
 
-        System.out.println(records);
-        assert(records.size() == 1 && records.get(0).getId() == 14);
+        assert(records.size() == 1);
     }
 
 
     @Test
-    public void testFindAllForTransactions() {
-        this.tableName = "UserTransactionTestTable";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.transactionRepository = new PostgresRepository<Integer, Transaction>(this.tableName, this.url);
+    public void testFindAllForTransactions() throws ValidationException {
+        User user = new User("testuserfirstname", "testuserlastname", 20);
+        user.setId(2);
+        Optional<User> optionalUser = this.userRepository.save(user);
+
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(3);
+        Optional<Record> optionalRecord = this.recordRepository.save(record);
+
+        Transaction transaction = new Transaction(2, 3, new Date(), 2);
+        transaction.setId(1);
+        Optional<Transaction> optionalTransaction = this.transactionRepository.save(transaction);
+
         Iterable<Transaction> list = this.transactionRepository.findAll();
-        Iterator<Transaction> recordIterator = list.iterator();
+        Iterator<Transaction> transactionIterator = list.iterator();
         List<Transaction> transactions = new ArrayList<>();
 
-        while (recordIterator.hasNext()) {
-            transactions.add(recordIterator.next());
+        while (transactionIterator.hasNext()) {
+            transactions.add(transactionIterator.next());
         }
 
         System.out.println(transactions);
-        assert(transactions.size() == 1 && transactions.get(0).getId() == 1 && transactions.get(0).getDate().toString().equals("Thu Feb 25 00:00:00 EET 2021"));
+        assert(transactions.size() == 1 && transactions.get(0).getUserID() == 2 && transactions.get(0).getRecordID() == 3);
     }
 
 
     @Test
     public void testSaveForUsers() throws ValidationException, SQLException {
-        this.tableName = "ClientUserTestTable2";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.username = "calandrinon";
-        this.password = "12345";
-        this.userRepository = new PostgresRepository<Integer, User>(this.tableName, this.url);
-        this.connection = DriverManager.getConnection(this.url, this.username, this.password);
-
-        var preparedStatement = connection.prepareStatement("DELETE FROM " + this.tableName);
-        preparedStatement.executeUpdate();
-
         User user = new User("testuserfirstname", "testuserlastname", 20);
         user.setId(1);
 
-        System.out.println("Column names: " + this.userRepository.getColumnsOfTheTableFromTheDatabase(connection));
+        int oldNumberOfEntities = this.userRepository.getNumberOfEntities();
         Optional<User> optionalUser = this.userRepository.save(user);
-
         int newNumberOfEntities = this.userRepository.getNumberOfEntities();
-        assert(newNumberOfEntities == 1);
+
+        assert(oldNumberOfEntities == 0 && newNumberOfEntities == 1);
     }
 
 
     @Test
     public void testSaveForRecords() throws ValidationException, SQLException {
-        this.tableName = "RecordTestTable2";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.username = "calandrinon";
-        this.password = "12345";
-        this.recordRepository = new PostgresRepository<Integer, Record>(this.tableName, this.url);
-        this.connection = DriverManager.getConnection(this.url, this.username, this.password);
-
-        var preparedStatement = connection.prepareStatement("DELETE FROM " + this.tableName);
-        preparedStatement.executeUpdate();
-
-        Record record = new Record(99, "Dark Side Of The Moon", 200, RecordType.VINYL);
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
         record.setId(1);
 
+        int oldNumberOfEntities = this.recordRepository.getNumberOfEntities();
         Optional<Record> optionalRecord = this.recordRepository.save(record);
-
         int newNumberOfEntities = this.recordRepository.getNumberOfEntities();
-        assert(newNumberOfEntities == 1);
+
+        assert(oldNumberOfEntities == 0 && newNumberOfEntities == 1);
     }
 
 
     @Test
     public void testSaveForTransactions() throws ValidationException, SQLException {
-        this.tableName = "UserTransactionTestTable2";
-        this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
-        this.username = "calandrinon";
-        this.password = "12345";
-        this.transactionRepository = new PostgresRepository<Integer, Transaction>(this.tableName, this.url);
-        this.connection = DriverManager.getConnection(this.url, this.username, this.password);
+        User user = new User("testuserfirstname", "testuserlastname", 20);
+        user.setId(1);
+        Optional<User> optionalUser = this.userRepository.save(user);
 
-        var preparedStatement = connection.prepareStatement("DELETE FROM " + this.tableName);
-        preparedStatement.executeUpdate();
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        Optional<Record> optionalRecord = this.recordRepository.save(record);
 
-        Transaction transaction = new Transaction(1, 1, new Date(), 1);
+        Transaction transaction = new Transaction(1, 1, new Date(), 2);
         transaction.setId(1);
 
+        int oldNumberOfEntities = this.transactionRepository.getNumberOfEntities();
         Optional<Transaction> optionalTransaction = this.transactionRepository.save(transaction);
-
         int newNumberOfEntities = this.transactionRepository.getNumberOfEntities();
-        assert(newNumberOfEntities == 1);
+
+        assert(oldNumberOfEntities == 0 && newNumberOfEntities == 1);
     }
 }

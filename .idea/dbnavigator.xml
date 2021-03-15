@@ -26,9 +26,9 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="5ed9d343-faef-48c8-ad2c-3edd06cf00d3">
-        <schema name="information_schema" object-types="view, table, column, function" />
-        <schema name="pg_catalog" object-types="view, table, constraint, column, function" />
-        <schema name="public" object-types="view, table, constraint, column, function" />
+        <schema name="information_schema" object-types="view, function, table, column" />
+        <schema name="pg_catalog" object-types="view, function, table" />
+        <schema name="public" object-types="view, function, table, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -45,7 +45,7 @@ SELECT
 FROM 
    information_schema.columns
 WHERE 
-   table_name = 'usertransactiontesttable2';
+   table_name = 'usertransactiontesttable';
 
 CREATE TABLE IF NOT EXISTS ClientUserTestTable
     (UserId INT PRIMARY KEY,
@@ -71,27 +71,6 @@ CREATE TABLE IF NOT EXISTS UserTransactionTestTable
 	 Quantity INT NOT NULL CHECK (Quantity > 0));     
 	 
 	 
-CREATE TABLE IF NOT EXISTS ClientUserTestTable2
-    (UserId INT PRIMARY KEY,
-	 FirstName VARCHAR (64) NOT NULL,
-	 LastName VARCHAR (64) NOT NULL,
-     NumberOfTransactions INT NOT NULL CHECK (NumberOfTransactions >= 0));
-     
-     
-CREATE TABLE IF NOT EXISTS RecordTestTable2
-    (RecordId INT PRIMARY KEY,
-	 AlbumName VARCHAR(64) NOT NULL,
-     Price REAL NOT NULL,
-     InStock INT NOT NULL,
-     RecordType VARCHAR(10) NOT NULL);
-     
-     
-CREATE TABLE IF NOT EXISTS UserTransactionTestTable2
-    (TransactionId INT PRIMARY KEY,
-     UserId INT REFERENCES ClientUserTestTable2(UserId) ON DELETE CASCADE,
-     RecordId INT REFERENCES RecordTestTable2(RecordId) ON DELETE CASCADE,
-     TransactionDateTime DATE NOT NULL,
-	 Quantity INT NOT NULL CHECK (Quantity > 0));     
 	 
 	 
 	 
@@ -102,9 +81,10 @@ INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, Transacti
 SELECT * FROM ClientUserTestTable;
 SELECT * FROM RecordTestTable;
 SELECT * FROM UserTransactionTestTable;
-SELECT * FROM ClientUserTestTable2;
-SELECT * FROM RecordTestTable2;
-SELECT * FROM UserTransactionTestTable2;
+
+DELETE FROM ClientUserTestTable CASCADE;
+DELETE FROM RecordTestTable;
+DELETE FROM UserTransactionTestTable;
 
 SELECT column_name FROM information_schema.columns WHERE table_name='clientuser';]]></console>
     </connection>
@@ -163,7 +143,7 @@ SELECT column_name FROM information_schema.columns WHERE table_name='clientuser'
           <deprecated-pwd value="MTIzNDU=" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />
