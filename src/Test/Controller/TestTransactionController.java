@@ -1,9 +1,5 @@
 package Controller;
 
-import Controller.RecordController;
-import Controller.TransactionController;
-import Controller.UserController;
-import Exceptions.ValidationException;
 import Model.Record;
 import Model.RecordType;
 import Model.Transaction;
@@ -17,7 +13,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -107,7 +102,6 @@ public class TestTransactionController {
 
     @Test
     public void testFilterByDate() throws Exception {
-        this.transactionRepository.save(new Transaction(USER_ID, RECORD_ID, new Date(2012, Calendar.FEBRUARY, 1), 1));
         this.transactionController.makeTransaction(USER_ID, RECORD_ID, 50);
 
         Date date = new Date();

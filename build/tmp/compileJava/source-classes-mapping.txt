@@ -4,16 +4,16 @@ Model/User.java
  Model.User
 Validator/RecordValidator.java
  Validator.RecordValidator
-Repository/FileRepository.java
- Repository.FileRepository
+Model/Transaction.java
+ Model.Transaction
 Repository/Repository.java
  Repository.Repository
 UI/AdminUI.java
  UI.AdminUI
-UI/UI.java
- UI.UI
-Validator/UserValidator.java
- Validator.UserValidator
+Repository/FileRepository.java
+ Repository.FileRepository
+Controller/TransactionController.java
+ Controller.TransactionController
 Validator/BaseEntityValidator.java
  Validator.BaseEntityValidator
 Model/RecordType.java
@@ -30,19 +30,19 @@ Model/BaseEntity.java
  Model.BaseEntity
 Controller/UserController.java
  Controller.UserController
-UI/ClientUI.java
- UI.ClientUI
+FileRepoMain.java
+ Main.FileRepoMain
 Repository/InMemoryRepository.java
  Repository.InMemoryRepository
 Controller/IController.java
  Controller.IController
 Validator/Validator.java
  Validator.Validator
-Model/Transaction.java
- Model.Transaction
-FileRepoMain.java
- Main.FileRepoMain
-Controller/TransactionController.java
- Controller.TransactionController
+UI/UI.java
+ UI.UI
+Validator/UserValidator.java
+ Validator.UserValidator
+UI/ClientUI.java
+ UI.ClientUI
 Validator/TransactionValidator.java
  Validator.TransactionValidator
