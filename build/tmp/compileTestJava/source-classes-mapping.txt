@@ -1,7 +1,7 @@
 Controller/TestUserController.java
  Controller.TestUserController
-Model/TestTransaction.java
- Model.TestTransaction
+Repository/TestFileRepository.java
+ Repository.TestFileRepository
 Repository/TestInMemoryRepository.java
  Repository.TestInMemoryRepository
 Controller/TestTransactionController.java
@@ -12,12 +12,7 @@ Model/TestRecord.java
  Model.TestRecord
 Model/TestUser.java
  Model.TestUser
-<<<<<<< HEAD
-Repository/TestFileRepository.java
- Repository.TestFileRepository
-=======
 Model/TestTransaction.java
  Model.TestTransaction
 Repository/TestXmlFileRepository.java
  Repository.TestXmlFileRepository
->>>>>>> 3894a95864a7a867354efaf05c213f1850c50d6f

@@ -16,9 +16,9 @@ import java.util.stream.StreamSupport;
 public class RecordController implements IController {
     private final Repository&lt;Integer, Record&gt; RecordRepository;
 
-<span class="nc" id="L19">    public RecordController(Repository&lt;Integer, Record&gt; recordRepository) {</span>
-<span class="nc" id="L20">        RecordRepository = recordRepository;</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L19">    public RecordController(Repository&lt;Integer, Record&gt; recordRepository) {</span>
+<span class="fc" id="L20">        RecordRepository = recordRepository;</span>
+<span class="fc" id="L21">    }</span>
 
     /**
      * creates and adds to the repository a record
@@ -34,10 +34,10 @@ public class RecordController implements IController {
      */
 
     public void add(Integer id, Integer price, String AlbumName, Integer InStock, RecordType RecordType) throws Exception {
-<span class="nc" id="L37">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
-<span class="nc" id="L38">        record.setId(id);</span>
-<span class="nc" id="L39">        this.RecordRepository.save(record).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L37">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
+<span class="fc" id="L38">        record.setId(id);</span>
+<span class="pc" id="L39">        this.RecordRepository.save(record).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * creates and updates to the repository the record with another one having the same id

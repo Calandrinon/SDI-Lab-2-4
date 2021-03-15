@@ -13,11 +13,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-<<<<<<< HEAD
-=======
-
-import java.util.Calendar;
->>>>>>> 3894a95864a7a867354efaf05c213f1850c50d6f
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

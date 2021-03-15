@@ -23,7 +23,7 @@ public class TransactionController {
     private final Repository&lt;Integer, Record&gt; RecordRepository;
     private final Repository&lt;Integer, User&gt; UserRepository;
     private final Repository&lt;Integer, Transaction&gt; TransactionRepository;
-<span class="nc" id="L26">    private AtomicInteger counter = new AtomicInteger(0);</span>
+<span class="fc" id="L26">    private AtomicInteger counter = new AtomicInteger(0);</span>
 
     /**
      *
@@ -32,11 +32,11 @@ public class TransactionController {
      * @param transactionRepository reference to the transaction repository
      */
 
-<span class="nc" id="L35">    public TransactionController(Repository&lt;Integer, Record&gt; recordRepository, Repository&lt;Integer, User&gt; userRepository, Repository&lt;Integer, Transaction&gt; transactionRepository) {</span>
-<span class="nc" id="L36">        RecordRepository = recordRepository;</span>
-<span class="nc" id="L37">        UserRepository = userRepository;</span>
-<span class="nc" id="L38">        TransactionRepository = transactionRepository;</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L35">    public TransactionController(Repository&lt;Integer, Record&gt; recordRepository, Repository&lt;Integer, User&gt; userRepository, Repository&lt;Integer, Transaction&gt; transactionRepository) {</span>
+<span class="fc" id="L36">        RecordRepository = recordRepository;</span>
+<span class="fc" id="L37">        UserRepository = userRepository;</span>
+<span class="fc" id="L38">        TransactionRepository = transactionRepository;</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      *
@@ -49,20 +49,20 @@ public class TransactionController {
      */
 
     public void makeTransaction(Integer userID, Integer recordID, Integer quantity) throws Exception {
-<span class="nc" id="L52">        User user = UserRepository.findOne(userID).orElseThrow(() -&gt; new TransactionException(&quot;no such user&quot;));</span>
-<span class="nc" id="L53">        Record record = RecordRepository.findOne(recordID).orElseThrow(() -&gt; new TransactionException(&quot;no such record&quot;));</span>
+<span class="pc" id="L52">        User user = UserRepository.findOne(userID).orElseThrow(() -&gt; new TransactionException(&quot;no such user&quot;));</span>
+<span class="pc" id="L53">        Record record = RecordRepository.findOne(recordID).orElseThrow(() -&gt; new TransactionException(&quot;no such record&quot;));</span>
 
-<span class="nc" id="L55">        User updatedUser = new User(user.getFirstName(), user.getLastName(), user.getNumberOfTransactions() + 1);</span>
-<span class="nc" id="L56">        updatedUser.setId(user.getId());</span>
-<span class="nc" id="L57">        this.UserRepository.update(updatedUser);</span>
-<span class="nc" id="L58">        Record updatedRecord = new Record(record.getPrice(), record.getAlbumName(), record.getInStock() - quantity, record.getTypeOfRecord());</span>
-<span class="nc" id="L59">        updatedRecord.setId(record.getId());</span>
-<span class="nc" id="L60">        this.RecordRepository.update(updatedRecord);</span>
+<span class="fc" id="L55">        User updatedUser = new User(user.getFirstName(), user.getLastName(), user.getNumberOfTransactions() + 1);</span>
+<span class="fc" id="L56">        updatedUser.setId(user.getId());</span>
+<span class="fc" id="L57">        this.UserRepository.update(updatedUser);</span>
+<span class="fc" id="L58">        Record updatedRecord = new Record(record.getPrice(), record.getAlbumName(), record.getInStock() - quantity, record.getTypeOfRecord());</span>
+<span class="fc" id="L59">        updatedRecord.setId(record.getId());</span>
+<span class="fc" id="L60">        this.RecordRepository.update(updatedRecord);</span>
 
-<span class="nc" id="L62">        Transaction newTransaction = new Transaction(userID, recordID, new Date(), quantity);</span>
-<span class="nc" id="L63">        newTransaction.setId(this.counter.incrementAndGet());</span>
-<span class="nc" id="L64">        this.TransactionRepository.save(newTransaction);</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L62">        Transaction newTransaction = new Transaction(userID, recordID, new Date(), quantity);</span>
+<span class="fc" id="L63">        newTransaction.setId(this.counter.incrementAndGet());</span>
+<span class="fc" id="L64">        this.TransactionRepository.save(newTransaction);</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      *
@@ -71,10 +71,10 @@ public class TransactionController {
      */
 
     private List&lt;String&gt; filter(Predicate&lt;Transaction&gt; pred){
-<span class="nc" id="L74">        return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)</span>
-<span class="nc" id="L75">                .filter(pred)</span>
-<span class="nc" id="L76">                .map(Transaction::toString)</span>
-<span class="nc" id="L77">                .collect(Collectors.toList());</span>
+<span class="fc" id="L74">        return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)</span>
+<span class="fc" id="L75">                .filter(pred)</span>
+<span class="fc" id="L76">                .map(Transaction::toString)</span>
+<span class="fc" id="L77">                .collect(Collectors.toList());</span>
     }
 
     /**
@@ -106,7 +106,7 @@ public class TransactionController {
      */
 
     public List&lt;String&gt; filterByDate(Date date) {
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        return filter(e -&gt; abs(TimeUnit.DAYS.convert(e.getDate().getTime() - date.getTime(), TimeUnit.MILLISECONDS)) &lt;= 1);</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        return filter(e -&gt; abs(TimeUnit.DAYS.convert(e.getDate().getTime() - date.getTime(), TimeUnit.MILLISECONDS)) &lt;= 1);</span>
     }
 
     /**
@@ -116,10 +116,10 @@ public class TransactionController {
      */
 
     public Integer getTotalQuantityPurchasedByRecordID(Integer id) {
-<span class="nc" id="L119">        return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)</span>
-<span class="nc bnc" id="L120" title="All 2 branches missed.">                .filter(t -&gt; t.getRecordID() == id)</span>
-<span class="nc" id="L121">                .map(Transaction::getQuantity)</span>
-<span class="nc" id="L122">                .reduce(0, Integer::sum);</span>
+<span class="fc" id="L119">        return StreamSupport.stream(this.TransactionRepository.findAll().spliterator(), false)</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                .filter(t -&gt; t.getRecordID() == id)</span>
+<span class="fc" id="L121">                .map(Transaction::getQuantity)</span>
+<span class="fc" id="L122">                .reduce(0, Integer::sum);</span>
     }
 
     /**
@@ -128,8 +128,8 @@ public class TransactionController {
      */
 
     public List&lt;Record&gt; getMostPurchasedRecords(){
-<span class="nc" id="L131">        return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)</span>
-<span class="nc" id="L132">                .max((r1, r2) -&gt; getTotalQuantityPurchasedByRecordID(r1.getId()) - getTotalQuantityPurchasedByRecordID(r2.getId())).stream().collect(Collectors.toList());</span>
+<span class="fc" id="L131">        return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)</span>
+<span class="fc" id="L132">                .max((r1, r2) -&gt; getTotalQuantityPurchasedByRecordID(r1.getId()) - getTotalQuantityPurchasedByRecordID(r2.getId())).stream().collect(Collectors.toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

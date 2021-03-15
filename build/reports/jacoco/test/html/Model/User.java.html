@@ -4,8 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -19,11 +17,11 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @param LastName - string
      * @param NumberOfTransactions - Integer
      */
-<span class="fc" id="L22">    public User(String FirstName, String LastName, int NumberOfTransactions) {</span>
-<span class="fc" id="L23">        this.FirstName = FirstName;</span>
-<span class="fc" id="L24">        this.LastName = LastName;</span>
-<span class="fc" id="L25">        this.NumberOfTransactions = NumberOfTransactions;</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L20">    public User(String FirstName, String LastName, int NumberOfTransactions) {</span>
+<span class="fc" id="L21">        this.FirstName = FirstName;</span>
+<span class="fc" id="L22">        this.LastName = LastName;</span>
+<span class="fc" id="L23">        this.NumberOfTransactions = NumberOfTransactions;</span>
+<span class="fc" id="L24">    }</span>
 
     /**
      *
@@ -31,9 +29,9 @@ public class User extends BaseEntity&lt;Integer&gt;{
      */
     @Override
     public String toString() {
-<span class="nc" id="L34">        return &quot;User &quot; + Integer.toString(this.getId()) + &quot;: &quot; +</span>
+<span class="fc" id="L32">        return &quot;User &quot; + Integer.toString(this.getId()) + &quot;: &quot; +</span>
                 FirstName + &quot; &quot; + LastName +
-<span class="nc" id="L36">                &quot; No. of transactions: &quot; + Integer.toString(NumberOfTransactions);</span>
+<span class="fc" id="L34">                &quot; No. of transactions: &quot; + Integer.toString(NumberOfTransactions);</span>
     }
 
     /**
@@ -44,19 +42,19 @@ public class User extends BaseEntity&lt;Integer&gt;{
      */
     @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if(this == obj)return true;</span>
-<span class="pc bpc" id="L48" title="2 of 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if(this == obj)return true;</span>
+<span class="pc bpc" id="L46" title="2 of 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
 
-<span class="fc" id="L50">        User user = (User) obj;</span>
+<span class="fc" id="L48">        User user = (User) obj;</span>
 
-<span class="fc" id="L52">        return getId().equals(user.getId());</span>
+<span class="fc" id="L50">        return getId().equals(user.getId());</span>
     }
 
     /**
      * @return the number of transactions for an User
      */
     public int getNumberOfTransactions() {
-<span class="fc" id="L59">        return NumberOfTransactions;</span>
+<span class="fc" id="L57">        return NumberOfTransactions;</span>
     }
 
     /**
@@ -64,7 +62,7 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @return the last name of an User
      */
     public String getLastName() {
-<span class="fc" id="L67">        return LastName;</span>
+<span class="fc" id="L65">        return LastName;</span>
     }
 
     /**
@@ -72,60 +70,60 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @return the first name of an User
      */
     public String getFirstName() {
-<span class="fc" id="L75">        return FirstName;</span>
+<span class="fc" id="L73">        return FirstName;</span>
     }
 
     public static Function reader(Function&lt;String, User&gt; function){
-<span class="nc" id="L79">        return function;</span>
+<span class="fc" id="L77">        return function;</span>
     }
 
     public static Function writer(Function&lt;User, String&gt; function){
-<span class="nc" id="L83">        return function;</span>
+<span class="fc" id="L81">        return function;</span>
     }
 
     public static String fileWriter(BaseEntity&lt;Integer&gt; baseEntity){
-<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (baseEntity.getClass() == User.class) {</span>
-<span class="nc" id="L88">            User user = (User) baseEntity;</span>
-<span class="nc" id="L89">            return user.getId() + &quot; | &quot; + user.FirstName + &quot; | &quot; + user.LastName + &quot; | &quot; + user.NumberOfTransactions;</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (baseEntity.getClass() == User.class) {</span>
+<span class="fc" id="L86">            User user = (User) baseEntity;</span>
+<span class="fc" id="L87">            return user.getId() + &quot; | &quot; + user.FirstName + &quot; | &quot; + user.LastName + &quot; | &quot; + user.NumberOfTransactions;</span>
         }
-<span class="nc" id="L91">        return &quot;&quot;;</span>
+<span class="nc" id="L89">        return &quot;&quot;;</span>
     }
 
     public static User fileReader(String line){
-<span class="nc" id="L95">        String[] parts = line.split(&quot; \\| &quot;);</span>
-<span class="nc" id="L96">        User user = new User(parts[1], parts[2], Integer.parseInt(parts[3]));</span>
-<span class="nc" id="L97">        user.setId(Integer.parseInt(parts[0]));</span>
-<span class="nc" id="L98">        return user;</span>
+<span class="fc" id="L93">        String[] parts = line.split(&quot; \\| &quot;);</span>
+<span class="fc" id="L94">        User user = new User(parts[1], parts[2], Integer.parseInt(parts[3]));</span>
+<span class="fc" id="L95">        user.setId(Integer.parseInt(parts[0]));</span>
+<span class="fc" id="L96">        return user;</span>
     }
 
 
 
 
 
-<span class="fc" id="L105">    public static BiFunction&lt;User, Document, Node&gt; userEncoder = (u, d) -&gt; {</span>
-<span class="fc" id="L106">        Element userElement = d.createElement(&quot;user&quot;);</span>
-<span class="fc" id="L107">        userElement.setAttribute(&quot;id&quot;, Integer.toString(u.getId()));</span>
-<span class="fc" id="L108">        addChildWithTextContent(d, userElement, &quot;firstName&quot;, u.getFirstName());</span>
-<span class="fc" id="L109">        addChildWithTextContent(d, userElement, &quot;lastName&quot;, u.getLastName());</span>
-<span class="fc" id="L110">        addChildWithTextContent(d, userElement, &quot;numberOfTransactions&quot;, Integer.toString(u.getNumberOfTransactions()));</span>
-<span class="fc" id="L111">        return userElement;</span>
+<span class="fc" id="L103">    public static BiFunction&lt;User, Document, Node&gt; userEncoder = (u, d) -&gt; {</span>
+<span class="fc" id="L104">        Element userElement = d.createElement(&quot;user&quot;);</span>
+<span class="fc" id="L105">        userElement.setAttribute(&quot;id&quot;, Integer.toString(u.getId()));</span>
+<span class="fc" id="L106">        addChildWithTextContent(d, userElement, &quot;firstName&quot;, u.getFirstName());</span>
+<span class="fc" id="L107">        addChildWithTextContent(d, userElement, &quot;lastName&quot;, u.getLastName());</span>
+<span class="fc" id="L108">        addChildWithTextContent(d, userElement, &quot;numberOfTransactions&quot;, Integer.toString(u.getNumberOfTransactions()));</span>
+<span class="fc" id="L109">        return userElement;</span>
     };
 
     private static void addChildWithTextContent(Document document, Element parent, String tagName, String textContent){
-<span class="fc" id="L115">        Element childElement = document.createElement(tagName);</span>
-<span class="fc" id="L116">        childElement.setTextContent(textContent);</span>
-<span class="fc" id="L117">        parent.appendChild(childElement);</span>
-<span class="fc" id="L118">    }</span>
+<span class="fc" id="L113">        Element childElement = document.createElement(tagName);</span>
+<span class="fc" id="L114">        childElement.setTextContent(textContent);</span>
+<span class="fc" id="L115">        parent.appendChild(childElement);</span>
+<span class="fc" id="L116">    }</span>
 
-<span class="fc" id="L120">    public static Function&lt;Element, User&gt; userDecoder = e -&gt;{</span>
-<span class="fc" id="L121">        User user = null;</span>
-<span class="fc" id="L122">        user = new User(</span>
-<span class="fc" id="L123">                e.getElementsByTagName(&quot;firstName&quot;).item(0).getTextContent(),</span>
-<span class="fc" id="L124">                e.getElementsByTagName(&quot;lastName&quot;).item(0).getTextContent(),</span>
-<span class="fc" id="L125">                Integer.parseInt(e.getElementsByTagName(&quot;numberOfTransactions&quot;).item(0).getTextContent())</span>
+<span class="fc" id="L118">    public static Function&lt;Element, User&gt; userDecoder = e -&gt;{</span>
+<span class="fc" id="L119">        User user = null;</span>
+<span class="fc" id="L120">        user = new User(</span>
+<span class="fc" id="L121">                e.getElementsByTagName(&quot;firstName&quot;).item(0).getTextContent(),</span>
+<span class="fc" id="L122">                e.getElementsByTagName(&quot;lastName&quot;).item(0).getTextContent(),</span>
+<span class="fc" id="L123">                Integer.parseInt(e.getElementsByTagName(&quot;numberOfTransactions&quot;).item(0).getTextContent())</span>
         );
-<span class="fc" id="L127">        user.setId(Integer.parseInt(e.getAttribute(&quot;id&quot;)));</span>
-<span class="fc" id="L128">        return user;</span>
+<span class="fc" id="L125">        user.setId(Integer.parseInt(e.getAttribute(&quot;id&quot;)));</span>
+<span class="fc" id="L126">        return user;</span>
     };
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

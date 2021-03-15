@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">distributableApplication</a> &gt; <a href="index.source.html" class="el_package">Validator</a> &gt; <span class="el_source">UserValidator.java</span></div><h1>UserValidator.java</h1><pre class="source lang-java linenums">package Validator;
+
+import Model.User;
+
+import Exceptions.ValidationException;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+<span class="fc" id="L11">public class UserValidator implements Validator&lt;User&gt;{</span>
+    /**
+     * validate the given user
+     *
+     * @param entity must be valid
+     *
+     * @throws ValidationException
+     *             if the user has an empty firstname
+     *             if the user has an empty lastname
+     *             if the user has a firstname that is longer than 64 characters
+     *             if the user has a lastname that is longer than 64 characters
+     */
+
+    @Override
+    public void validate(User entity) throws ValidationException {
+<span class="fc" id="L26">        Optional.ofNullable(entity)</span>
+<span class="pc" id="L27">                .orElseThrow(() -&gt; new ValidationException(&quot;entity is null&quot;));</span>
+
+<span class="fc" id="L29">        Optional.of(entity)</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">                .filter(e -&gt; e.getId() &gt; 0)</span>
+<span class="pc" id="L31">                .orElseThrow(() -&gt; new ValidationException(&quot;id of entity must be positive&quot;));</span>
+
+<span class="fc" id="L33">        Predicate&lt;User&gt; checkFirstName = e -&gt;</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                !e.getFirstName().isBlank()</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">                        &amp;&amp; e.getFirstName().length() &lt;= 64;</span>
+
+<span class="fc" id="L37">        Predicate&lt;User&gt; checkLastName = e -&gt;</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">                !e.getLastName().isBlank()</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">                        &amp;&amp; e.getLastName().length() &lt;= 64;</span>
+
+<span class="fc" id="L41">        Optional.of(entity)</span>
+<span class="fc" id="L42">                .filter(checkFirstName)</span>
+<span class="pc" id="L43">                .orElseThrow(() -&gt; new ValidationException(&quot;firstname is invalid&quot;));</span>
+
+<span class="fc" id="L45">        Optional.of(entity)</span>
+<span class="fc" id="L46">                .filter(checkLastName)</span>
+<span class="pc" id="L47">                .orElseThrow(() -&gt; new ValidationException(&quot;lastname is invalid&quot;));</span>
+<span class="fc" id="L48">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
