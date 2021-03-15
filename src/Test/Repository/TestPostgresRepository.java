@@ -239,4 +239,94 @@ public class TestPostgresRepository {
 
         assert(oldNumberOfEntities == 1 && newNumberOfEntities == 0);
     }
+
+
+    @Test
+    public void testUpdateForUsers() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+
+        user = new User("aaa", "ddd", 500);
+        user.setId(1);
+        this.userRepository.update(user);
+
+        Iterable<User> list = this.userRepository.findAll();
+        Iterator<User> userIterator = list.iterator();
+        List<User> users = new ArrayList<>();
+
+        while (userIterator.hasNext()) {
+            users.add(userIterator.next());
+        }
+
+        System.out.println(users);
+        String firstName = users.get(0).getFirstName();
+        String lastName = users.get(0).getLastName();
+        int numberOfTransactions = users.get(0).getNumberOfTransactions();
+
+        assert(users.size() == 1 && firstName.equals("aaa") && lastName.equals("ddd") && numberOfTransactions == 500);
+    }
+
+
+    @Test
+    public void testUpdateForRecords() throws ValidationException {
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+        assert (this.recordRepository.getNumberOfEntities() == 1);
+
+        record = new Record(100, "Meddle", 200, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.update(record);
+
+        Iterable<Record> list = this.recordRepository.findAll();
+        Iterator<Record> recordIterator = list.iterator();
+        List<Record> records = new ArrayList<>();
+
+        while (recordIterator.hasNext()) {
+            records.add(recordIterator.next());
+        }
+
+        System.out.println(records);
+        int price = records.get(0).getPrice();
+        String albumName = records.get(0).getAlbumName();
+        int inStock = records.get(0).getInStock();
+        String recordType = records.get(0).getTypeOfRecord().toString();
+
+        assert(records.size() == 1 && price == 100 && albumName.equals("Meddle") && inStock == 200 && recordType.equals(RecordType.VINYL.toString()));
+    }
+
+
+    @Test
+    public void testUpdateForTransactions() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+
+        Transaction transaction = new Transaction(1, 1, new Date(), 2);
+        transaction.setId(1);
+        this.transactionRepository.save(transaction);
+
+        transaction = new Transaction(1, 1, new Date(), 50);
+        transaction.setId(1);
+        this.transactionRepository.update(transaction);
+
+        Iterable<Transaction> list = this.transactionRepository.findAll();
+        Iterator<Transaction> transactionIterator= list.iterator();
+        List<Transaction> transactions = new ArrayList<>();
+
+        while (transactionIterator.hasNext()) {
+            transactions.add(transactionIterator.next());
+        }
+
+        System.out.println(transactions);
+        int userId = transactions.get(0).getUserID();
+        int recordId = transactions.get(0).getRecordID();
+        int quantity = transactions.get(0).getQuantity();
+
+        assert (transactions.size() == 1 && userId == 1 && recordId == 1 && quantity == 50);
+    }
 }

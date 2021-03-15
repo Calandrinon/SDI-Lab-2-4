@@ -250,6 +250,53 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> update(T entity) throws ValidationException {
+        try (var connection = DriverManager.getConnection(url, username, password)) {
+            String columnNamesAsString = this.getColumnsOfTheTableFromTheDatabase(connection);
+            String[] columnNames = columnNamesAsString.split(",");
+            String updateStatement = "UPDATE " + this.tableName.toLowerCase() + " SET ";
+
+            for (int i = 1; i < columnNames.length; i++) {
+                if (i > 1) {
+                    updateStatement = updateStatement.concat(", ");
+                }
+                updateStatement = updateStatement.concat(columnNames[i] + "=?");
+            }
+
+
+            updateStatement += " where " + columnNames[0] + "=?";
+
+            var preparedStatement = connection.prepareStatement(updateStatement);
+
+            if (entity instanceof User) {
+                preparedStatement.setString(1, ((User)entity).getFirstName());
+                preparedStatement.setString(2, ((User)entity).getLastName());
+                preparedStatement.setInt(3, ((User)entity).getNumberOfTransactions());
+                preparedStatement.setInt(4, ((User)entity).getId());
+            } else if (entity instanceof Record) {
+                double price = ((Record)entity).getPrice();
+                System.out.println("IN UPDATE: RECORD PRICE IS " + price);
+
+                preparedStatement.setString(1, ((Record)entity).getAlbumName());
+                preparedStatement.setDouble(2, price);
+                preparedStatement.setInt(3, ((Record)entity).getInStock());
+                preparedStatement.setString(4, ((Record)entity).getTypeOfRecord().toString());
+                preparedStatement.setInt(5, ((Record)entity).getId());
+            } else if (entity instanceof Transaction) {
+                preparedStatement.setInt(1, ((Transaction)entity).getUserID());
+                preparedStatement.setInt(2, ((Transaction)entity).getRecordID());
+                Date date = ((Transaction)entity).getDate();
+                LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+                preparedStatement.setDate(3, sqlDate);
+                preparedStatement.setInt(4, ((Transaction)entity).getQuantity());
+                preparedStatement.setInt(5, ((Transaction)entity).getId());
+            }
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return Optional.empty();
     }
 
