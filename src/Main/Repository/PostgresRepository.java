@@ -3,8 +3,8 @@ package Repository;
 import Exceptions.ValidationException;
 import Model.*;
 import Model.Record;
+import Validator.Validator;
 
-import java.sql.ClientInfoStatus;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Repository<ID, T> {
-    //private Validator<T> validator;
+    private Validator<T> validator;
     private String tableName, url, username, password;
 
-    public PostgresRepository(/*Validator<T> validator,*/ String tableName, String url) {
-        //this.validator = validator;
+    public PostgresRepository(Validator<T> validator, String tableName, String url) {
+        this.validator = validator;
         this.tableName = tableName;
         this.url = url;
         this.username = "calandrinon";
@@ -188,6 +188,9 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> save(T entity) throws ValidationException {
+        Optional.ofNullable(entity).orElseThrow(() -> new ValidationException("entity must not be null"));
+        validator.validate(entity);
+
         String columnNames = "";
         try (var connection = DriverManager.getConnection(url, username, password)) {
             columnNames = this.getColumnsOfTheTableFromTheDatabase(DriverManager.getConnection(url, username, password));
@@ -266,6 +269,9 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
     @Override
     public Optional<T> update(T entity) throws ValidationException {
+        Optional.ofNullable(entity).orElseThrow(() -> new ValidationException("the entity cannot be null"));
+        validator.validate(entity);
+
         try (var connection = DriverManager.getConnection(url, username, password)) {
             String columnNamesAsString = this.getColumnsOfTheTableFromTheDatabase(connection);
             String[] columnNames = columnNamesAsString.split(",");

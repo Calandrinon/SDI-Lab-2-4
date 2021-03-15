@@ -4,6 +4,7 @@ import Exceptions.ValidationException;
 import Model.RecordType;
 import Model.Transaction;
 import Model.User;
+import Validator.Validator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
+import Validator.UserValidator;
+import Validator.RecordValidator;
+import Validator.TransactionValidator;
 
 public class TestPostgresRepository {
     private PostgresRepository<Integer, User> userRepository;
@@ -27,9 +31,9 @@ public class TestPostgresRepository {
         this.url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
         this.username = "calandrinon";
         this.password = "12345";
-        this.userRepository = new PostgresRepository<Integer, User>("ClientUserTestTable", this.url);
-        this.recordRepository = new PostgresRepository<Integer, Record>("RecordTestTable", this.url);
-        this.transactionRepository = new PostgresRepository<Integer, Transaction>("UserTransactionTestTable", this.url);
+        this.userRepository = new PostgresRepository<Integer, User>(new UserValidator(), "ClientUserTestTable", this.url);
+        this.recordRepository = new PostgresRepository<Integer, Record>(new RecordValidator(), "RecordTestTable", this.url);
+        this.transactionRepository = new PostgresRepository<Integer, Transaction>(new TransactionValidator(), "UserTransactionTestTable", this.url);
 
         String deleteStatement = "DELETE FROM UserTransactionTestTable; DELETE FROM ClientUserTestTable; DELETE FROM RecordTestTable;";
         try (var connection = DriverManager.getConnection(this.url, this.username, this.password);
@@ -367,5 +371,108 @@ public class TestPostgresRepository {
         assert(this.transactionRepository.findOne(1).isPresent());
         Transaction databaseTransaction = this.transactionRepository.findOne(1).get();
         assert(databaseTransaction.getId() == 1 && databaseTransaction.getUserID() == 1 && databaseTransaction.getRecordID() == 1);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForUser_nullEntityCase() throws ValidationException {
+        this.userRepository.save(null);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForUser_negativeIdCase() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(-1);
+
+        this.userRepository.save(user);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForRecord_nullEntityCase() throws ValidationException {
+        this.recordRepository.save(null);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForRecord_negativeIdCase() throws ValidationException {
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(-1);
+
+        this.recordRepository.save(record);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForTransaction_nullEntityCase() throws ValidationException {
+        this.transactionRepository.save(null);
+    }
+
+
+
+    @Test(expected = ValidationException.class)
+    public void testSaveForTransaction_negativeIdCase() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+        Transaction transaction = new Transaction(1, 1, new Date(), 50);
+        transaction.setId(-1);
+
+        this.transactionRepository.save(transaction);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForUser_nullEntityCase() throws ValidationException {
+        this.userRepository.update(null);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForUser_negativeIdCase() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(-1);
+
+        this.userRepository.save(user);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForRecord_nullEntityCase() throws ValidationException {
+        this.recordRepository.update(null);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForRecord_negativeIdCase() throws ValidationException {
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(-1);
+
+        this.recordRepository.save(record);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForTransaction_nullEntityCase() throws ValidationException {
+        this.transactionRepository.update(null);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void testUpdateForTransaction_negativeIdCase() throws ValidationException {
+        User user = new User("abc", "def", 2);
+        user.setId(1);
+        this.userRepository.save(user);
+        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
+        record.setId(1);
+        this.recordRepository.save(record);
+        Transaction transaction = new Transaction(1, 1, new Date(), 50);
+        transaction.setId(-1);
+
+        this.transactionRepository.save(transaction);
     }
 }
