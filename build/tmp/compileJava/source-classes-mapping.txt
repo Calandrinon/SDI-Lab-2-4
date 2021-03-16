@@ -4,16 +4,11 @@ Repository/Repository.java
  Repository.Repository
 Repository/FileRepository.java
  Repository.FileRepository
-<<<<<<< HEAD
 Repository/XmlFileRepository.java
  Repository.XmlFileRepository
 Model/Record.java
  Model.Record
  Model.Record$1
-=======
-Model/Record.java
- Model.Record
->>>>>>> playing-with-postgres
 Main.java
  Main.Main
 Controller/RecordController.java
@@ -32,20 +27,14 @@ Validator/RecordValidator.java
  Validator.RecordValidator
 UI/AdminUI.java
  UI.AdminUI
-<<<<<<< HEAD
-=======
-Validator/TransactionValidator.java
- Validator.TransactionValidator
->>>>>>> playing-with-postgres
+Repository/PostgresRepository.java
+ Repository.PostgresRepository
 Controller/TransactionController.java
  Controller.TransactionController
 Validator/BaseEntityValidator.java
  Validator.BaseEntityValidator
-<<<<<<< HEAD
 deleteLater.java
  deleteLater
-=======
->>>>>>> playing-with-postgres
 Model/RecordType.java
  Model.RecordType
 Exceptions/TransactionException.java
@@ -62,10 +51,5 @@ UI/UI.java
  UI.UI
 Validator/UserValidator.java
  Validator.UserValidator
-<<<<<<< HEAD
 Validator/TransactionValidator.java
  Validator.TransactionValidator
-=======
-Repository/PostgresRepository.java
- Repository.PostgresRepository
->>>>>>> playing-with-postgres
