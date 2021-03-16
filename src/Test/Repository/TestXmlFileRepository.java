@@ -10,10 +10,30 @@ import Validator.UserValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class TestXmlFileRepository {
@@ -30,6 +50,51 @@ public class TestXmlFileRepository {
     private XmlFileRepository<Integer, User> userRepository;
     private XmlFileRepository<Integer, Transaction> transactionRepository;
 
+    private static void createFiles(){
+        Path records, transactions, users;
+
+        records = Paths.get("src/Test/Repository/XmlFiles/").resolve("recordTestFile.xml");
+        transactions = Paths.get("src/Test/Repository/XmlFiles/").resolve("transactionTestFile.xml");
+        users = Paths.get("src/Test/Repository/XmlFiles/").resolve("userTestFile.xml");
+
+        Stream.of(records, transactions, users)
+                .forEach(path -> {
+                    if(!Files.exists(path)) {
+                        try {
+                            Files.createFile(path);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = null;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
+
+            Element rootElement = doc.createElement("elems");
+            doc.appendChild(rootElement);
+
+
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+
+            StreamResult result1 = new StreamResult(new File("src/Test/Repository/XmlFiles/recordTestFile.xml"));
+            StreamResult result2 = new StreamResult(new File("src/Test/Repository/XmlFiles/transactionTestFile.xml"));
+            StreamResult result3 = new StreamResult(new File("src/Test/Repository/XmlFiles/userTestFile.xml"));
+
+            transformer.transform(source, result1);
+            transformer.transform(source, result2);
+            transformer.transform(source, result3);
+        } catch (ParserConfigurationException | TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Before
     public void setUp() {
         RECORD_1.setId(1);
@@ -40,6 +105,8 @@ public class TestXmlFileRepository {
 
         TRANSACTION_1.setId(1);
         TRANSACTION_2.setId(1);
+
+        createFiles();
 
         recordRepository = new XmlFileRepository<Integer, Record>(
                 new RecordValidator()
@@ -67,6 +134,14 @@ public class TestXmlFileRepository {
         recordRepository = null;
         userRepository = null;
         transactionRepository = null;
+
+        try {
+            Files.delete(Paths.get("src/Test/Repository/XmlFiles/recordTestFile.xml"));
+            Files.delete(Paths.get("src/Test/Repository/XmlFiles/transactionTestFile.xml"));
+            Files.delete(Paths.get("src/Test/Repository/XmlFiles/userTestFile.xml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

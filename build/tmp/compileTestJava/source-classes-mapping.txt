@@ -8,13 +8,13 @@ Repository/TestInMemoryRepository.java
  Repository.TestInMemoryRepository
 Controller/TestTransactionController.java
  Controller.TestTransactionController
-Repository/TestXmlFileRepository.java
- Repository.TestXmlFileRepository
+Controller/TestRecordController.java
+ Controller.TestRecordController
 Model/TestRecord.java
  Model.TestRecord
 Model/TestUser.java
  Model.TestUser
 Model/TestTransaction.java
  Model.TestTransaction
-Controller/TestRecordController.java
- Controller.TestRecordController
+Repository/TestXmlFileRepository.java
+ Repository.TestXmlFileRepository

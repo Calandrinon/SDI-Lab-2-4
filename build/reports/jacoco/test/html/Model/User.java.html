@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">distributableApplication</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package Model;
 
-<<<<<<< HEAD
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -8,8 +7,6 @@ import org.w3c.dom.Node;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-=======
->>>>>>> playing-with-postgres
 public class User extends BaseEntity&lt;Integer&gt;{
     private final String FirstName;
     private final String LastName;
@@ -20,19 +17,11 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @param LastName - string
      * @param NumberOfTransactions - Integer
      */
-<<<<<<< HEAD
 <span class="fc" id="L20">    public User(String FirstName, String LastName, int NumberOfTransactions) {</span>
 <span class="fc" id="L21">        this.FirstName = FirstName;</span>
 <span class="fc" id="L22">        this.LastName = LastName;</span>
 <span class="fc" id="L23">        this.NumberOfTransactions = NumberOfTransactions;</span>
 <span class="fc" id="L24">    }</span>
-=======
-<span class="fc" id="L13">    public User(String FirstName, String LastName, int NumberOfTransactions) {</span>
-<span class="fc" id="L14">        this.FirstName = FirstName;</span>
-<span class="fc" id="L15">        this.LastName = LastName;</span>
-<span class="fc" id="L16">        this.NumberOfTransactions = NumberOfTransactions;</span>
-<span class="fc" id="L17">    }</span>
->>>>>>> playing-with-postgres
 
     /**
      *
@@ -40,15 +29,9 @@ public class User extends BaseEntity&lt;Integer&gt;{
      */
     @Override
     public String toString() {
-<<<<<<< HEAD
-<span class="fc" id="L32">        return &quot;User &quot; + Integer.toString(this.getId()) + &quot;: &quot; +</span>
+<span class="nc" id="L32">        return &quot;User &quot; + Integer.toString(this.getId()) + &quot;: &quot; +</span>
                 FirstName + &quot; &quot; + LastName +
-<span class="fc" id="L34">                &quot; No. of transactions: &quot; + Integer.toString(NumberOfTransactions);</span>
-=======
-<span class="fc" id="L25">        return &quot;User &quot; + Integer.toString(this.getId()) + &quot;: &quot; +</span>
-                FirstName + &quot; &quot; + LastName +
-<span class="fc" id="L27">                &quot; No. of transactions: &quot; + Integer.toString(NumberOfTransactions);</span>
->>>>>>> playing-with-postgres
+<span class="nc" id="L34">                &quot; No. of transactions: &quot; + Integer.toString(NumberOfTransactions);</span>
     }
 
     /**
@@ -59,32 +42,19 @@ public class User extends BaseEntity&lt;Integer&gt;{
      */
     @Override
     public boolean equals(Object obj) {
-<<<<<<< HEAD
 <span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if(this == obj)return true;</span>
 <span class="pc bpc" id="L46" title="2 of 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
 
 <span class="fc" id="L48">        User user = (User) obj;</span>
 
 <span class="fc" id="L50">        return getId().equals(user.getId());</span>
-=======
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        if(this == obj)return true;</span>
-<span class="nc bnc" id="L39" title="All 4 branches missed.">        if(obj == null || getClass() != obj.getClass()) return false;</span>
-
-<span class="nc" id="L41">        User user = (User) obj;</span>
-
-<span class="nc" id="L43">        return getId().equals(user.getId());</span>
->>>>>>> playing-with-postgres
     }
 
     /**
      * @return the number of transactions for an User
      */
     public int getNumberOfTransactions() {
-<<<<<<< HEAD
 <span class="fc" id="L57">        return NumberOfTransactions;</span>
-=======
-<span class="fc" id="L50">        return NumberOfTransactions;</span>
->>>>>>> playing-with-postgres
     }
 
     /**
@@ -92,11 +62,7 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @return the last name of an User
      */
     public String getLastName() {
-<<<<<<< HEAD
 <span class="fc" id="L65">        return LastName;</span>
-=======
-<span class="fc" id="L58">        return LastName;</span>
->>>>>>> playing-with-postgres
     }
 
     /**
@@ -104,65 +70,57 @@ public class User extends BaseEntity&lt;Integer&gt;{
      * @return the first name of an User
      */
     public String getFirstName() {
-<<<<<<< HEAD
 <span class="fc" id="L73">        return FirstName;</span>
     }
 
     public static Function reader(Function&lt;String, User&gt; function){
-<span class="fc" id="L77">        return function;</span>
+<span class="nc" id="L77">        return function;</span>
     }
 
     public static Function writer(Function&lt;User, String&gt; function){
-<span class="fc" id="L81">        return function;</span>
+<span class="nc" id="L81">        return function;</span>
     }
 
     public static String fileWriter(BaseEntity&lt;Integer&gt; baseEntity){
-<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (baseEntity.getClass() == User.class) {</span>
-<span class="fc" id="L86">            User user = (User) baseEntity;</span>
-<span class="fc" id="L87">            return user.getId() + &quot; | &quot; + user.FirstName + &quot; | &quot; + user.LastName + &quot; | &quot; + user.NumberOfTransactions;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        if (baseEntity.getClass() == User.class) {</span>
+<span class="nc" id="L86">            User user = (User) baseEntity;</span>
+<span class="nc" id="L87">            return user.getId() + &quot; | &quot; + user.FirstName + &quot; | &quot; + user.LastName + &quot; | &quot; + user.NumberOfTransactions;</span>
         }
 <span class="nc" id="L89">        return &quot;&quot;;</span>
     }
 
     public static User fileReader(String line){
-<span class="fc" id="L93">        String[] parts = line.split(&quot; \\| &quot;);</span>
-<span class="fc" id="L94">        User user = new User(parts[1], parts[2], Integer.parseInt(parts[3]));</span>
-<span class="fc" id="L95">        user.setId(Integer.parseInt(parts[0]));</span>
-<span class="fc" id="L96">        return user;</span>
+<span class="nc" id="L93">        String[] parts = line.split(&quot; \\| &quot;);</span>
+<span class="nc" id="L94">        User user = new User(parts[1], parts[2], Integer.parseInt(parts[3]));</span>
+<span class="nc" id="L95">        user.setId(Integer.parseInt(parts[0]));</span>
+<span class="nc" id="L96">        return user;</span>
     }
 
 
-
-
-
-<span class="fc" id="L103">    public static BiFunction&lt;User, Document, Node&gt; userEncoder = (u, d) -&gt; {</span>
-<span class="fc" id="L104">        Element userElement = d.createElement(&quot;user&quot;);</span>
-<span class="fc" id="L105">        userElement.setAttribute(&quot;id&quot;, Integer.toString(u.getId()));</span>
-<span class="fc" id="L106">        addChildWithTextContent(d, userElement, &quot;firstName&quot;, u.getFirstName());</span>
-<span class="fc" id="L107">        addChildWithTextContent(d, userElement, &quot;lastName&quot;, u.getLastName());</span>
-<span class="fc" id="L108">        addChildWithTextContent(d, userElement, &quot;numberOfTransactions&quot;, Integer.toString(u.getNumberOfTransactions()));</span>
-<span class="fc" id="L109">        return userElement;</span>
+<span class="fc" id="L100">    public static BiFunction&lt;User, Document, Node&gt; userEncoder = (u, d) -&gt; {</span>
+<span class="fc" id="L101">        Element userElement = d.createElement(&quot;user&quot;);</span>
+<span class="fc" id="L102">        userElement.setAttribute(&quot;id&quot;, Integer.toString(u.getId()));</span>
+<span class="fc" id="L103">        addChildWithTextContent(d, userElement, &quot;firstName&quot;, u.getFirstName());</span>
+<span class="fc" id="L104">        addChildWithTextContent(d, userElement, &quot;lastName&quot;, u.getLastName());</span>
+<span class="fc" id="L105">        addChildWithTextContent(d, userElement, &quot;numberOfTransactions&quot;, Integer.toString(u.getNumberOfTransactions()));</span>
+<span class="fc" id="L106">        return userElement;</span>
     };
 
     private static void addChildWithTextContent(Document document, Element parent, String tagName, String textContent){
-<span class="fc" id="L113">        Element childElement = document.createElement(tagName);</span>
-<span class="fc" id="L114">        childElement.setTextContent(textContent);</span>
-<span class="fc" id="L115">        parent.appendChild(childElement);</span>
-<span class="fc" id="L116">    }</span>
+<span class="fc" id="L110">        Element childElement = document.createElement(tagName);</span>
+<span class="fc" id="L111">        childElement.setTextContent(textContent);</span>
+<span class="fc" id="L112">        parent.appendChild(childElement);</span>
+<span class="fc" id="L113">    }</span>
 
-<span class="fc" id="L118">    public static Function&lt;Element, User&gt; userDecoder = e -&gt;{</span>
-<span class="fc" id="L119">        User user = null;</span>
-<span class="fc" id="L120">        user = new User(</span>
-<span class="fc" id="L121">                e.getElementsByTagName(&quot;firstName&quot;).item(0).getTextContent(),</span>
-<span class="fc" id="L122">                e.getElementsByTagName(&quot;lastName&quot;).item(0).getTextContent(),</span>
-<span class="fc" id="L123">                Integer.parseInt(e.getElementsByTagName(&quot;numberOfTransactions&quot;).item(0).getTextContent())</span>
+<span class="fc" id="L115">    public static Function&lt;Element, User&gt; userDecoder = e -&gt;{</span>
+<span class="fc" id="L116">        User user = null;</span>
+<span class="fc" id="L117">        user = new User(</span>
+<span class="fc" id="L118">                e.getElementsByTagName(&quot;firstName&quot;).item(0).getTextContent(),</span>
+<span class="fc" id="L119">                e.getElementsByTagName(&quot;lastName&quot;).item(0).getTextContent(),</span>
+<span class="fc" id="L120">                Integer.parseInt(e.getElementsByTagName(&quot;numberOfTransactions&quot;).item(0).getTextContent())</span>
         );
-<span class="fc" id="L125">        user.setId(Integer.parseInt(e.getAttribute(&quot;id&quot;)));</span>
-<span class="fc" id="L126">        return user;</span>
+<span class="fc" id="L122">        user.setId(Integer.parseInt(e.getAttribute(&quot;id&quot;)));</span>
+<span class="fc" id="L123">        return user;</span>
     };
-=======
-<span class="fc" id="L66">        return FirstName;</span>
-    }
->>>>>>> playing-with-postgres
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

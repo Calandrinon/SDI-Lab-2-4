@@ -4,6 +4,8 @@ Repository/Repository.java
  Repository.Repository
 Repository/FileRepository.java
  Repository.FileRepository
+DatabaseMain.java
+ DatabaseMain
 Repository/XmlFileRepository.java
  Repository.XmlFileRepository
 Model/Record.java
@@ -27,14 +29,16 @@ Validator/RecordValidator.java
  Validator.RecordValidator
 UI/AdminUI.java
  UI.AdminUI
-Validator/TransactionValidator.java
- Validator.TransactionValidator
+Repository/PostgresRepository.java
+ Repository.PostgresRepository
 Controller/TransactionController.java
  Controller.TransactionController
 Validator/BaseEntityValidator.java
  Validator.BaseEntityValidator
 deleteLater.java
  deleteLater
+XmlFileMain.java
+ XmlFileMain
 Model/RecordType.java
  Model.RecordType
 Exceptions/TransactionException.java
@@ -51,7 +55,5 @@ UI/UI.java
  UI.UI
 Validator/UserValidator.java
  Validator.UserValidator
-DatabaseMain.java
- DatabaseMain
-Repository/PostgresRepository.java
- Repository.PostgresRepository
+Validator/TransactionValidator.java
+ Validator.TransactionValidator
