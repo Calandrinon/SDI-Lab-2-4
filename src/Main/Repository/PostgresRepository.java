@@ -239,8 +239,10 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
                 }
 
                 preparedStatement.executeUpdate();
+                return Optional.empty();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+                return Optional.ofNullable(entity);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -266,10 +268,8 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
             preparedStatement.executeUpdate();
             return optional;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new IllegalArgumentException("The entity is referenced in a transaction, so it cannot be deleted.");
         }
-
-        return Optional.empty();
     }
 
 

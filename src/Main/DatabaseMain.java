@@ -5,7 +5,6 @@ import Controller.UserController;
 import Model.Record;
 import Model.Transaction;
 import Model.User;
-import Repository.InMemoryRepository;
 import Repository.Repository;
 import UI.AdminUI;
 import UI.ClientUI;
@@ -17,11 +16,6 @@ import Repository.PostgresRepository;
 
 public class DatabaseMain {
     public static void main(String[] args) {
-        /**
-        Repository<Integer, Transaction> transactionRepository = new InMemoryRepository<Integer, Transaction>(new TransactionValidator());
-        Repository<Integer, Record> recordRepository = new InMemoryRepository<Integer, Record>(new RecordValidator());
-        Repository<Integer, User> userRepository = new InMemoryRepository<Integer, User>(new UserValidator());
-         **/
         String url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
         Repository<Integer, Transaction> transactionRepository = new PostgresRepository<Integer, Transaction>(new TransactionValidator(), "UserTransaction", url);
         Repository<Integer, Record> recordRepository = new PostgresRepository<Integer, Record>(new RecordValidator(), "Record", url);
