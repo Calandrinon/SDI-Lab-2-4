@@ -5,7 +5,7 @@ import Model.BaseEntity;
 
 import java.util.Optional;
 
-<span class="fc" id="L8">public class BaseEntityValidator implements Validator&lt;BaseEntity&lt;Integer&gt;&gt; {</span>
+<span class="nc" id="L8">public class BaseEntityValidator implements Validator&lt;BaseEntity&lt;Integer&gt;&gt; {</span>
     /**
      *
      * @param entity the given BaseEntity object
@@ -14,7 +14,7 @@ import java.util.Optional;
      */
     @Override
     public void validate(BaseEntity&lt;Integer&gt; entity) throws ValidationException {
-<span class="fc bfc" id="L17" title="All 2 branches covered.">        Optional.ofNullable(entity).filter(e -&gt; e.getId() &gt; 0).orElseThrow(() -&gt; new ValidationException(&quot;id of entity must be positive&quot;));</span>
-<span class="fc" id="L18">    }</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        Optional.ofNullable(entity).filter(e -&gt; e.getId() &gt; 0).orElseThrow(() -&gt; new ValidationException(&quot;id of entity must be positive&quot;));</span>
+<span class="nc" id="L18">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

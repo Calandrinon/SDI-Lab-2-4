@@ -18,10 +18,10 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
     /**
      * @param validator - validator for the entities
      */
-<span class="fc" id="L21">    public InMemoryRepository(Validator&lt;T&gt; validator) {</span>
-<span class="fc" id="L22">        this.validator = validator;</span>
-<span class="fc" id="L23">        entities = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L21">    public InMemoryRepository(Validator&lt;T&gt; validator) {</span>
+<span class="nc" id="L22">        this.validator = validator;</span>
+<span class="nc" id="L23">        entities = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L24">    }</span>
 
     /**
      * Find the entity with the given {@code id}.
@@ -34,8 +34,8 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
      */
     @Override
     public Optional&lt;T&gt; findOne(ID id) {
-<span class="pc" id="L37">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
-<span class="fc" id="L38">        return Optional.ofNullable(entities.get(id));</span>
+<span class="nc" id="L37">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
+<span class="nc" id="L38">        return Optional.ofNullable(entities.get(id));</span>
     }
 
     /**
@@ -44,7 +44,7 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
      */
     @Override
     public Iterable&lt;T&gt; findAll() {
-<span class="fc" id="L47">        return new HashSet&lt;&gt;(entities.values());</span>
+<span class="nc" id="L47">        return new HashSet&lt;&gt;(entities.values());</span>
     }
 
     /**
@@ -60,9 +60,9 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
      */
     @Override
     public Optional&lt;T&gt; save(T entity) throws ValidationException {
-<span class="pc" id="L63">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;entity must not be null&quot;));</span>
-<span class="fc" id="L64">        validator.validate(entity);</span>
-<span class="fc" id="L65">        return Optional.ofNullable(entities.putIfAbsent(entity.getId(), entity));</span>
+<span class="nc" id="L63">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;entity must not be null&quot;));</span>
+<span class="nc" id="L64">        validator.validate(entity);</span>
+<span class="nc" id="L65">        return Optional.ofNullable(entities.putIfAbsent(entity.getId(), entity));</span>
     }
 
     /**
@@ -76,8 +76,8 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
      */
     @Override
     public Optional&lt;T&gt; delete(ID id) {
-<span class="pc" id="L79">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
-<span class="fc" id="L80">        return Optional.ofNullable(entities.remove(id));</span>
+<span class="nc" id="L79">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
+<span class="nc" id="L80">        return Optional.ofNullable(entities.remove(id));</span>
     }
 
     /**
@@ -94,9 +94,9 @@ public class InMemoryRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implem
      */
     @Override
     public Optional&lt;T&gt; update(T entity) throws ValidationException {
-<span class="pc" id="L97">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;the entity cannot be null&quot;));</span>
-<span class="fc" id="L98">        validator.validate(entity);</span>
-<span class="fc" id="L99">        return Optional.ofNullable(entities.computeIfPresent(entity.getId(), (k, v) -&gt; entity));</span>
+<span class="nc" id="L97">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;the entity cannot be null&quot;));</span>
+<span class="nc" id="L98">        validator.validate(entity);</span>
+<span class="nc" id="L99">        return Optional.ofNullable(entities.computeIfPresent(entity.getId(), (k, v) -&gt; entity));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

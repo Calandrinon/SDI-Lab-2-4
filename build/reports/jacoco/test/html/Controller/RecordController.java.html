@@ -16,9 +16,9 @@ import java.util.stream.StreamSupport;
 public class RecordController implements IController {
     private final Repository&lt;Integer, Record&gt; RecordRepository;
 
-<span class="fc" id="L19">    public RecordController(Repository&lt;Integer, Record&gt; recordRepository) {</span>
-<span class="fc" id="L20">        RecordRepository = recordRepository;</span>
-<span class="fc" id="L21">    }</span>
+<span class="nc" id="L19">    public RecordController(Repository&lt;Integer, Record&gt; recordRepository) {</span>
+<span class="nc" id="L20">        RecordRepository = recordRepository;</span>
+<span class="nc" id="L21">    }</span>
 
     /**
      * creates and adds to the repository a record
@@ -34,14 +34,10 @@ public class RecordController implements IController {
      */
 
     public void add(Integer id, Integer price, String AlbumName, Integer InStock, RecordType RecordType) throws Exception {
-<span class="fc" id="L37">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
-<span class="fc" id="L38">        record.setId(id);</span>
-<<<<<<< HEAD
-<span class="pc" id="L39">        this.RecordRepository.save(record).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
-=======
-<span class="fc" id="L39">        this.RecordRepository.save(record).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
->>>>>>> playing-with-postgres
-<span class="fc" id="L40">    }</span>
+<span class="nc" id="L37">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
+<span class="nc" id="L38">        record.setId(id);</span>
+<span class="nc" id="L39">        this.RecordRepository.save(record).ifPresent(e -&gt; {throw new RuntimeException(&quot;element already in the list&quot;);});</span>
+<span class="nc" id="L40">    }</span>
 
     /**
      * creates and updates to the repository the record with another one having the same id
@@ -56,17 +52,10 @@ public class RecordController implements IController {
      */
 
     public void update(Integer id, Integer price, String AlbumName, Integer InStock, RecordType RecordType) throws Exception {
-<<<<<<< HEAD
 <span class="nc" id="L55">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
 <span class="nc" id="L56">        record.setId(id);</span>
 <span class="nc" id="L57">        this.RecordRepository.update(record);</span>
 <span class="nc" id="L58">    }</span>
-=======
-<span class="fc" id="L55">        Record record = new Record(price, AlbumName, InStock,RecordType);</span>
-<span class="fc" id="L56">        record.setId(id);</span>
-<span class="fc" id="L57">        this.RecordRepository.update(record);</span>
-<span class="fc" id="L58">    }</span>
->>>>>>> playing-with-postgres
 
 
     /**
@@ -77,13 +66,8 @@ public class RecordController implements IController {
      */
 
     public void remove(Integer id) throws Exception {
-<<<<<<< HEAD
 <span class="nc" id="L69">        this.RecordRepository.delete(id).orElseThrow(() -&gt; new Exception(&quot;the element does not exist&quot;));</span>
 <span class="nc" id="L70">    }</span>
-=======
-<span class="fc" id="L69">        this.RecordRepository.delete(id).orElseThrow(() -&gt; new Exception(&quot;the element does not exist&quot;));</span>
-<span class="fc" id="L70">    }</span>
->>>>>>> playing-with-postgres
 
     /**
      *
@@ -92,17 +76,10 @@ public class RecordController implements IController {
      */
 
     public List&lt;String&gt; filter(Predicate&lt;Record&gt; pred){
-<<<<<<< HEAD
 <span class="nc" id="L79">        return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)</span>
 <span class="nc" id="L80">                .filter(pred)</span>
 <span class="nc" id="L81">                .map(Record::toString)</span>
 <span class="nc" id="L82">                .collect(Collectors.toList());</span>
-=======
-<span class="fc" id="L79">        return StreamSupport.stream(this.RecordRepository.findAll().spliterator(), false)</span>
-<span class="fc" id="L80">                .filter(pred)</span>
-<span class="fc" id="L81">                .map(Record::toString)</span>
-<span class="fc" id="L82">                .collect(Collectors.toList());</span>
->>>>>>> playing-with-postgres
     }
 
     /**
@@ -121,11 +98,7 @@ public class RecordController implements IController {
      */
 
     public List&lt;String&gt; getRepository() {
-<<<<<<< HEAD
 <span class="nc" id="L101">        return filter(e -&gt; true);</span>
-=======
-<span class="fc" id="L101">        return filter(e -&gt; true);</span>
->>>>>>> playing-with-postgres
     }
 
     /**
@@ -135,11 +108,7 @@ public class RecordController implements IController {
      */
 
     public List&lt;String&gt; filterByPrice(Integer maximumPrice) {
-<<<<<<< HEAD
 <span class="nc bnc" id="L111" title="All 2 branches missed.">        return filter(e -&gt; e.getPrice() &lt; maximumPrice);</span>
-=======
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        return filter(e -&gt; e.getPrice() &lt; maximumPrice);</span>
->>>>>>> playing-with-postgres
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

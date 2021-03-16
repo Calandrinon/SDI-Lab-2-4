@@ -77,8 +77,8 @@ public class XmlFileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; impleme
 <span class="fc" id="L77">            Element listOfElements = root.getDocumentElement();</span>
 <span class="fc" id="L78">            NodeList elementList = listOfElements.getChildNodes();</span>
 <span class="fc bfc" id="L79" title="All 2 branches covered.">            for (int i = 0; i &lt; elementList.getLength(); ++i) {</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">                if (!(elementList.item(i) instanceof Element)) {</span>
-<span class="fc" id="L81">                    continue;</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">                if (!(elementList.item(i) instanceof Element)) {</span>
+<span class="nc" id="L81">                    continue;</span>
                 }
 <span class="fc" id="L83">                T object = objectDecoder.apply((Element) elementList.item(i));</span>
 <span class="fc" id="L84">                list.add(object);</span>
@@ -103,9 +103,9 @@ public class XmlFileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; impleme
 <span class="fc" id="L103">            Document root = db.parse(this.filename);</span>
 <span class="fc" id="L104">            Element listOfElements = root.getDocumentElement();</span>
 <span class="fc" id="L105">            NodeList elementList = listOfElements.getChildNodes();</span>
-<span class="fc bfc" id="L106" title="All 2 branches covered.">            for (int i = 0; i &lt; elementList.getLength(); ++i) {</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">                if (!(elementList.item(i) instanceof Element))</span>
-<span class="fc" id="L108">                    continue;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">            for (int i = 0; i &lt; elementList.getLength(); ++i) {</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">                if (!(elementList.item(i) instanceof Element))</span>
+<span class="nc" id="L108">                    continue;</span>
 <span class="nc" id="L109">                T object = objectDecoder.apply((Element) elementList.item(i));</span>
 <span class="nc" id="L110">                list.add(object);</span>
             }
@@ -135,9 +135,9 @@ public class XmlFileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; impleme
 <span class="fc" id="L135">            Document document = documentBuilder.parse(this.filename);</span>
 
 <span class="fc" id="L137">            NodeList elementlist = document.getDocumentElement().getChildNodes();</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">            for(int i = 0 ; i &lt; elementlist.getLength() ; ++i){</span>
-<span class="pc bpc" id="L139" title="1 of 2 branches missed.">                if (!(elementlist.item(i) instanceof Element)) {</span>
-<span class="fc" id="L140">                    continue;</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">            for(int i = 0 ; i &lt; elementlist.getLength() ; ++i){</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                if (!(elementlist.item(i) instanceof Element)) {</span>
+<span class="nc" id="L140">                    continue;</span>
                 }
 <span class="nc bnc" id="L142" title="All 2 branches missed.">                if(((Element)elementlist.item(i)).getAttribute(&quot;id&quot;).equals(entity.getId().toString())){</span>
 <span class="nc" id="L143">                    return Optional.of(entity);</span>
@@ -205,8 +205,8 @@ public class XmlFileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; impleme
     private Optional&lt;Node&gt; getNodeByID(NodeList nodeList, ID id){
 <span class="fc" id="L206">        Node node = null;</span>
 <span class="pc bpc" id="L207" title="1 of 2 branches missed.">        for(int i = 0 ; i &lt; nodeList.getLength() ; i++){</span>
-<span class="fc bfc" id="L208" title="All 2 branches covered.">            if (!(nodeList.item(i) instanceof Element)) {</span>
-<span class="fc" id="L209">                continue;</span>
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">            if (!(nodeList.item(i) instanceof Element)) {</span>
+<span class="nc" id="L209">                continue;</span>
             }
 <span class="pc bpc" id="L211" title="1 of 2 branches missed.">            if(this.objectDecoder.apply((Element) nodeList.item(i)).getId() == id){</span>
 <span class="fc" id="L212">                return Optional.ofNullable(nodeList.item(i));</span>
