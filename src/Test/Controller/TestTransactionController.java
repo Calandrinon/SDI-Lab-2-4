@@ -126,4 +126,13 @@ public class TestTransactionController {
         this.transactionController.makeTransaction(USER_ID_2, RECORD_ID_2, 1);
         assert(this.transactionController.getMostPurchasedRecords().get(0).getId() == RECORD_ID);
     }
+
+
+    @Test
+    public void testGetRepository() throws Exception
+    {
+        this.transactionController.makeTransaction(USER_ID, RECORD_ID, 15);
+        assert(this.transactionController.getRepository().size() == 1);
+
+    }
 }
