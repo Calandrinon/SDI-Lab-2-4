@@ -86,7 +86,15 @@ DELETE FROM ClientUserTestTable CASCADE;
 DELETE FROM RecordTestTable;
 DELETE FROM UserTransactionTestTable;
 
-SELECT column_name FROM information_schema.columns WHERE table_name='clientuser';]]></console>
+SELECT column_name FROM information_schema.columns WHERE table_name='clientuser';
+
+DELETE FROM ClientUser;
+DELETE FROM Record;
+DELETE FROM UserTransaction;
+
+SELECT * FROM ClientUser;
+SELECT * FROM Record;
+SELECT * FROM UserTransaction;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
