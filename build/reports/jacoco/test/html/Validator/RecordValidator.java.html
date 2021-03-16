@@ -25,8 +25,13 @@ import java.util.Optional;
 <span class="pc" id="L25">                .orElseThrow(() -&gt; new ValidationException(&quot;entity is null&quot;));</span>
 
 <span class="fc" id="L27">        Optional.of(entity)</span>
+<<<<<<< HEAD
+<span class="fc bfc" id="L28" title="All 2 branches covered.">                .filter(e -&gt; e.getId() &gt; 0)</span>
+<span class="fc" id="L29">                .orElseThrow(() -&gt; new ValidationException(&quot;id of entity must be positive&quot;));</span>
+=======
 <span class="pc bpc" id="L28" title="1 of 2 branches missed.">                .filter(e -&gt; e.getId() &gt; 0)</span>
 <span class="pc" id="L29">                .orElseThrow(() -&gt; new ValidationException(&quot;id of entity must be positive&quot;));</span>
+>>>>>>> playing-with-postgres
 
 <span class="fc" id="L31">        Optional.of(entity)</span>
 <span class="pc bpc" id="L32" title="1 of 2 branches missed.">                .filter(e -&gt; e.getPrice() &gt; 0)</span>

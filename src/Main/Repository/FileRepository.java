@@ -35,10 +35,16 @@ public class FileRepository<ID, T extends BaseEntity<ID>> implements Repository<
     private void writeAll(){
         Path path = Paths.get("src/Main/Repository/RepositoryFiles");
         path = path.resolve(file_path);
-        try{
-            if(!Files.exists(path))
+
+        if(!Files.exists(path)) {
+            try {
                 Files.createFile(path);
-            BufferedWriter bufferedWriter = Files.newBufferedWriter(path, Charset.defaultCharset());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try(BufferedWriter bufferedWriter = Files.newBufferedWriter(path, Charset.defaultCharset())){
             entities.forEach((key, value) -> {
                 try {
                     bufferedWriter.write((String) writer.apply(value));
@@ -46,7 +52,6 @@ public class FileRepository<ID, T extends BaseEntity<ID>> implements Repository<
                     e.printStackTrace();
                 }
             });
-            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,6 +69,7 @@ public class FileRepository<ID, T extends BaseEntity<ID>> implements Repository<
                 e.printStackTrace();
             }
         }
+
         try(Stream<String> stream = Files.lines(path)){
             stream.map(p -> (T)reader.apply(p)).forEach(p -> entities.put(p.getId(), p));
         } catch (IOException e) {
@@ -106,6 +112,7 @@ public class FileRepository<ID, T extends BaseEntity<ID>> implements Repository<
 
     @Override
     public Optional<T> update(T entity) throws ValidationException {
+        this.readAll();
         Optional.ofNullable(entity).orElseThrow(() -> new ValidationException("the entity cannot be null"));
         validator.validate(entity);
         Optional<T> optionalT = Optional.ofNullable(entities.computeIfPresent(entity.getId(), (k, v) -> entity));

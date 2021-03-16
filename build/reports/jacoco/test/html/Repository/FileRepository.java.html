@@ -4,6 +4,79 @@ import Exceptions.ValidationException;
 import Model.BaseEntity;
 import Validator.Validator;
 
+<<<<<<< HEAD
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+public class FileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implements Repository&lt;ID, T&gt; {
+    private Map&lt;ID, T&gt; entities;
+    private Validator&lt;T&gt; validator;
+    private final String file_path;
+    private final Function reader;
+    private final Function writer;
+
+<span class="fc" id="L27">    public FileRepository(Validator&lt;T&gt; validator, String file_path, Function reader, Function writer) {</span>
+<span class="fc" id="L28">        this.validator = validator;</span>
+<span class="fc" id="L29">        this.file_path = file_path;</span>
+<span class="fc" id="L30">        this.reader = reader;</span>
+<span class="fc" id="L31">        this.writer = writer;</span>
+<span class="fc" id="L32">        entities = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L33">    }</span>
+
+    private void writeAll(){
+<span class="fc" id="L36">        Path path = Paths.get(&quot;src/Main/Repository/RepositoryFiles&quot;);</span>
+<span class="fc" id="L37">        path = path.resolve(file_path);</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if(!Files.exists(path)) {</span>
+            try {
+<span class="nc" id="L40">                Files.createFile(path);</span>
+<span class="nc" id="L41">            } catch (IOException e) {</span>
+<span class="nc" id="L42">                e.printStackTrace();</span>
+<span class="nc" id="L43">            }</span>
+        }
+
+<span class="fc" id="L46">        try(BufferedWriter bufferedWriter = Files.newBufferedWriter(path, Charset.defaultCharset())){</span>
+<span class="fc" id="L47">            entities.forEach((key, value) -&gt; {</span>
+                try {
+<span class="fc" id="L49">                    bufferedWriter.write((String) writer.apply(value));</span>
+<span class="nc" id="L50">                } catch (IOException e) {</span>
+<span class="nc" id="L51">                    e.printStackTrace();</span>
+<span class="fc" id="L52">                }</span>
+<span class="fc" id="L53">            });</span>
+<span class="nc" id="L54">        } catch (IOException e) {</span>
+<span class="nc" id="L55">            e.printStackTrace();</span>
+<span class="fc" id="L56">        }</span>
+
+<span class="fc" id="L58">    }</span>
+
+    private void readAll(){
+<span class="fc" id="L61">        entities.clear();</span>
+<span class="fc" id="L62">        Path path = Paths.get(&quot;src/Main/Repository/RepositoryFiles&quot;);</span>
+<span class="fc" id="L63">        path = path.resolve(file_path);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if(!Files.exists(path)) {</span>
+            try {
+<span class="fc" id="L66">                Files.createFile(path);</span>
+<span class="nc" id="L67">            } catch (IOException e) {</span>
+<span class="nc" id="L68">                e.printStackTrace();</span>
+<span class="fc" id="L69">            }</span>
+        }
+
+<span class="fc" id="L72">        try(Stream&lt;String&gt; stream = Files.lines(path)){</span>
+<span class="fc" id="L73">            stream.map(p -&gt; (T)reader.apply(p)).forEach(p -&gt; entities.put(p.getId(), p));</span>
+<span class="nc" id="L74">        } catch (IOException e) {</span>
+<span class="nc" id="L75">            e.printStackTrace();</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc" id="L77">    }</span>
+=======
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,31 +111,69 @@ public class FileRepository&lt;ID, T extends BaseEntity&lt;ID&gt;&gt; implements
 <span class="nc" id="L38">            line = scanner.nextLine();</span>
 <span class="nc" id="L39">        }</span>
 <span class="nc" id="L40">    }</span>
+>>>>>>> playing-with-postgres
 
 
     @Override
     public Optional&lt;T&gt; findOne(ID id) {
+<<<<<<< HEAD
+<span class="fc" id="L82">        this.readAll();</span>
+<span class="pc" id="L83">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
+<span class="fc" id="L84">        return Optional.ofNullable(entities.get(id));</span>
+=======
 <span class="nc" id="L45">        return Optional.empty();</span>
+>>>>>>> playing-with-postgres
     }
 
     @Override
     public Iterable&lt;T&gt; findAll() {
+<<<<<<< HEAD
+<span class="fc" id="L89">        this.readAll();</span>
+<span class="fc" id="L90">        return new HashSet&lt;&gt;(entities.values());</span>
+=======
 <span class="nc" id="L50">        return null;</span>
+>>>>>>> playing-with-postgres
     }
 
     @Override
     public Optional&lt;T&gt; save(T entity) throws ValidationException {
+<<<<<<< HEAD
+<span class="fc" id="L95">        this.readAll();</span>
+<span class="pc" id="L96">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;entity must not be null&quot;));</span>
+<span class="fc" id="L97">        validator.validate(entity);</span>
+<span class="fc" id="L98">        Optional&lt;T&gt; optionalT = Optional.ofNullable(entities.putIfAbsent(entity.getId(), entity));</span>
+<span class="fc" id="L99">        this.writeAll();</span>
+<span class="fc" id="L100">        return optionalT;</span>
+=======
 <span class="nc" id="L55">        return Optional.empty();</span>
+>>>>>>> playing-with-postgres
     }
 
     @Override
     public Optional&lt;T&gt; delete(ID id) {
+<<<<<<< HEAD
+<span class="fc" id="L105">        this.readAll();</span>
+<span class="pc" id="L106">        Optional.ofNullable(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;id must not be null&quot;));</span>
+<span class="fc" id="L107">        Optional&lt;T&gt; optionalT = Optional.ofNullable(entities.remove(id));</span>
+<span class="fc" id="L108">        this.writeAll();</span>
+<span class="fc" id="L109">        return optionalT;</span>
+=======
 <span class="nc" id="L60">        return Optional.empty();</span>
+>>>>>>> playing-with-postgres
     }
 
     @Override
     public Optional&lt;T&gt; update(T entity) throws ValidationException {
+<<<<<<< HEAD
+<span class="fc" id="L114">        this.readAll();</span>
+<span class="pc" id="L115">        Optional.ofNullable(entity).orElseThrow(() -&gt; new ValidationException(&quot;the entity cannot be null&quot;));</span>
+<span class="fc" id="L116">        validator.validate(entity);</span>
+<span class="fc" id="L117">        Optional&lt;T&gt; optionalT = Optional.ofNullable(entities.computeIfPresent(entity.getId(), (k, v) -&gt; entity));</span>
+<span class="fc" id="L118">        this.writeAll();</span>
+<span class="fc" id="L119">        return optionalT;</span>
+=======
 <span class="nc" id="L65">        return Optional.empty();</span>
+>>>>>>> playing-with-postgres
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

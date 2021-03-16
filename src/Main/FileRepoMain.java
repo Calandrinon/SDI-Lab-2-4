@@ -17,7 +17,7 @@ import Validator.UserValidator;
 
 public class FileRepoMain {
     public static void main(String[] args) {
-        Repository<Integer, Transaction> transactionRepository = new FileRepository<Integer, Transaction>(new TransactionValidator(), "trasactions.txt", Transaction.reader(Transaction::fileReader), Transaction.writer(Transaction::fileWriter));
+        Repository<Integer, Transaction> transactionRepository = new FileRepository<Integer, Transaction>(new TransactionValidator(), "transactions.txt", Transaction.reader(Transaction::fileReader), Transaction.writer(Transaction::fileWriter));
         Repository<Integer, Record> recordRepository = new FileRepository<Integer, Record>(new RecordValidator(), "records.txt", Record.reader(Record::fileReader), Record.writer(Record::fileWriter));
         Repository<Integer, User> userRepository = new FileRepository<Integer, User>(new UserValidator(), "users.txt", User.reader(User::fileReader), User.writer(User::fileWriter));
         TransactionController transactionController = new TransactionController(recordRepository, userRepository, transactionRepository);
