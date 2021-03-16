@@ -1,7 +1,12 @@
 Controller/TestUserController.java
  Controller.TestUserController
+<<<<<<< HEAD
 Repository/TestFileRepository.java
  Repository.TestFileRepository
+=======
+Model/TestTransaction.java
+ Model.TestTransaction
+>>>>>>> playing-with-postgres
 Repository/TestInMemoryRepository.java
  Repository.TestInMemoryRepository
 Controller/TestTransactionController.java
@@ -12,7 +17,12 @@ Model/TestRecord.java
  Model.TestRecord
 Model/TestUser.java
  Model.TestUser
+<<<<<<< HEAD
 Model/TestTransaction.java
  Model.TestTransaction
 Repository/TestXmlFileRepository.java
  Repository.TestXmlFileRepository
+=======
+Repository/TestPostgresRepository.java
+ Repository.TestPostgresRepository
+>>>>>>> playing-with-postgres

@@ -97,9 +97,6 @@ public class User extends BaseEntity<Integer>{
     }
 
 
-
-
-
     public static BiFunction<User, Document, Node> userEncoder = (u, d) -> {
         Element userElement = d.createElement("user");
         userElement.setAttribute("id", Integer.toString(u.getId()));

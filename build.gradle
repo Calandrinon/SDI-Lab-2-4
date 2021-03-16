@@ -13,6 +13,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testCompileOnly 'junit:junit:4.13'
     testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.11'
 }
 
 application {
@@ -39,6 +40,7 @@ jar {
 }
 
 test {
+    useJUnitPlatform()
     useJUnit()
     maxHeapSize = '1G'
     finalizedBy jacocoTestReport

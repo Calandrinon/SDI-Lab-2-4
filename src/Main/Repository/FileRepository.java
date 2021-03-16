@@ -35,6 +35,7 @@ public class FileRepository<ID, T extends BaseEntity<ID>> implements Repository<
     private void writeAll(){
         Path path = Paths.get("src/Main/Repository/RepositoryFiles");
         path = path.resolve(file_path);
+
         if(!Files.exists(path)) {
             try {
                 Files.createFile(path);
