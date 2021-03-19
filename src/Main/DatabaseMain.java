@@ -16,7 +16,8 @@ import Repository.PostgresRepository;
 
 public class DatabaseMain {
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
+        //String url = "jdbc:postgresql://localhost:5432/onlinemusicstore";
+        String url = "jdbc:postgresql://ec2-52-50-171-4.eu-west-1.compute.amazonaws.com:5432/dequ4hdpce8hbn?user=kgjjyzuqvgooml&password=1cf52939657451151fad34a67b01a285ba4a927aea25bda2f98fda5948ba1842";
         Repository<Integer, Transaction> transactionRepository = new PostgresRepository<Integer, Transaction>(new TransactionValidator(), "UserTransaction", url);
         Repository<Integer, Record> recordRepository = new PostgresRepository<Integer, Record>(new RecordValidator(), "Record", url);
         Repository<Integer, User> userRepository = new PostgresRepository<Integer, User>(new UserValidator(), "ClientUser", url);

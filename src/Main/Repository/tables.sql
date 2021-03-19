@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS ClientUser
      NumberOfTransactions INT NOT NULL CHECK (NumberOfTransactions >= 0));
 
 
-DROP TABLE UserTransaction;
 CREATE TABLE IF NOT EXISTS UserTransaction
     (TransactionId SERIAL PRIMARY KEY,
      UserId INT REFERENCES ClientUser(UserId),
@@ -45,6 +44,7 @@ CREATE TABLE IF NOT EXISTS UserTransactionTestTable
 	 Quantity INT NOT NULL CHECK (Quantity > 0));
 
 
+/**
 DROP TABLE ClientUser;
 DROP TABLE Record;
 DROP TABLE UserTransaction;
@@ -68,9 +68,4 @@ FROM
    information_schema.columns
 WHERE
    table_name = 'usertransactiontesttable';
-
-/**
-INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (15, 'userfirstname', 'userlastname', 22);
-INSERT INTO RecordTestTable (RecordId, AlbumName, Price, InStock, RecordType) VALUES (14, 'abc', 99, 200, 'VINYL');
-INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, TransactionDateTime, Quantity) VALUES (1, 15, 14, '2021-02-25', 2);
 **/
