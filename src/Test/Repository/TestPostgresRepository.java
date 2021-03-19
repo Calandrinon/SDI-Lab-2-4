@@ -36,12 +36,17 @@ public class TestPostgresRepository {
         this.transactionRepository = new PostgresRepository<Integer, Transaction>(new TransactionValidator(), "UserTransactionTestTable", this.url);
 
         String deleteStatement = "DELETE FROM UserTransactionTestTable; DELETE FROM ClientUserTestTable; DELETE FROM RecordTestTable;";
+        String resetIncrementalPKStatement = "TRUNCATE TABLE UserTransactionTestTable RESTART IDENTITY;";
         try (var connection = DriverManager.getConnection(this.url, this.username, this.password);
-             var firstPreparedStatement = connection.prepareStatement(deleteStatement)) {
-            firstPreparedStatement.executeUpdate();
+             var firstPreparedStatement = connection.prepareStatement(deleteStatement);
+             var secondPreparedStatement= connection.prepareStatement(resetIncrementalPKStatement)) {
+                firstPreparedStatement.executeUpdate();
+                secondPreparedStatement.executeUpdate();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+
+
 
         System.out.println("SETUP METHOD CALLED");
     }
@@ -298,39 +303,6 @@ public class TestPostgresRepository {
 
 
     @Test
-    public void testUpdateForTransactions() throws ValidationException {
-        User user = new User("abc", "def", 2);
-        user.setId(1);
-        this.userRepository.save(user);
-        Record record = new Record(99, "Dark Side Of The Moon", 100, RecordType.VINYL);
-        record.setId(1);
-        this.recordRepository.save(record);
-
-        Transaction transaction = new Transaction(1, 1, new Date(), 2);
-        transaction.setId(1);
-        this.transactionRepository.save(transaction);
-
-        transaction = new Transaction(1, 1, new Date(), 50);
-        transaction.setId(1);
-        this.transactionRepository.update(transaction);
-
-        Iterable<Transaction> list = this.transactionRepository.findAll();
-        Iterator<Transaction> transactionIterator= list.iterator();
-        List<Transaction> transactions = new ArrayList<>();
-
-        while (transactionIterator.hasNext()) {
-            transactions.add(transactionIterator.next());
-        }
-
-        int userId = transactions.get(0).getUserID();
-        int recordId = transactions.get(0).getRecordID();
-        int quantity = transactions.get(0).getQuantity();
-
-        assert (transactions.size() == 1 && userId == 1 && recordId == 1 && quantity == 50);
-    }
-
-
-    @Test
     public void testFindOneForUsers() throws ValidationException {
         User user = new User("abc", "def", 2);
         user.setId(1);
@@ -370,7 +342,8 @@ public class TestPostgresRepository {
 
         assert(this.transactionRepository.findOne(1).isPresent());
         Transaction databaseTransaction = this.transactionRepository.findOne(1).get();
-        assert(databaseTransaction.getId() == 1 && databaseTransaction.getUserID() == 1 && databaseTransaction.getRecordID() == 1);
+        System.out.println(databaseTransaction.toString());
+        assert(databaseTransaction.getUserID() == 1 && databaseTransaction.getRecordID() == 1);
     }
 
 

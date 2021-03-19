@@ -13,14 +13,13 @@ CREATE TABLE IF NOT EXISTS ClientUser
      NumberOfTransactions INT NOT NULL CHECK (NumberOfTransactions >= 0));
 
 
+DROP TABLE UserTransaction;
 CREATE TABLE IF NOT EXISTS UserTransaction
-    (TransactionId INT PRIMARY KEY,
+    (TransactionId SERIAL PRIMARY KEY,
      UserId INT REFERENCES ClientUser(UserId),
      RecordId INT REFERENCES Record(RecordId),
      TransactionDateTime DATE NOT NULL,
 	 Quantity INT NOT NULL CHECK (Quantity > 0));
-
-
 
 
 CREATE TABLE IF NOT EXISTS ClientUserTestTable
@@ -39,7 +38,7 @@ CREATE TABLE IF NOT EXISTS RecordTestTable
 
 
 CREATE TABLE IF NOT EXISTS UserTransactionTestTable
-    (TransactionId INT PRIMARY KEY,
+    (TransactionId SERIAL PRIMARY KEY,
      UserId INT REFERENCES ClientUserTestTable(UserId),
      RecordId INT REFERENCES RecordTestTable(RecordId),
      TransactionDateTime DATE NOT NULL,

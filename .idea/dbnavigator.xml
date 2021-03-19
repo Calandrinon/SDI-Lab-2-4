@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS UserTransactionTestTable
 	 
 INSERT INTO ClientUserTestTable (UserId, FirstName, LastName, NumberOfTransactions) VALUES (15, 'userfirstname', 'userlastname', 22);
 INSERT INTO RecordTestTable (RecordId, AlbumName, Price, InStock, RecordType) VALUES (14, 'abc', 99, 200, 'VINYL');
-INSERT INTO UserTransactionTestTable (TransactionId, UserId, RecordId, TransactionDateTime, Quantity) VALUES (1, 15, 14, '2021-02-25', 2);
+INSERT INTO UserTransactionTestTable (UserId, RecordId, TransactionDateTime, Quantity) VALUES (15, 14, '2021-02-25', 2);
 
 SELECT * FROM ClientUserTestTable;
 SELECT * FROM RecordTestTable;
@@ -94,7 +94,10 @@ DELETE FROM UserTransaction;
 
 SELECT * FROM ClientUser;
 SELECT * FROM Record;
-SELECT * FROM UserTransaction;]]></console>
+SELECT * FROM UserTransaction;
+
+
+TRUNCATE TABLE UserTransactionTestTable RESTART IDENTITY;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

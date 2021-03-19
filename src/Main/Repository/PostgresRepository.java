@@ -90,16 +90,24 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
 
 
     public String getColumnsOfTheTableFromTheDatabase(Connection connection) throws SQLException {
-        var columnDataTypesQuery = connection.prepareStatement("SELECT column_name FROM information_schema.columns WHERE table_name=?");
-        columnDataTypesQuery.setString(1, this.tableName.toLowerCase());
-        var columnDataTypes = columnDataTypesQuery.executeQuery();
-        String types = "";
-        while (columnDataTypes.next()) {
-            types = types.concat(columnDataTypes.getString(1)).concat(",");
+        var columnNamesQuery = connection.prepareStatement("SELECT column_name FROM information_schema.columns WHERE table_name=?");
+        columnNamesQuery.setString(1, this.tableName.toLowerCase());
+        var columnNames = columnNamesQuery.executeQuery();
+        String names = "";
+        int index = 0;
+
+        while (columnNames.next()) {
+            if ((this.tableName.equals("UserTransaction") || this.tableName.equals("UserTransactionTestTable")) && index == 0) {
+                columnNames.getString(1);
+                index++;
+                continue;
+            }
+            names = names.concat(columnNames.getString(1)).concat(",");
+            index++;
         }
 
-        types = types.substring(0, types.length() - 1);
-        return types;
+        names = names.substring(0, names.length() - 1);
+        return names;
     }
 
 
@@ -206,6 +214,9 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
                 numberOfColumns = numberOfColumnsResult.getInt(1);
             }
 
+            if (this.tableName.equals("UserTransaction") || this.tableName.equals("UserTransactionTestTable"))
+                numberOfColumns--;
+
             String stringWithParameters = "";
             for (int i = 1; i <= numberOfColumns; i++) {
                 if (i > 1)
@@ -228,14 +239,13 @@ public class PostgresRepository<ID, T extends BaseEntity<ID>> implements Reposit
                     preparedStatement.setInt(4, ((Record)entity).getInStock());
                     preparedStatement.setString(5, ((Record)entity).getTypeOfRecord().toString());
                 } else if (entity instanceof Transaction) {
-                    preparedStatement.setInt(1, ((Transaction)entity).getId());
-                    preparedStatement.setInt(2, ((Transaction)entity).getUserID());
-                    preparedStatement.setInt(3, ((Transaction)entity).getRecordID());
+                    preparedStatement.setInt(1, ((Transaction)entity).getUserID());
+                    preparedStatement.setInt(2, ((Transaction)entity).getRecordID());
                     Date date = ((Transaction)entity).getDate();
                     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
-                    preparedStatement.setDate(4, sqlDate);
-                    preparedStatement.setInt(5, ((Transaction)entity).getQuantity());
+                    preparedStatement.setDate(3, sqlDate);
+                    preparedStatement.setInt(4, ((Transaction)entity).getQuantity());
                 }
 
                 preparedStatement.executeUpdate();
